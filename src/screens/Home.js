@@ -40,9 +40,10 @@ function Home() {
 
 
     return (
-        <div style={{ backgroundImage: `url(${backdrop})`, height: '100vh', marginTop: '-2vh' }}>
-            <div style={{ top: '20vh', position: 'absolute', left: '40vh' }}>
-                <input style={{ height: '30vh', width: '50vw', backgroundColor: 'black', color: 'white' }} placeholder="Write down what sort of job you are looking for! Be as descriptive as possible." value={userText} onChange={(e) => { setUserText(e.target.value) }}></input>
+        <div style={{ backgroundImage: `url(${backdrop})`, height: '100vh', marginTop: '-2vh', position: 'relative' }}>
+            <h1 style={{ color: 'white' }}>Crewmate Job Prompt</h1>
+            <textarea style={{ height: '30vh', width: '50vw', backgroundColor: '#212121', color: 'white', borderRadius: '1vh' }} placeholder="Write down what sort of job you are looking for! Be as descriptive as possible." value={userText} onChange={(e) => { setUserText(e.target.value) }}></textarea>
+            <div>
                 <button onClick={async () => { await chatGPTDude() }}>Submit</button>
             </div>
             {jobRecs.map((job) => {
