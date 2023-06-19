@@ -5,6 +5,7 @@ import { useStateValue } from './components/utility/StateProvider';
 import Login from './screens/Login';
 import Header from './components/common/Header';
 import backdrop from './assets/backdrop.gif';
+import Home from './screens/Home';
 
 function App() {
   const [{ user }, dispatch] = useStateValue({ user: null });
@@ -16,9 +17,9 @@ function App() {
         ) : (
           <>
             <Header />
-            <div style={{ backgroundImage: `url(${backdrop})`, height: '100vh', marginTop: '-2vh' }}>
-              <h1>Hello Mf</h1>
-            </div>
+            <Routes>
+              <Route path="/" element={<Home />} />
+            </Routes>
           </>
         )}
       </Router>
