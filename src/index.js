@@ -5,12 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { StateProvider } from './components/utility/StateProvider';
 import reducer, { initialState } from './components/utility/reducer';
+import { NextUIProvider } from '@nextui-org/react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <StateProvider initialState={initialState} reducer={reducer}>
-      <App />
+      <NextUIProvider>
+        <App />
+      </NextUIProvider>
     </StateProvider>
   </React.StrictMode>
 );

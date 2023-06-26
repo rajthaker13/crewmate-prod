@@ -7,6 +7,10 @@ import Header from './components/common/Header';
 import backdrop from './assets/backdrop.gif';
 import Home from './screens/Home';
 
+
+
+
+
 function App() {
   const [{ user }, dispatch] = useStateValue({ user: null });
   return (
@@ -28,3 +32,6 @@ function App() {
 }
 
 export default App;
+
+
+
