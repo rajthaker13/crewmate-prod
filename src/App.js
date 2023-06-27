@@ -1,11 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Switch } from "react-router-dom";
 import { useStateValue } from './components/utility/StateProvider';
 import Login from './screens/Login';
 import Header from './components/common/Header';
 import backdrop from './assets/backdrop.gif';
 import Home from './screens/Home';
+import { LinkedInCallback } from "react-linkedin-login-oauth2";
+import LinkedInPage from './components/login/callback';
+import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -17,7 +21,10 @@ function App() {
     <div className="App">
       <Router>
         {!user ? (
-          <Login />
+          <Routes>
+            <Route exact path="/linkedin" element={<LinkedInCallback />} />
+            <Route path="/" element={<Login />} />
+          </Routes>
         ) : (
           <>
             <Header />
