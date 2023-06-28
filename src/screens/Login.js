@@ -89,15 +89,20 @@ function Login() {
         let user
         if (!userRef.exists()) {
             await createUserWithEmailAndPassword(auth, email, "password3894843974j").then((cred) => {
-                console.log(user)
                 user = cred.user
                 console.log(email)
                 user.photoURL = pfp
                 user.displayName = firstName + " " + lastName
                 console.log(user)
             })
+            console.log(user.displayName)
             await setDoc(doc(db, "users", email), {
-                email: email
+                displayName: user.displayName,
+                email: user.email,
+                uid: user.uid,
+                photoURL: user.photoURL,
+
+
             })
             dispatch({
                 type: actionTypes.SET_USER,
@@ -105,8 +110,17 @@ function Login() {
             });
         }
         else {
-            console.log("RAJ MF")
-
+            console.log("User exists")
+            const existing_user = {
+                displayName: userRef.data()['displayName'],
+                email: userRef.data()['email'],
+                uid: userRef.data()['uid'],
+                photoURL: userRef.data()['photoURL']
+            }
+            dispatch({
+                type: actionTypes.SET_USER,
+                user: existing_user,
+            });
         }
 
     }
