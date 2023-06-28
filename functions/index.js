@@ -10,6 +10,12 @@ const admin = require('firebase-admin');
 const serviceAccount = require('./service-account.json');
 
 const request = require('request');
+const cors = require('cors')({ origin: true });
+const express = require('express');
+
+const app = express();
+
+app.use(express.json());
 
 
 admin.initializeApp({
@@ -91,8 +97,6 @@ function getEmailAddress(emailObject) {
 * Extract the photo URL from LinkedIn's payload
 */
 function extractPhotoUrl(photoObject) {
-    // {"profilePicture":{"displayImage":"urn:li:digitalmediaAsset:C5603AQHpClibLq7hLw","displayImage~":{"paging":{"count":10,"start":0,"links":[]},"elements":[{"artifact":"urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5603AQHpClibLq7hLw,urn:li:digitalmediaMediaArtifactClass:profile-displayphoto-shrink_100_100)","authorizationMethod":"PUBLIC","data":{"com.linkedin.digitalmedia.mediaartifact.StillImage":{"storageSize":{"width":100,"height":100},"storageAspectRatio":{"widthAspect":1.0,"heightAspect":1.0,"formatted":"1.00:1.00"},"mediaType":"image/jpeg","rawCodecSpec":{"name":"jpeg","type":"image"},"displaySize":{"uom":"PX","width":100.0,"height":100.0},"displayAspectRatio":{"widthAspect":1.0,"heightAspect":1.0,"formatted":"1.00:1.00"}}},"identifiers":[{"identifier":"https://media.licdn.com/dms/image/C5603AQHpClibLq7hLw/profile-displayphoto-shrink_100_100/0?e=1571875200&v=beta&t=DGLXoAVmGmZ4UXkSjFOMum_yI1KEFvMoB52n21WJfG4","file":"urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5603AQHpClibLq7hLw,urn:li:digitalmediaMediaArtifactClass:profile-displayphoto-shrink_100_100,0)","index":0,"mediaType":"image/jpeg","identifierType":"EXTERNAL_URL","identifierExpiresInSeconds":1571875200}]},{"artifact":"urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5603AQHpClibLq7hLw,urn:li:digitalmediaMediaArtifactClass:profile-displayphoto-shrink_200_200)","authorizationMethod":"PUBLIC","data":{"com.linkedin.digitalmedia.mediaartifact.StillImage":{"storageSize":{"width":200,"height":200},"storageAspectRatio":{"widthAspect":1.0,"heightAspect":1.0,"formatted":"1.00:1.00"},"mediaType":"image/jpeg","rawCodecSpec":{"name":"jpeg","type":"image"},"displaySize":{"uom":"PX","width":200.0,"height":200.0},"displayAspectRatio":{"widthAspect":1.0,"heightAspect":1.0,"formatted":"1.00:1.00"}}},"identifiers":[{"identifier":"https://media.licdn.com/dms/image/C5603AQHpClibLq7hLw/profile-displayphoto-shrink_200_200/0?e=1571875200&v=beta&t=Ziud4Lb-F2g6sm6BdbwRMWU-8i9fRLY6jJqw9mpueYU","file":"urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5603AQHpClibLq7hLw,urn:li:digitalmediaMediaArtifactClass:profile-displayphoto-shrink_200_200,0)","index":0,"mediaType":"image/jpeg","identifierType":"EXTERNAL_URL","identifierExpiresInSeconds":1571875200}]},{"artifact":"urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5603AQHpClibLq7hLw,urn:li:digitalmediaMediaArtifactClass:profile-displayphoto-shrink_400_400)","authorizationMethod":"PUBLIC","data":{"com.linkedin.digitalmedia.mediaartifact.StillImage":{"storageSize":{"width":400,"height":400},"storageAspectRatio":{"widthAspect":1.0,"heightAspect":1.0,"formatted":"1.00:1.00"},"mediaType":"image/jpeg","rawCodecSpec":{"name":"jpeg","type":"image"},"displaySize":{"uom":"PX","width":400.0,"height":400.0},"displayAspectRatio":{"widthAspect":1.0,"heightAspect":1.0,"formatted":"1.00:1.00"}}},"identifiers":[{"identifier":"https://media.licdn.com/dms/image/C5603AQHpClibLq7hLw/profile-displayphoto-shrink_400_400/0?e=1571875200&v=beta&t=rdQqf46Mo6c-I2jc1BuIZ8h4fBo3WgBl6IafWH5TFq8","file":"urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5603AQHpClibLq7hLw,urn:li:digitalmediaMediaArtifactClass:profile-displayphoto-shrink_400_400,0)","index":0,"mediaType":"image/jpeg","identifierType":"EXTERNAL_URL","identifierExpiresInSeconds":1571875200}]},{"artifact":"urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5603AQHpClibLq7hLw,urn:li:digitalmediaMediaArtifactClass:profile-displayphoto-shrink_800_800)","authorizationMethod":"PUBLIC","data":{"com.linkedin.digitalmedia.mediaartifact.StillImage":{"storageSize":{"width":800,"height":800},"storageAspectRatio":{"widthAspect":1.0,"heightAspect":1.0,"formatted":"1.00:1.00"},"mediaType":"image/jpeg","rawCodecSpec":{"name":"jpeg","type":"image"},"displaySize":{"uom":"PX","width":800.0,"height":800.0},"displayAspectRatio":{"widthAspect":1.0,"heightAspect":1.0,"formatted":"1.00:1.00"}}},"identifiers":[{"identifier":"https://media.licdn.com/dms/image/C5603AQHpClibLq7hLw/profile-displayphoto-shrink_800_800/0?e=1571875200&v=beta&t=xs9FgLbNGDx_TLCr7XqfROszDmnQ0o153SgCTHCFPeM","file":"urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5603AQHpClibLq7hLw,urn:li:digitalmediaMediaArtifactClass:profile-displayphoto-shrink_800_800,0)","index":0,"mediaType":"image/jpeg","identifierType":"EXTERNAL_URL","identifierExpiresInSeconds":1571875200}]}]}},"id":"RST39CgsmW"}
-
     console.assert(isRealValue(photoObject), "photoObject is null")
 
     console.assert("profilePicture" in photoObject, "Missing key profilePicture from photoObject")
@@ -305,25 +309,61 @@ async function createFirebaseAccount(linkedinID, displayName, photoURL, email, a
 
 
 exports.linkedinAccessToken = functions.https.onRequest(async (req, res) => {
+    // Set CORS headers
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', 'GET, POST');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+
+    if (req.method === 'OPTIONS') {
+        // Handle preflight CORS request
+        res.status(204).send('');
+        return;
+    }
+
     const code = req.query.code;
-    // const redirectUri = `${req.protocol}://${req.get('host')}/linkedin`;
-    const redirectUri = `${window.location.origin}/linkedin`
+    const redirectUri = `${req.protocol}://${req.get('host')}/linkedin`;
 
     try {
-        const response = await axios.post('https://cors-anywhere.herokuapp.com/https://www.linkedin.com/oauth/v2/accessToken', null, {
+        const response = await axios.post('https://www.linkedin.com/oauth/v2/accessToken', null, {
             params: {
                 code: code,
                 grant_type: 'authorization_code',
                 client_id: functions.config().linkedin.client_id,
                 client_secret: functions.config().linkedin.client_secret,
-                redirect_uri: redirectUri
-            }
+                redirect_uri: redirectUri,
+            },
         });
-        console.log(response)
-        const accessToken = response.data.access_token;
-        res.status(200).json({ accessToken });
+
+        res.status(200).json({ accessToken: response.data.access_token });
     } catch (error) {
         console.error('Error fetching LinkedIn access token:', error);
         res.status(500).json({ error: 'Failed to fetch access token' });
     }
+});
+
+
+app.all('/linkedinAccessToken', async (req, res) => {
+    try {
+        const { code } = req.query;
+        const redirectUri = `${req.protocol}://${req.get('host')}/linkedin`;
+
+        const response = await axios.post('https://www.linkedin.com/oauth/v2/accessToken', null, {
+            params: {
+                code: code,
+                grant_type: 'authorization_code',
+                client_id: functions.config().linkedin.client_id,
+                client_secret: functions.config().linkedin.client_secret,
+                redirect_uri: redirectUri,
+            },
+        });
+
+        res.status(200).json({ accessToken: response.data.access_token });
+    } catch (error) {
+        console.error('Error fetching LinkedIn access token:', error);
+        res.status(500).json({ error: 'Failed to fetch access token' });
+    }
+});
+
+app.listen(3000, () => {
+    console.log('Proxy server is running on port 3000');
 });
