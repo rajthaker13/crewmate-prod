@@ -20,7 +20,7 @@ function Login() {
 
     const { linkedInLogin } = useLinkedIn({
         clientId: `${process.env.REACT_APP_LINKEDIN_CLIENT_ID}`,
-        redirectUri: `${window.location.origin}/linkedin`, // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
+        redirectUri: `${window.location.origin}/linkedin`,
         scope: "r_emailaddress r_liteprofile w_member_social",
         onSuccess: async (code) => {
             setAuthCode(code)
@@ -34,7 +34,7 @@ function Login() {
 
     async function getUserAccessToken(code) {
         const link_temp = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://www.linkedin.com/oauth/v2/accessToken?code=${code}&grant_type=authorization_code&client_id=${process.env.REACT_APP_LINKEDIN_CLIENT_ID}&client_secret=${process.env.REACT_APP_LINKEDIN_SECRET_ID}&redirect_uri=${window.location.origin}/linkedin`
-        axios.post(link_temp, { Origin: 'linkedin.com' }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(async (res) => {
+        axios.post(link_temp, { Origin: `${window.location.origin}/linkedin` }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(async (res) => {
             const token = res.data.access_token
             setUserToken(token)
             await getUserData(token)
