@@ -113,13 +113,6 @@ function Login() {
                     user: user,
                 });
             })
-
-
-
-            // dispatch({
-            //     type: actionTypes.SET_USER,
-            //     user: existing_user,
-            // });
         }
 
     }

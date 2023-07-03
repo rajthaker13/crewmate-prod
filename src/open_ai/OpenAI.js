@@ -3,11 +3,6 @@ import cosineSimilarity from 'cosine-similarity';
 const { Configuration, OpenAIApi } = require("openai");
 
 
-
-
-// const configuration = new Configuration({
-//     apiKey: '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',
-// });
 const configuration = new Configuration({
     apiKey: process.env.REACT_APP_API_KEY
 });
