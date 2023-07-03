@@ -10,7 +10,7 @@ import { useLinkedIn } from 'react-linkedin-login-oauth2';
 import linkedin from 'react-linkedin-login-oauth2/assets/linkedin.png';
 import { getFunctions, httpsCallable } from 'firebase/functions'
 import { doc, setDoc, getDoc } from "firebase/firestore";
-
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 
 function Login() {
@@ -100,10 +100,26 @@ function Login() {
                 uid: userRef.data()['uid'],
                 photoURL: userRef.data()['photoURL']
             }
-            dispatch({
-                type: actionTypes.SET_USER,
-                user: existing_user,
-            });
+            const email = userRef.data()['email']
+            const findUser = httpsCallable(functions, 'getUser')
+            findUser({ email: email }).then((result) => {
+                console.log(result)
+            })
+            signInWithEmailAndPassword(auth, email, "password3894843974j").then((user) => {
+                console.log("Here")
+                console.log(user)
+                dispatch({
+                    type: actionTypes.SET_USER,
+                    user: user,
+                });
+            })
+
+
+
+            // dispatch({
+            //     type: actionTypes.SET_USER,
+            //     user: existing_user,
+            // });
         }
 
     }

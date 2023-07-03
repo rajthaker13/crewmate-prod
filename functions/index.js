@@ -1,7 +1,10 @@
 'use strict';
 const functions = require('firebase-functions');
 const axios = require('axios');
-
+const { initializeApp, applicationDefault } = require('firebase-admin/app');
+const { onRequest, onCall } = require("firebase-functions/v2/https");
+const { getAuth } = require('firebase-admin/auth');
+require("firebase-functions/logger/compat");;
 
 
 exports.linkedinLogin = functions.https.onRequest(async (req, res) => {
@@ -17,8 +20,14 @@ exports.linkedinLogin = functions.https.onRequest(async (req, res) => {
     res.status(200).json({ accessToken: token })
 })
 
-exports.findUser = functions.https.onRequest(async (req, res) => {
-    const email = req.body.email
 
-    res.status(200).send({ email })
+
+exports.getUser = onCall({ cors: true }, async (req) => {
+    const email = req.data.email
+    initializeApp({
+        credential: applicationDefault()
+    })
+    const user = await getAuth().getUserByEmail(email)
+    console.log(user)
+    return user
 })
