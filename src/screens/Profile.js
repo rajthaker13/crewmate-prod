@@ -1,3 +1,5 @@
+
+
 import React, { useEffect, useState } from "react";
 import { useStateValue } from "../components/utility/StateProvider";
 import backdrop from "../assets/backdrop.gif";
@@ -7,9 +9,41 @@ import '../styles/Profile.css'
 import { Card, Grid, Text, Link } from '@nextui-org/react';
 import CommunityCard from "../components/common/CommunityCard";
 import db, { auth, provider, functions } from '../firebase/firebase';
+import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "firebase/firestore";
+import JobCard from "../components/common/JobCard";
 
 
 function Profile() {
+    const [savedJobs, setSavedJobs] = useState([])
+    const [name, setName] = useState('')
+
+    useEffect(() => {
+        async function getSavedJobs() {
+            let userRef
+            if (!auth.currentUser) {
+                userRef = doc(db, "users", 'rajthaker13@yahoo.com')
+            }
+            else {
+                userRef = doc(db, "users", auth.currentUser.email)
+            }
+            const userSnap = await getDoc(userRef)
+            if (userSnap.exists()) {
+                let userSavedJobs = userSnap.data()['savedJobs']
+                const displayName = userSnap.data()['displayName']
+
+                if (userSavedJobs == null) {
+                    userSavedJobs = []
+                }
+
+                setSavedJobs(userSavedJobs)
+                setName(displayName)
+            }
+
+        }
+
+        getSavedJobs()
+
+    }, [])
     return (
         <div className="profile_background">
             <h1 className="profile_header">Profile</h1>
@@ -19,7 +53,7 @@ function Profile() {
                         <img className="profile_icon" src={require('../assets/Raj.jpeg')}></img>
                         <div style={{ width: '20px' }}></div>
                         <div className="header_info_text">
-                            <h1 className="header_info_container_name">Raj Thaker</h1>
+                            <h1 className="header_info_container_name">{name}</h1>
                             <h1 className="header_info_container_membership">Member</h1>
                         </div>
                     </div>
@@ -41,11 +75,20 @@ function Profile() {
                 <CommunityCard />
                 <CommunityCard />
             </Grid.Container>
-            <h1>Profile</h1>
-            <h1>Profile</h1>
-            <h1>Profile</h1>
+            <h1 className="profile_header">My Jobs</h1>
+            <Grid.Container gap={5} >
+
+                {savedJobs.map((job) => {
+                    console.log(job)
+                    return (
+                        <JobCard job={job} xs={3} profile={true} />
+                    )
+                })}
+
+            </Grid.Container>
         </div >
     )
 }
 
 export default Profile
+

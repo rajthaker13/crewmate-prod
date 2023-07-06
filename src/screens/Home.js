@@ -3,8 +3,9 @@ import { useStateValue } from "../components/utility/StateProvider";
 import backdrop from "../assets/backdrop.gif";
 import sample from '../data/sample.json';
 import { getUserAndProductEmbeddings, getJobRecommendation } from "../open_ai/OpenAI"
-import { Card, Grid, Text, Link } from '@nextui-org/react';
+import { Card, Grid, Text, Link, Button } from '@nextui-org/react';
 import db, { auth, provider, functions } from '../firebase/firebase';
+import JobCard from "../components/common/JobCard";
 
 
 function Home() {
@@ -53,49 +54,13 @@ function Home() {
                 {jobRecs.map((job) => {
                     console.log(job)
                     return (
-                        <Grid xs={4}>
-                            <Card css={{ p: "$6", mw: "400px" }}>
-                                <Card.Header>
-                                    <img
-                                        alt="nextui logo"
-                                        src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-                                        width="34px"
-                                        height="34px"
-                                    />
-                                    <Grid.Container css={{ pl: "$6" }}>
-                                        <Grid xs={12}>
-                                            <Text h4 css={{ lineHeight: "$xs" }}>
-                                                {job.company_name}
-                                            </Text>
-                                        </Grid>
-                                        <Grid xs={10}>
-                                            <Text css={{ color: "$accents8" }}>{job.location}</Text>
-                                        </Grid>
-                                    </Grid.Container>
-                                </Card.Header>
-                                <Card.Body css={{ py: "$2" }}>
-                                    <Text>
-                                        {job.title}
-                                    </Text>
-                                </Card.Body>
-                                <Card.Footer>
-                                    <Link
-                                        icon
-                                        color="primary"
-                                        target="_blank"
-                                        href={job.redirected_url}
-                                    >
-                                        View Job
-                                    </Link>
-                                </Card.Footer>
-                            </Card>
-                        </Grid>
 
+                        <JobCard job={job} />
                     )
                 })}
 
             </Grid.Container>
-        </div>
+        </div >
 
     );
 }
