@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  background-image: url('./assets/crewmate-backdrop.jpg');
+  height: auto;
+  flex-direction: column;
+  align-content: start;
 }
 
 .App-logo {

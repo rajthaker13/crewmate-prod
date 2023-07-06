@@ -4,6 +4,7 @@ import backdrop from "../assets/backdrop.gif";
 import sample from '../data/sample.json';
 import { getUserAndProductEmbeddings, getJobRecommendation } from "../open_ai/OpenAI"
 import { Card, Grid, Text, Link } from '@nextui-org/react';
+import db, { auth, provider, functions } from '../firebase/firebase';
 
 
 function Home() {
@@ -35,9 +36,13 @@ function Home() {
 
     }
 
+    useEffect(() => {
+        console.log(auth.currentUser)
+    }, [])
+
 
     return (
-        <div style={{ backgroundImage: `url(${backdrop})`, height: '100vh', marginTop: '-2vh', position: 'relative' }}>
+        <div style={{ height: '100vh', marginTop: '-2vh', position: 'relative' }}>
             <h2 style={{ color: 'white' }}>Crewmate Job Prompt</h2>
             <textarea style={{ height: '30vh', width: '50vw', backgroundColor: '#212121', color: 'white', borderRadius: '1vh' }} placeholder="Write down what sort of job you are looking for! Be as descriptive as possible." value={userText} onChange={(e) => { setUserText(e.target.value) }}></textarea>
             <div>

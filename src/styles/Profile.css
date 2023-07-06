@@ -1,0 +1,78 @@
+.profile_background {
+    height: auto;
+    flex-direction: column;
+    align-content: start;
+    min-height: 100vh;
+  }
+
+  .profile_header {
+    color: #FFFFFF;
+    font-size: 56;
+    font-family: 'inter';
+    font-weight: 600;
+    margin-right: 88%;
+
+  }
+
+  .header_info {
+    flex-direction: row;
+    display: flex;
+    justify-content: space-around;
+    margin-right: 1%;
+    margin-left: 1%;
+  }
+
+  .header_info_container {
+    background: #C5D9FF;
+    height: 30vh;
+    width: 45vw;
+    border-radius: 2%;
+    justify-items: center;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+  }
+
+  .profile_icon {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    background-position: 50% 50%;
+    background-size: cover;
+    border-radius: 50%;
+  }
+
+  .header_info_container_content {
+    justify-items: center;
+    flex-direction: row;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5%;
+    width: auto;
+  }
+
+  .header_info_text{
+    flex-direction: column;
+    align-self: center;
+  }
+
+  .header_info_container_name {
+    font-family: 'Inter';
+    font-family: 400;
+    font-size: 30px;
+  }
+
+  .header_info_container_membership {
+    font-family: 'Inter';
+    font-family: 100;
+    font-size: 18px;
+  }
+
+  .communities_header {
+    color: #FFFFFF;
+    font-size: 20;
+    font-family: 'inter';
+    font-weight: 100;
+    margin-right: 86%;
+    margin-top: 5%;
+  }

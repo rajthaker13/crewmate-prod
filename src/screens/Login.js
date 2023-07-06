@@ -127,22 +127,12 @@ function Login() {
                 />
                 <h1>Sign in to Crewmate</h1>
                 <p>crewmate.com</p>
-                {/* <Button variant="outlined" color="primary" onClick={async () => await signIn()}>
-                    Sign In with Google
-                </Button> */}
                 <img
                     onClick={linkedInLogin}
                     src={linkedin}
                     alt="Log in with LinkedIn"
                     style={{ maxWidth: "180px", cursor: "pointer" }}
                 />
-
-                {/* {!authCode && <div>No code</div>}
-                {authCode && (
-                    <div>
-                        <div>Authorization Code: {authCode}</div>
-                    </div>
-                )} */}
 
             </div>
         </div>

@@ -14,7 +14,7 @@
     flex: .3;
     display: flex;
     align-items: center;
-    margin-left: 60px;
+    margin-left: 2%;
   }
 
   .header_center {
@@ -55,12 +55,28 @@
   }
   
   .header_right {
-    flex: 0.3;
+    flex: 0.45;
     display: flex;
     align-items: flex-end;
+    margin-left: 60%;
+    font-family: 'inter';
+    font-size: 16;
+    justify-content: space-around;
   }
   
   .header_right > .MuiSvgIcon-root {
     margin-left: auto;
     margin-right: 20px;
   }
+  .astext {
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+    cursor: pointer;
+}
+
+.header_labels {
+  color:azure;
+  margin-bottom: 5vh;
+}

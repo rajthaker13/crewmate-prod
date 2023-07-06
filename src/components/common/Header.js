@@ -5,13 +5,15 @@ import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import SearchIcon from "@material-ui/icons/Search";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import { useStateValue } from "../utility/StateProvider";
-import backdrop from '../../assets/backdrop.gif'
+import { Button } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
     const [{ user }] = useStateValue();
+    const navigate = useNavigate()
 
     return (
-        <div style={{ backgroundImage: `url(${backdrop})`, height: '12vh', display: 'flex' }}>
+        <div style={{ height: '12vh', display: 'flex' }}>
             <div className="header_left">
                 <Avatar
                     alt='crewmate-logo'
@@ -19,9 +21,16 @@ function Header() {
                     style={{ height: '15vw', width: 'auto', }}
                 />
             </div>
-
-            <div className="header_center">
-
+            <div className="header_right">
+                <button class="astext" onClick={() => { navigate("/") }}>
+                    <h4 class="header_labels">Home</h4>
+                </button>
+                <button class="astext">
+                    <h4 class="header_labels">Community Explorer</h4>
+                </button>
+                <button class="astext" onClick={() => { navigate('/profile') }}>
+                    <h4 class="header_labels">Profile</h4>
+                </button>
             </div>
 
 
@@ -39,9 +48,9 @@ function Header() {
         //         <SearchIcon />
         //         <input placeholder="Search something here" style={{ backgroundColor: 'white' }} />
         //     </div>
-        //     <div className="header_right">
-        //         <HelpOutlineIcon />
-        //     </div>
+        // <div className="header_right">
+        //     <HelpOutlineIcon />
+        // </div>
         // </div>
     );
 }
