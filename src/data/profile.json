@@ -1,0 +1,534 @@
+{
+    "id": 1291810,
+    "name": "• ×David Scheer",
+    "first_name": "• ×David",
+    "last_name": "Scheer",
+    "title": "Attorney",
+    "url": "https://www.linkedin.com/in/%c3%97david-scheer-15ab269b",
+    "hash": "e076d2c9c9bd398106625cffb38701d0",
+    "location": "Newark, New York, United States",
+    "industry": "Law Practice",
+    "summary": null,
+    "connections": "4 connections",
+    "recommendations_count": "0",
+    "logo_url": "https://static-exp1.licdn.com/sc/h/244xhbkr7g40x6bsu4gi6q4ry",
+    "last_response_code": 200,
+    "created": "2016-07-22 17:43:28",
+    "last_updated": "2022-07-11 06:29:50",
+    "outdated": 0,
+    "deleted": 0,
+    "country": "United States",
+    "connections_count": 4,
+    "experience_count": 1,
+    "last_updated_ux": 1657520990,
+    "member_shorthand_name": "%c3%97david-scheer-15ab269b",
+    "member_shorthand_name_hash": "658e6334e7a7d3892d564d2bc0086bd4",
+    "canonical_url": "https://www.linkedin.com/in/%c3%97david-scheer-15ab269b",
+    "canonical_hash": "e076d2c9c9bd398106625cffb38701d0",
+    "canonical_shorthand_name": "%c3%97david-scheer-15ab269b",
+    "canonical_shorthand_name_hash": "658e6334e7a7d3892d564d2bc0086bd4",
+    "member_also_viewed_collection": [
+        {
+            "id": 7100712818,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/ernie-day-a1b30a4?trk=public_profile_browsemap_mini-profile_title",
+            "title": null,
+            "location": null,
+            "created": "2019-04-25 23:49:10",
+            "last_updated": "2021-04-06 10:43:31",
+            "deleted": 1
+        },
+        {
+            "id": 7100712820,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/steve-andretich-554435120?trk=public_profile_browsemap_mini-profile_title",
+            "title": null,
+            "location": null,
+            "created": "2019-04-25 23:49:10",
+            "last_updated": "2021-04-06 10:43:31",
+            "deleted": 1
+        },
+        {
+            "id": 7100712822,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/ed-morales-0279006?trk=public_profile_browsemap_mini-profile_title",
+            "title": null,
+            "location": null,
+            "created": "2019-04-25 23:49:10",
+            "last_updated": "2021-04-06 10:43:31",
+            "deleted": 1
+        },
+        {
+            "id": 7100712825,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/dennis-kerfeld-1bb7a6155?trk=public_profile_browsemap_mini-profile_title",
+            "title": null,
+            "location": null,
+            "created": "2019-04-25 23:49:10",
+            "last_updated": "2021-04-06 10:43:31",
+            "deleted": 1
+        },
+        {
+            "id": 7100712829,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/edwardhockwater?trk=public_profile_browsemap_mini-profile_title",
+            "title": null,
+            "location": null,
+            "created": "2019-04-25 23:49:10",
+            "last_updated": "2021-04-06 10:43:31",
+            "deleted": 1
+        },
+        {
+            "id": 16636138958,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-shear-00052113",
+            "title": "Senior Advisor, McLarty Associates",
+            "location": "Washington, DC",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 1
+        },
+        {
+            "id": 16636138959,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/rsoswald",
+            "title": "Employment, Whistleblower, and Civil Rights Lawyer",
+            "location": "Washington, DC",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 16636138960,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-bernstein-b4714243",
+            "title": "Attorney at David Bernstein, Attorney at Law",
+            "location": "Norman, OK",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 16636138961,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/michael-angileri-a736553b",
+            "title": "Attorney at Angileri & Associates",
+            "location": "Downers Grove, IL",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 16636138962,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-hilburn-3b484510",
+            "title": "Attorney at Law Office of David G. Hilburn, P.C.",
+            "location": "College Station, TX",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 1
+        },
+        {
+            "id": 16636138963,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/kevinhickey2",
+            "title": "Divorce/custody attorney; defender of parents wrongfully accused of child abuse.",
+            "location": "Fort Smith, AR",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 16636138964,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/joseph-morgano-174132100",
+            "title": "Joseph F. Morgano Attorney at Law",
+            "location": "Shrewsbury, NJ",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 16636138965,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/eric-olson-9804408",
+            "title": "Attorney at Eric J. Olson, Esq., Attorney at Law",
+            "location": "Lakeland, FL",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 1
+        },
+        {
+            "id": 16636138966,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-minicozzi-26710558",
+            "title": "Attorney",
+            "location": "Branford, CT",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 16636138967,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/michael-jefferson-4a92596",
+            "title": "Independent Law Practice Professional",
+            "location": "New Haven, CT",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 16636138968,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/adele-small-harris-7b8b064",
+            "title": "Attorney at Karp Law Firm",
+            "location": "Palm Beach Gardens, FL",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 16636138969,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/alanphillips5",
+            "title": "Legal Consultant at Alan Phillips, J.D.",
+            "location": "Asheville, NC",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 16636138970,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/steven-nullman-3b05474",
+            "title": "Nullman Law, P.A.",
+            "location": "Miami Beach, FL",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 16636138971,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/nicholas-conrardy-3981b977",
+            "title": "--",
+            "location": "Greater Milwaukee",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 16636138972,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/sharon-l-vollrath-63bb3943",
+            "title": "Attorney",
+            "location": "Oviedo, FL",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 16636138973,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/terrence-l-ivey-0725a551",
+            "title": "Family and Real Estate Attorney",
+            "location": "Jacksonville, FL",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 16636138974,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/michelle-smith-4a91b751",
+            "title": "Attorney at Michelle Smith Attorney at Law",
+            "location": "Warner Robins, GA",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 16636138975,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/labe-richman-b04a514",
+            "title": "Criminal Defense Attorney at Labe M. Richman, Attorney at Law",
+            "location": "New York, NY",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 16636138976,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/alirezamarkbalaliesq",
+            "title": "Attorney at Law and Real Estate Broker",
+            "location": "Beverly Hills, CA",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 16636138977,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-scheer-19483b5",
+            "title": "Architect and Owner, David Ross Scheer, Architect LLC",
+            "location": "Salt Lake City, UT",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 16636138978,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-scheer-53b7038",
+            "title": "Real Estate Broker at Scheer Realty & Investment",
+            "location": "Oakley, CA",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2021-12-12 01:59:54",
+            "deleted": 1
+        },
+        {
+            "id": 16636138979,
+            "member_id": 1291810,
+            "url": "https://ch.linkedin.com/in/david-scheer",
+            "title": "M.A. Student in Strategy & International Management (SIM-HSG)",
+            "location": "Sankt Gallen",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2021-10-05 14:02:31",
+            "deleted": 1
+        },
+        {
+            "id": 16636138980,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-scheer-5290429",
+            "title": "President at Scheer & Company, Inc.",
+            "location": "New York City Metropolitan Area",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 1
+        },
+        {
+            "id": 16636138981,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/davidscheeratlantaga",
+            "title": "Chief Executive Officer",
+            "location": "Atlanta Metropolitan Area",
+            "created": "2021-04-06 10:43:31",
+            "last_updated": "2021-10-05 14:02:31",
+            "deleted": 1
+        },
+        {
+            "id": 19752900281,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-scheer-b60aa52",
+            "title": null,
+            "location": "New York, NY",
+            "created": "2021-10-05 14:02:31",
+            "last_updated": "2021-10-09 01:08:55",
+            "deleted": 1
+        },
+        {
+            "id": 19797639240,
+            "member_id": 1291810,
+            "url": "https://de.linkedin.com/in/davidscheerde",
+            "title": "Managing Consultant bei Senacor Technologies",
+            "location": "Frankfurt",
+            "created": "2021-10-09 01:08:55",
+            "last_updated": "2021-12-12 01:59:54",
+            "deleted": 1
+        },
+        {
+            "id": 20899667269,
+            "member_id": 1291810,
+            "url": "https://es.linkedin.com/in/david-scheer",
+            "title": "MiBA ESADE, SIM HSG | BCG, P&G, SMP, BMW",
+            "location": "Barcelona",
+            "created": "2021-12-12 01:59:55",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 1
+        },
+        {
+            "id": 20899667270,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-scheer-85b43a25",
+            "title": "President - SR Rep",
+            "location": "Lakewood, OH",
+            "created": "2021-12-12 01:59:55",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 1
+        },
+        {
+            "id": 24717093710,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-shear-00052113",
+            "title": "Adjunct Professor, School of Advanced International Studies",
+            "location": "Washington, DC",
+            "created": "2022-07-11 06:29:50",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 24717093713,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-hilburn-3b484510",
+            "title": "Judge, 361st District Court of Brazos County, Texas",
+            "location": "College Station, TX",
+            "created": "2022-07-11 06:29:50",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 24717093716,
+            "member_id": 1291810,
+            "url": "https://hk.linkedin.com/in/davidalexander-scheer",
+            "title": "Strategy & Partnerships @Slope_Finance",
+            "location": "Hong Kong SAR",
+            "created": "2022-07-11 06:29:50",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 24717093718,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-scheer-ba63a47",
+            "title": "Senior Editor at Bloomberg News",
+            "location": "Seattle, WA",
+            "created": "2022-07-11 06:29:50",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 24717093720,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-scheer-53b7038",
+            "title": "Real Estate Broker at Scheer Realty & Investment",
+            "location": "Oakley, CA",
+            "created": "2022-07-11 06:29:50",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        }
+    ],
+    "member_awards_collection": [],
+    "member_certifications_collection": [],
+    "member_courses_collection": [],
+    "member_courses_suggestion_collection": [],
+    "member_education_collection": [],
+    "member_experience_collection": [
+        {
+            "id": 1052869,
+            "member_id": 1291810,
+            "title": "Attorney",
+            "location": null,
+            "company_name": "David A. Scheer Attorney at Law",
+            "company_url": null,
+            "date_from": null,
+            "date_to": null,
+            "duration": null,
+            "description": null,
+            "created": "2016-07-22 17:43:28",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0,
+            "order_in_profile": 1,
+            "company_id": null
+        }
+    ],
+    "member_groups_collection": [],
+    "member_interests_collection": [],
+    "member_languages_collection": [],
+    "member_organizations_collection": [],
+    "member_patents_collection": [],
+    "member_posts_see_more_urls_collection": [],
+    "member_projects_collection": [],
+    "member_publications_collection": [],
+    "member_recommendations_collection": [],
+    "member_similar_profiles_collection": [
+        {
+            "id": 1168439229,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-scheer-19483b5",
+            "created": "2021-10-05 14:02:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 1168439230,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-scheer-53b7038",
+            "created": "2021-10-05 14:02:31",
+            "last_updated": "2021-12-12 01:59:54",
+            "deleted": 1
+        },
+        {
+            "id": 1168439231,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-scheer-5290429",
+            "created": "2021-10-05 14:02:31",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 1
+        },
+        {
+            "id": 1168439232,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-scheer-b60aa52",
+            "created": "2021-10-05 14:02:31",
+            "last_updated": "2021-10-09 01:08:55",
+            "deleted": 1
+        },
+        {
+            "id": 1172737804,
+            "member_id": 1291810,
+            "url": "https://de.linkedin.com/in/davidscheerde",
+            "created": "2021-10-09 01:08:55",
+            "last_updated": "2021-12-12 01:59:54",
+            "deleted": 1
+        },
+        {
+            "id": 1338348751,
+            "member_id": 1291810,
+            "url": "https://es.linkedin.com/in/david-scheer",
+            "created": "2021-12-12 01:59:54",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 1
+        },
+        {
+            "id": 1338348752,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-scheer-85b43a25",
+            "created": "2021-12-12 01:59:54",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 1
+        },
+        {
+            "id": 1852382373,
+            "member_id": 1291810,
+            "url": "https://hk.linkedin.com/in/davidalexander-scheer",
+            "created": "2022-07-11 06:29:50",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 1852382374,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-scheer-ba63a47",
+            "created": "2022-07-11 06:29:50",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        },
+        {
+            "id": 1852382375,
+            "member_id": 1291810,
+            "url": "https://www.linkedin.com/in/david-scheer-53b7038",
+            "created": "2022-07-11 06:29:50",
+            "last_updated": "2022-07-11 06:29:50",
+            "deleted": 0
+        }
+    ],
+    "member_skills_collection": [],
+    "member_test_scores_collection": [],
+    "member_volunteering_cares_collection": [],
+    "member_volunteering_opportunities_collection": [],
+    "member_volunteering_positions_collection": [],
+    "member_volunteering_supports_collection": [],
+    "member_websites_collection": []
+}

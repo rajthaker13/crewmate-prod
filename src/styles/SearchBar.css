@@ -1,0 +1,42 @@
+.search-bar {
+    display: flex;
+    align-items: center;
+    height: 7%;
+    overflow: hidden;
+    transition: height 0.3s ease;
+    margin-left: 3%;
+    margin-right: 3%;
+    border-radius: 35px;
+  }
+  
+  .search-bar.expanded {
+    height: 15%; 
+    border-radius: 10px;
+  }
+  
+  .search-bar input {
+    flex: 1;
+    height: 100%;
+    padding: 0 10px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: white;
+    background-color: transparent;
+    transition: flex 0.3s ease; /* Add transition for flex property */
+  }
+  
+  .search-bar.expanded input {
+    flex: 2; /* Adjust the flex value to give more room for input */
+  }
+  
+  .search-bar button {
+    height: 100%;
+    padding: 0 10px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+  }
+  

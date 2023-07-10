@@ -124,15 +124,20 @@ function Login() {
                 <img
                     src={require('../assets/crewmate-logo.png')}
                     alt="crewmate-emblem"
+                    className="crewmate_image"
                 />
-                <h1>Sign in to Crewmate</h1>
-                <p>crewmate.com</p>
-                <img
-                    onClick={linkedInLogin}
-                    src={linkedin}
-                    alt="Log in with LinkedIn"
-                    style={{ maxWidth: "180px", cursor: "pointer" }}
-                />
+                <h3 className="login_text">Sign In</h3>
+                <h5 className="login_text">joincrewmate.com</h5>
+                <div style={{ flexDirection: 'row', display: 'inline-flex', }}>
+                    <button className="login_button" onClick={linkedInLogin}>
+                        <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '5vh', minWidth: '20vw', justifyContent: 'left' }}>
+                            <img src={require("../assets/linkedin-icon.png")} className="login_icon" ></img>
+                            <h5 className="login_text_button">Continue with LinkedIn</h5>
+                        </div>
+                    </button>
+                </div>
+
+
 
             </div>
         </div>

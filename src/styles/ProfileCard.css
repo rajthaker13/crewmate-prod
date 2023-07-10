@@ -1,0 +1,93 @@
+.card_profile {
+    height: 50vh;
+    width: 25vw;
+    background-color: #121212;
+    margin-bottom: 3vh;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: .1px;
+    border-color: #9E9E9E;
+    margin-left: 3vw;
+    margin-right: 3vw;
+    display: flex;
+    flex-direction: column;
+    scrollbar-color: #9921e8;
+}
+
+
+.crewmate_profile_icon {
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+    border-radius: 50%;
+    margin-top: 5%;
+    margin-left: 5%;
+  }
+
+  .crewmate_name {
+    font-family: 'inter';
+    font-size: 16;
+    color: #FAFAFA;
+    margin-top: 10%;
+    margin-left: 2%;
+    font-weight: 500;
+    min-width: 14vw;
+    text-align: left;
+  }
+
+  .crewmate_job_title {
+    font-family: 'inter';
+    font-size: 8;
+    color: #FAFAFA;
+    margin-top: 2%;
+    margin-left: 3%;
+  }
+
+
+  .crewmate_description {
+    font-family: 'inter';
+    font-size: 8;
+    color: #9E9E9E;
+    margin-top: 1%;
+    margin-left: 3%;
+    margin-right: 3%;
+    font-weight: 400;
+    text-align: left;
+  }
+
+  .crewmate_location_icon {
+    margin-top: 1%;
+    margin-left: 3%;
+  }
+
+  .crewmate_location {
+    margin-top: 1%;
+    font-family: 'inter';
+    font-size: 8;
+    color: #FAFAFA;
+    margin-left: 1%;
+    font-weight: 400;
+    text-align: lef
+    t;
+  }
+
+  .crew_break {
+    height: .1%;
+    width: 94%;
+    background-color: #9E9E9E;
+    margin-top: 3%;
+    margin-left: 3%;
+    margin-right: 3%;
+  }
+
+
+  .add_to_crew_button {
+    margin-top: 10%;
+    margin-left: 8%;
+    margin-right: 8%;
+    height: 10%;
+    border-radius: 25px;
+    background-color: #9921e8;
+    background-image: linear-gradient(315deg, #9921e8 0%, #5f72be 74%);
+    justify-content: center;
+  }

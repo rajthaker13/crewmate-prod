@@ -10,6 +10,7 @@ import { LinkedInCallback } from "react-linkedin-login-oauth2";
 import LinkedInPage from './components/login/callback';
 import { useNavigate } from "react-router-dom";
 import Profile from "./screens/Profile.js"
+import CommunityExplorer from './screens/CommunityExplorer';
 
 
 
@@ -32,6 +33,8 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/community" element={<CommunityExplorer />} />
+
             </Routes>
           </>
         )}

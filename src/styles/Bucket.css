@@ -1,0 +1,32 @@
+.bucket-first {
+    background-color: black;
+    height: 69%;
+    width: 30%;
+    margin-right: 8%;
+}
+
+.bucket {
+    background-color: black;
+    height: 100px;
+    width: 30%;
+}
+
+
+.bucket_title {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 8;
+    color: #FAFAFA;
+    margin-top: 2%;
+    font-weight: 500;
+
+  }
+  .container {
+    background-color: #121212;
+    height: auto;
+    width: 30vw;
+    border-radius: 20px;
+    scrollbar-color: #9921e8;
+    min-height: 60vh;
+
+
+  }
