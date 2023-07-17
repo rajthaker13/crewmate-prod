@@ -1,0 +1,8 @@
+.container_requests {
+    background-color: #121212;
+    height: auto;
+    width: 20vw;
+    border-radius: 20px;
+    scrollbar-color: #9921e8;
+    min-height: 60vh;
+  }

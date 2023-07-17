@@ -25,14 +25,17 @@ const SearchBar = (props) => {
     async function chatGPTDude() {
         props.setIsSearching(true)
         const link = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://us-central1-crewmate-prod.cloudfunctions.net/getJobRec`
+        const experienceText = "What User Desires: " + userText + " Prior Work Experience of user: " + props.experience
         await axios.post(link, { text: userText }, { headers: { 'Content-Type': 'application/json' } }).then(async (res) => {
-            setUserText('')
-            console.log(res.data)
             props.setJobRecs(res.data)
         })
-        // await getCrewmateReccomendation(userText).then((res) => {
-        //     props.setProfileRec(res)
-        // })
+        await axios.post(link, { text: experienceText }, { headers: { 'Content-Type': 'application/json' } }).then(async (res) => {
+            setUserText('')
+            props.setExperienceRecs(res.data)
+        })
+        await getCrewmateReccomendation(userText).then((res) => {
+            props.setProfileRec(res)
+        })
         props.setIsSearching(false)
     }
 

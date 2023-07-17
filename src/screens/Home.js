@@ -19,14 +19,14 @@ import Modal from "../components/home/Modal";
 function Home() {
     const [state, dispatch] = useStateValue();
     const [jobRecs, setJobRecs] = useState([])
+    const [experienceRecs, setExperienceRecs] = useState([])
     const [profileRec, setProfileRec] = useState([])
     const [isSearching, setIsSearching] = useState(false)
     const [openModal, setOpenModal] = useState(false)
+    const [experience, setExperience] = useState('')
 
     useEffect(() => {
         async function getData() {
-            const usersRef = collection(db, "users")
-            const usersSnap = await getDocs(usersRef)
 
             let checkModal = true
             let email
@@ -37,16 +37,15 @@ function Home() {
             else {
                 email = auth.currentUser.email
             }
+            const usersRef = doc(db, "users", email)
+            const usersSnap = await getDoc(usersRef)
 
-            usersSnap.forEach((user) => {
-                if (user.data()['email'] == email) {
-                    console.log("Myemail", email)
-                    console.log("emai", user.data()['email'])
-                    checkModal = false
-                }
-            })
+            if (usersSnap.exists()) {
+                checkModal = false
+                setExperience(JSON.stringify(usersSnap.data()['data'].member_experience_collection))
+            }
             setOpenModal(checkModal)
-            console.log("MODAL", openModal)
+
         }
         getData()
 
@@ -56,9 +55,9 @@ function Home() {
     return (
         <div style={{ height: '88vh' }}>
             {openModal && <Modal setOpenModal={setOpenModal} />}
-            <SearchBar setJobRecs={setJobRecs} setIsSearching={setIsSearching} isSearching={isSearching} setProfileRec={setProfileRec} />
+            <SearchBar setJobRecs={setJobRecs} setIsSearching={setIsSearching} isSearching={isSearching} setProfileRec={setProfileRec} experience={experience} setExperienceRecs={setExperienceRecs} />
             <div style={{ display: 'inline-flex', marginTop: '5vh' }}>
-                <Bucket isFirstBucket={true} jobRecs={jobRecs} isSearching={isSearching} />
+                <Bucket isFirstBucket={true} jobRecs={jobRecs} isSearching={isSearching} experienceRecs={experienceRecs} />
                 <Bucket profileRec={profileRec} isSearching={isSearching} />
             </div>
 

@@ -13,7 +13,7 @@ function Header() {
     const navigate = useNavigate()
 
     return (
-        <div style={{ height: '12vh', display: 'flex' }}>
+        <div style={{ height: '12vh', display: 'flex', }}>
             <div className="header_left">
                 <Avatar
                     alt='crewmate-logo'
@@ -26,7 +26,7 @@ function Header() {
                     <h4 class="header_labels">Home</h4>
                 </button>
                 <button class="astext" onClick={() => { navigate("/community") }}>
-                    <h4 class="header_labels">Community Explorer</h4>
+                    <h4 class="header_labels">Community</h4>
                 </button>
                 <button class="astext" onClick={() => { navigate('/profile') }}>
                     <h4 class="header_labels">Profile</h4>

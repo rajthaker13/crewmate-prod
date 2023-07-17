@@ -11,6 +11,7 @@ import LinkedInPage from './components/login/callback';
 import { useNavigate } from "react-router-dom";
 import Profile from "./screens/Profile.js"
 import CommunityExplorer from './screens/CommunityExplorer';
+import Chat from './screens/Chat';
 
 
 
@@ -22,22 +23,22 @@ function App() {
   return (
     <div className="App">
       <Router>
-        {/* {!user ? (
+        {!user ? (
           <Routes>
             <Route exact path="/linkedin" element={<LinkedInCallback />} />
             <Route path="/" element={<Login />} />
           </Routes>
-        ) : ( */}
-        <>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/community" element={<CommunityExplorer />} />
+        ) : (
+          <>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/community" element={<Chat />} />
 
-          </Routes>
-        </>
-        {/* )} */}
+            </Routes>
+          </>
+        )}
       </Router>
     </div>
   );

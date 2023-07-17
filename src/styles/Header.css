@@ -60,8 +60,11 @@
     align-items: flex-end;
     margin-left: 60%;
     font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 16;
+    font-size: 16px;
     justify-content: space-around;
+    word-wrap: break-word;
+    /* Optionally, you can set a max-width for the text container to control the wrapping behavior */
+    max-width: calc(100% - 50px);
   }
   
   .header_right > .MuiSvgIcon-root {

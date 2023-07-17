@@ -13,70 +13,80 @@ const openai = new OpenAIApi(configuration);
 
 
 export async function getCrewmateReccomendation(userInput) {
-    const usersRef = collection(db, "users")
-    const usersSnap = await getDocs(usersRef)
+    let users = [];
+    let email;
+    let embeddings = [];
+    let query_embedding;
+    try {
+        const usersRef = collection(db, "users");
+        const usersSnap = await getDocs(usersRef);
 
-    let users = []
-    let email
-
-    if (!auth.currentUser) {
-        email = "rajthaker13@yahoo.com"
-    }
-    else {
-        email = auth.currentUser.email
-    }
-    let embeddings = []
-
-
-    usersSnap.forEach(async (user) => {
-        // if (user.data()['email'] != email) {
-        users.push(user.data())
-        const data = user.data()['data']
-        const response = await openai.createEmbedding({
-            model: "text-embedding-ada-002",
-            input: JSON.stringify({ "data": data.member_experience_collection }),
-        });
-        embeddings.push(response)
-        // }
-    })
-
-
-    console.log(embeddings)
-
-    const query_embedding = await openai.createEmbedding({
-        model: "text-embedding-ada-002",
-        input: JSON.stringify({ "prompt": userInput }),
-    });
-
-
-    let scores = []
-
-    console.log(users.length)
-
-    for (var s = 0; s < users.length; s++) {
-        console.log("s", s)
-        const query = query_embedding.data.data[0].embedding = undefined ? null : query_embedding.data.data[0].embedding
-        const embed = embeddings[s].data.data[0].embedding = undefined ? null : embeddings[s].data.data[0].embedding
-
-        console.log(query)
-        console.log(embed)
-        if (query != null && embed != null) {
-            const cosine_simi = cosineSimilarity(
-                query,
-                embed
-            )
-
-            console.log("Cosine similarity for index", s, ":", cosine_simi);
-            scores.push({ "index": s, "rating": cosine_simi })
+        if (!auth.currentUser) {
+            email = "rajthaker13@yahoo.com";
+        } else {
+            email = auth.currentUser.email;
         }
+
+        const embeddingPromises = [];
+
+        usersSnap.forEach((user) => {
+            // if (user.data()['email'] != email) {
+            users.push(user.data());
+            const data = user.data()["data"];
+            const embeddingPromise = openai.createEmbedding({
+                model: "text-embedding-ada-002",
+                input: JSON.stringify({ data: data.member_experience_collection }),
+            });
+            embeddingPromises.push(embeddingPromise);
+            // }
+        });
+
+        console.log(embeddings);
+
+        embeddings = await Promise.all(embeddingPromises);
+
+        query_embedding = await openai.createEmbedding({
+            model: "text-embedding-ada-002",
+            input: JSON.stringify({ prompt: userInput }),
+        });
+    } finally {
+        let scores = [];
+        console.log(users.length);
+
+        for (var s = 0; s < users.length; s++) {
+            console.log("s", s);
+            let query;
+            let embed;
+
+            console.log(query_embedding);
+
+            if (
+                query_embedding.data.data[0].embedding != undefined &&
+                embeddings[s].data.data[0].embedding != undefined
+            ) {
+                query =
+                    query_embedding.data.data[0].embedding == undefined
+                        ? null
+                        : query_embedding.data.data[0].embedding;
+                embed =
+                    embeddings[s].data.data[0].embedding == undefined
+                        ? null
+                        : embeddings[s].data.data[0].embedding;
+            }
+
+
+            if (query != null && embed != null) {
+                const cosine_simi = cosineSimilarity(query, embed);
+
+                console.log("Cosine similarity for index", s, ":", cosine_simi);
+                scores.push({ index: s, rating: cosine_simi });
+            }
+        }
+
+        scores.sort((a, b) => b.rating - a.rating);
+
+        return users[scores[0].index];
     }
-    scores.sort((a, b) => b.rating - a.rating);
-    console.log(scores)
-    console.log(users)
-    return users[scores[0].index].email
-
-
-
 }
 
 

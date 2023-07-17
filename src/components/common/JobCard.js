@@ -48,38 +48,30 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }
                         await setDoc(doc(db, "companies", job.company_name), {
                             data: json
                         })
-                        console.log("Fuck")
                         icon = json[0].icon
                         if (icon == null) {
                             icon = json[1].icon
                         }
-                        console.log(icon)
                     })
                     .catch(err => console.error('error:' + err));
             }
             else {
                 const data = companyRef.data()['data']
-                if (Array.isArray(data)) {
-                    console.log(data)
+                console.log("FUCKTARD", data)
+                console.log(data.length)
+                if (data.length == 0) {
+                    icon = require('../../assets/crewmate-emblem.png')
+                }
+                else {
                     icon = data[0].icon
                     if (icon == null) {
                         icon = data[1].icon
                     }
                 }
-                else {
-                    icon = data.icon
-                }
             }
             setPfp(icon)
         }
 
-        function getJobData() {
-            console.log(job)
-            // const job_function = job.job_functions_collection[0].job_function_list.function
-            // const industry = job.job_industries_collection[0].job_industry_list.industry
-            // setJobFunction(job_function)
-            // setIndustry(industry)
-        }
 
         async function isJobSaved() {
             let userDoc
@@ -132,14 +124,13 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }
         }
         if (!isSearching && job != null) {
             getCompanyData()
-            getJobData()
             isJobSaved()
             isWaitlisted()
         }
 
 
 
-    }, [isSearching, job.company_name])
+    }, [])
 
     async function joinWaitlist() {
         if (!companyWaitlisted) {
@@ -219,37 +210,32 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }
         }
     }
     return (
-        <div className="card">
-            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '10vh', maxHeight: '10vh' }}>
-                <img className="profile_icon" src={pfp} style={{ height: '75px', width: '75px' }}></img>
+        <div className="card" style={{ maxWidth: profile == true ? "25vw" : "auto" }} >
+            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', minWidth: 'auto', maxWidth: 'auto' }}>
+                <img className="profile_icon" src={pfp} style={{ height: '75px', width: '75px' }} onError={({ currentTarget }) => {
+                    currentTarget.onerror = null; // prevents looping
+                    currentTarget.src = require('../../assets/crewmate-emblem.png');
+                }}></img>
                 <h3 className="company_name">{job.company_name}</h3>
                 <FaBookmark color={jobSaved ? "#9921e8" : '#FAFAFA'} size={25} className="job_bookmark_icon" onClick={saveJob} />
                 <FaTelegramPlane color='#FAFAFA' size={25} className="job_share_icon" onClick={saveJob} />
             </div>
-            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '7vh', maxHeight: '7vh' }}>
-                <h4 className="job_title">{job.title}</h4>
+            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', minWidth: 'auto' }}>
+                <h4 className="job_title" style={{ height: 'auto', minHeight: 'auto' }}>{job.title}</h4>
             </div>
-            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '9vh', maxHeight: '9vh' }}>
+            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
                 <h6 className="job_description">{description}</h6>
             </div>
-            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '3vh', maxHeight: '3vh' }}>
+            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
                 <FaPeriscope color='#FAFAFA' size={25} className="job_location_icon" />
                 <h5 className="job_location">{job.location}</h5>
             </div>
-            <div className="line_break" />
-            {/* <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '3vh', maxHeight: '3vh' }}>
-                <FaBlackTie color='#FAFAFA' size={25} className="job_info_icon" />
-                <h6 className="job_info">{`Job Function: ${jobFunction}`}</h6>
-            </div> */}
-            {/* <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '4vh', maxHeight: '4vh' }}>
-                <FaWarehouse color='#FAFAFA' size={25} className="job_info_icon" />
-                <h6 className="job_info">{`Job Industry: ${jobIndustry}`}</h6>
-            </div> */}
-            <div className="line_break" />
-            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '3vh', maxHeight: '3vh' }}>
+            {/* <div className="line_break" />
+            <div className="line_break" /> */}
+            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
                 <h6 className="job_info">{`${job.employment_type} Position`}</h6>
             </div>
-            <div style={{ flexDirection: 'row', display: 'inline-flex', }}>
+            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
                 <button className="job_apply_button" onClick={() => {
                     if (job.external_url != null) {
                         window.open(
@@ -265,16 +251,15 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }
 
                     }
                 }}>
-                    <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '50vh', minWidth: '10vw', justifyContent: 'center' }}>
-                        <img src={require("../../assets/crewmate-emblem.png")} className="apply_icon" ></img>
+                    <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', minWidth: '10vw', justifyContent: 'center' }}>
                         <h4 className="apply_text">Apply</h4>
                     </div>
                 </button>
                 <button className="job_waitlist_button" onClick={joinWaitlist}>
                     <div style={{
-                        flexDirection: 'row', display: 'inline-flex', minHeight: '50vh', minWidth: '10vw', justifyContent: 'center'
+                        flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', minWidth: '10vw', justifyContent: 'center'
                     }}>
-                        {!companyWaitlisted && <> <FaPeopleArrows color='#FAFAFA' size={25} className="waitlist_icon" />
+                        {!companyWaitlisted && <>
                             <h4 className="apply_text">Join Waitlist</h4></>}
                         {companyWaitlisted && <>
                             <h4 className="apply_text">Joined</h4></>}
@@ -282,6 +267,7 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }
                     </div>
                 </button>
             </div >
+            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '5vh', minWidth: '20vw', justifyContent: 'center', }} />
 
 
 
