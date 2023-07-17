@@ -67,6 +67,12 @@
     text-overflow: clip;
   }
 
+  .header_info_container_job {
+    font-family: 'Inter';
+    font-family: 400;
+    font-size: 30px;
+  }
+
   .header_info_container_membership {
     font-family: 'Inter';
     font-family: 100;

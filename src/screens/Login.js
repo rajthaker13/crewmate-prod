@@ -55,8 +55,6 @@ function Login() {
         let pfp
 
         await axios.get(link, { headers: { Authorization: `Bearer ${token}` } }).then((res) => {
-            console.log("FUCK")
-            console.log(res)
             id = res.data.id
             firstName = res.data.localizedFirstName
             lastName = res.data.localizedLastName
@@ -107,11 +105,9 @@ function Login() {
             const email = userRef.data()['email']
             const findUser = httpsCallable(functions, 'getUser')
             findUser({ email: email }).then((result) => {
-                console.log(result)
+                // console.log(result)
             })
             signInWithEmailAndPassword(auth, email, "password3894843974j").then((user) => {
-                console.log("Here")
-                console.log(user)
                 dispatch({
                     type: actionTypes.SET_USER,
                     user: user,

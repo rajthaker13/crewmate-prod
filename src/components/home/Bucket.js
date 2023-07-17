@@ -13,7 +13,7 @@ function Bucket({ jobRecs, isFirstBucket = false, profileRec = {}, isSearching, 
             {isFirstBucket ?
                 <>
                     <div>
-                        <h2 className="bucket_title">Prompt Reccomendations</h2>
+                        <h2 className="bucket_title">Prompt Recommendations</h2>
                         <div className="container">
                             <div style={{ height: '3vh' }} />
                             {jobRecs && jobRecs.map((job, index) => {

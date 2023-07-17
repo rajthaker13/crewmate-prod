@@ -8,7 +8,7 @@ import '../../styles/ProfileCard.css'
 import { FaPeriscope, FaTelegramPlane, FaBlackTie, FaWarehouse, FaBookmark, FaPeopleArrows } from 'react-icons/fa';
 
 
-function ProfileCard({ profileRec = false }) {
+function ProfileCard({ profileRec = false, mini = false, outgoing = false, addConversation }) {
 
     const [addedToCrew, setAddedToCrew] = useState(false)
     const [experience, setExperience] = useState([])
@@ -79,12 +79,15 @@ function ProfileCard({ profileRec = false }) {
 
             }
         }
+    }
 
+    async function onAccept() {
+        addConversation(profileRec.email, profileRec.data)
 
     }
 
     return (
-        <div className="card_profile">
+        <div className="card_profile" >
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
                 <img className="crewmate_profile_icon" src={profileRec.data.logo_url} style={{ height: '75px', width: '75px' }}></img>
                 <h3 className="company_name">{profileRec.data.name}</h3>
@@ -93,32 +96,37 @@ function ProfileCard({ profileRec = false }) {
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
                 <h4 className="crewmate_job_title">{profileRec.data.title}</h4>
             </div>
-            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
+            {!mini && <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
                 <h6 className="crewmate_description">{profileRec.data.summary} </h6>
-            </div>
+            </div>}
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
                 <FaPeriscope color='#FAFAFA' size={25} className="crewmate_location_icon" />
                 <h5 className="crewmate_location">{profileRec.data.location}</h5>
             </div>
             <div className="crew_break" />
-            {experience.map((job) => {
-                return (
-                    <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
-                        <FaBlackTie color='#FAFAFA' size={25} className="job_info_icon" />
-                        <h6 className="job_experience">{`${job.title} @ ${job.company_name}`}</h6>
-                    </div>
-                )
-            })}
-            <div className="crew_break" />
-            <div style={{ flexDirection: 'row', display: 'inline-flex', }}>
-                <button className="add_to_crew_button" onClick={onAdd}>
-                    <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '5vh', minWidth: '20vw', justifyContent: 'center', }}>
-                        <img src={require("../../assets/crewmate-emblem.png")} className="apply_icon" ></img>
+            {!mini && <>
+                {experience.map((job) => {
+                    return (
+                        <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
+                            <FaBlackTie color='#FAFAFA' size={25} className="job_info_icon" />
+                            <h6 className="job_experience">{`${job.title} @ ${job.company_name}`}</h6>
+                        </div>
+                    )
+                })}
+                <div className="crew_break" />
+            </>
+            }
+            {!outgoing && <div style={{ flexDirection: 'row', display: 'inline-flex', justifyContent: 'center' }}>
+                <button className="add_to_crew_button" onClick={mini ? onAccept : onAdd}>
+                    <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', minWidth: 'auto', justifyContent: 'center', }}>
+                        {/* <img src={require("../../assets/crewmate-emblem.png")} style={{ height: mini ? "30px" : "50px", width: mini ? "30px" : "50px" }}></img> */}
                         {!addedToCrew && <h4 className="apply_text">Add to Crew</h4>}
                         {addedToCrew && <h4 className="apply_text">Requested</h4>}
                     </div>
                 </button>
-            </div >
+            </div >}
+            {outgoing && <h5 className="crewmate_location">PENDING</h5>}
+
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '5vh', minWidth: '20vw', justifyContent: 'center', }} />
         </div>
     )

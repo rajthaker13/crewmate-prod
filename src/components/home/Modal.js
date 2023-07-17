@@ -31,7 +31,7 @@ function Modal({ setOpenModal }) {
                 else {
                     email = auth.currentUser.email
                 }
-                await setDoc(doc(db, "users", email), {
+                await updateDoc(doc(db, "users", email), {
                     data: response.data,
                     email: email
 
@@ -58,9 +58,9 @@ function Modal({ setOpenModal }) {
 
                     style={{ backgroundColor: 'black', outlineWidth: '10px', outlineColor: '#9E9E9E' }}
                 >
-                    <input type="text" placeholder="Enter a link..." style={{ backgroundColor: 'black', borderWidth: 0, width: '80%', color: 'white', fontFamily: 'Verdana, Arial, Helvetica, sans-serif' }} onChange={(e) => { setUrl(e.target.value) }} />
+                    <input type="text" placeholder="https://www.linkedin.com/in/firstNameLastName/" style={{ backgroundColor: 'black', borderWidth: 0, width: '80%', color: 'white', fontFamily: 'Verdana, Arial, Helvetica, sans-serif' }} onChange={(e) => { setUrl(e.target.value) }} />
                 </div>
-                <button onClick={handleInput}>Close</button>
+                <button onClick={handleInput}>Register</button>
             </div>
         </div>
     )

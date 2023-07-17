@@ -30,15 +30,15 @@ export async function getCrewmateReccomendation(userInput) {
         const embeddingPromises = [];
 
         usersSnap.forEach((user) => {
-            // if (user.data()['email'] != email) {
-            users.push(user.data());
-            const data = user.data()["data"];
-            const embeddingPromise = openai.createEmbedding({
-                model: "text-embedding-ada-002",
-                input: JSON.stringify({ data: data.member_experience_collection }),
-            });
-            embeddingPromises.push(embeddingPromise);
-            // }
+            if (user.data()['email'] != email) {
+                users.push(user.data());
+                const data = user.data()["data"];
+                const embeddingPromise = openai.createEmbedding({
+                    model: "text-embedding-ada-002",
+                    input: JSON.stringify({ data: data.member_experience_collection }),
+                });
+                embeddingPromises.push(embeddingPromise);
+            }
         });
 
         console.log(embeddings);

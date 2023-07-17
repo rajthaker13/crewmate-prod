@@ -21,6 +21,7 @@ function Profile() {
     const [description, setDescription] = useState('')
     const [experience, setExperience] = useState([])
 
+
     useEffect(() => {
         async function getSavedJobs() {
             let userRef
@@ -79,18 +80,18 @@ function Profile() {
                 <div className="header_info_container" style={{ background: "#2E1069" }}>
                     <div className="header_info_container_content">
                         <div className="header_info_text">
-                            <h1 className="header_info_container_name">{title}</h1>
+                            <h1 className="header_info_container_job">{title}</h1>
                             <h1 className="header_info_container_membership">{description}</h1>
                         </div>
                     </div>
                 </div>
             </div>
-            <h4 className="communities_header">Joined Communities: 3</h4>
+            {/* <h4 className="communities_header">Joined Communities: 3</h4>
             <Grid.Container gap={5} >
                 <CommunityCard />
                 <CommunityCard />
                 <CommunityCard />
-            </Grid.Container>
+            </Grid.Container> */}
             <h1 className="profile_header">My Jobs</h1>
             <Grid.Container gap={5} >
 

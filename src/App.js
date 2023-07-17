@@ -12,6 +12,10 @@ import { useNavigate } from "react-router-dom";
 import Profile from "./screens/Profile.js"
 import CommunityExplorer from './screens/CommunityExplorer';
 import Chat from './screens/Chat';
+import { useEffect } from 'react'
+import db, { auth } from './firebase/firebase';
+import { actionTypes } from './components/utility/reducer'
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 
 
 
@@ -20,27 +24,51 @@ import Chat from './screens/Chat';
 
 function App() {
   const [{ user }, dispatch] = useStateValue({ user: null });
-  return (
-    <div className="App">
-      <Router>
-        {!user ? (
-          <Routes>
-            <Route exact path="/linkedin" element={<LinkedInCallback />} />
-            <Route path="/" element={<Login />} />
-          </Routes>
-        ) : (
-          <>
-            <Header />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/community" element={<Chat />} />
 
-            </Routes>
-          </>
-        )}
-      </Router>
-    </div>
+  // useEffect(() => {
+  //   function unregisterAuth() {
+  //     auth.onAuthStateChanged((u) => {
+  //       if (u) {
+  //         localStorage.setItem('user', JSON.stringify(u));
+  //       }
+  //       else {
+  //         localStorage.removeItem('user');
+  //       }
+  //     })
+
+  //   }
+  //   return () => unregisterAuth();
+  // }, [])
+
+  return (
+    <>
+      <BrowserView>
+        <div className="App">
+          <Router>
+            {!user ? (
+              <Routes>
+                <Route exact path="/linkedin" element={<LinkedInCallback />} />
+                <Route path="/" element={<Login />} />
+              </Routes>
+            ) : (
+              <>
+                <Header />
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/community" element={<Chat />} />
+
+                </Routes>
+              </>
+            )}
+          </Router>
+        </div>
+      </BrowserView>
+      <MobileView>
+        <h1>Check us out on Web! Coming soon to mobile...</h1>
+      </MobileView>
+    </>
+
   );
 }
 

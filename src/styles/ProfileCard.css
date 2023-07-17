@@ -1,6 +1,6 @@
 .card_profile {
     height: auto;
-    width: 25vw;
+    width: auto;
     background-color: #121212;
     margin-bottom: 3vh;
     border-radius: 20px;
@@ -103,4 +103,9 @@
     max-width: calc(100% - 50px);
     font-weight: 400;
     text-align: left;
+  }
+
+  .apply_icon_profile {
+    height: 50px;
+    width: 50px;
   }

@@ -13,6 +13,8 @@ import axios from 'axios';
 import { getStorage, ref, listAll } from "firebase/storage";
 import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "firebase/firestore";
 import Modal from "../components/home/Modal";
+import { createCheckoutSession } from "../stripe/createCheckoutSession";
+import usePremiumStatus from "../stripe/usePremiumStatus";
 
 
 
@@ -24,6 +26,8 @@ function Home() {
     const [isSearching, setIsSearching] = useState(false)
     const [openModal, setOpenModal] = useState(false)
     const [experience, setExperience] = useState('')
+    const userIsPremium = usePremiumStatus(auth.currentUser)
+    const [location, setLocation] = useState('')
 
     useEffect(() => {
         async function getData() {
@@ -41,8 +45,13 @@ function Home() {
             const usersSnap = await getDoc(usersRef)
 
             if (usersSnap.exists()) {
-                checkModal = false
-                setExperience(JSON.stringify(usersSnap.data()['data'].member_experience_collection))
+                const data = usersSnap.data()['data']
+                if (data != null) {
+                    checkModal = false
+                    setExperience(JSON.stringify(usersSnap.data()['data'].member_experience_collection))
+                    setLocation(usersSnap.data()['data'].country)
+
+                }
             }
             setOpenModal(checkModal)
 
@@ -55,12 +64,12 @@ function Home() {
     return (
         <div style={{ height: '88vh' }}>
             {openModal && <Modal setOpenModal={setOpenModal} />}
-            <SearchBar setJobRecs={setJobRecs} setIsSearching={setIsSearching} isSearching={isSearching} setProfileRec={setProfileRec} experience={experience} setExperienceRecs={setExperienceRecs} />
+            <SearchBar setJobRecs={setJobRecs} setIsSearching={setIsSearching} isSearching={isSearching} setProfileRec={setProfileRec} experience={experience} setExperienceRecs={setExperienceRecs} location={location} />
             <div style={{ display: 'inline-flex', marginTop: '5vh' }}>
                 <Bucket isFirstBucket={true} jobRecs={jobRecs} isSearching={isSearching} experienceRecs={experienceRecs} />
                 <Bucket profileRec={profileRec} isSearching={isSearching} />
             </div>
-
+            {/* <button onClick={() => { createCheckoutSession(auth.currentUser.uid) }}></button> */}
         </div >
 
     );

@@ -29,7 +29,7 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }
     useEffect(() => {
         async function getCompanyData() {
             const document = doc(db, "companies", job.company_name)
-            const companyRef = await getDoc(document)
+            let companyRef = await getDoc(document)
             let icon = ''
 
             if (!companyRef.exists()) {
@@ -42,15 +42,15 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }
                     }
                 };
 
-                fetch(url, options)
+                await fetch(url, options)
                     .then(res => res.json())
                     .then(async (json) => {
                         await setDoc(doc(db, "companies", job.company_name), {
                             data: json
                         })
-                        icon = json[0].icon
+                        icon = json[0]['icon']
                         if (icon == null) {
-                            icon = json[1].icon
+                            icon = json[1]['icon']
                         }
                     })
                     .catch(err => console.error('error:' + err));
@@ -130,7 +130,7 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }
 
 
 
-    }, [])
+    }, [isSearching])
 
     async function joinWaitlist() {
         if (!companyWaitlisted) {
@@ -210,7 +210,7 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }
         }
     }
     return (
-        <div className="card" style={{ maxWidth: profile == true ? "25vw" : "auto" }} >
+        <div className="card" style={{ maxWidth: profile == true ? "25vw" : "" }} >
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', minWidth: 'auto', maxWidth: 'auto' }}>
                 <img className="profile_icon" src={pfp} style={{ height: '75px', width: '75px' }} onError={({ currentTarget }) => {
                     currentTarget.onerror = null; // prevents looping
@@ -218,7 +218,7 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }
                 }}></img>
                 <h3 className="company_name">{job.company_name}</h3>
                 <FaBookmark color={jobSaved ? "#9921e8" : '#FAFAFA'} size={25} className="job_bookmark_icon" onClick={saveJob} />
-                <FaTelegramPlane color='#FAFAFA' size={25} className="job_share_icon" onClick={saveJob} />
+                {/* <FaTelegramPlane color='#FAFAFA' size={25} className="job_share_icon" onClick={saveJob} /> */}
             </div>
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', minWidth: 'auto' }}>
                 <h4 className="job_title" style={{ height: 'auto', minHeight: 'auto' }}>{job.title}</h4>
@@ -230,12 +230,10 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }
                 <FaPeriscope color='#FAFAFA' size={25} className="job_location_icon" />
                 <h5 className="job_location">{job.location}</h5>
             </div>
-            {/* <div className="line_break" />
-            <div className="line_break" /> */}
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
                 <h6 className="job_info">{`${job.employment_type} Position`}</h6>
             </div>
-            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
+            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', justifyContent: 'center' }}>
                 <button className="job_apply_button" onClick={() => {
                     if (job.external_url != null) {
                         window.open(
@@ -251,13 +249,13 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }
 
                     }
                 }}>
-                    <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', minWidth: '10vw', justifyContent: 'center' }}>
+                    <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', minWidth: '8vw', justifyContent: 'center', overflow: 'hidden', width: 'auto' }}>
                         <h4 className="apply_text">Apply</h4>
                     </div>
                 </button>
                 <button className="job_waitlist_button" onClick={joinWaitlist}>
                     <div style={{
-                        flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', minWidth: '10vw', justifyContent: 'center'
+                        flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', minWidth: '8vw', justifyContent: 'center'
                     }}>
                         {!companyWaitlisted && <>
                             <h4 className="apply_text">Join Waitlist</h4></>}

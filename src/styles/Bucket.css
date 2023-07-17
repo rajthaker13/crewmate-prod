@@ -1,14 +1,14 @@
 .bucket-first {
     background-color: black;
     height: 69%;
-    width: 30%;
+    width: auto;
     margin-right: 8%;
 }
 
 .bucket {
     background-color: black;
     height: 100px;
-    width: 30%;
+    width: auto;
 }
 
 
@@ -23,7 +23,7 @@
   .container {
     background-color: #121212;
     height: auto;
-    width: 30vw;
+    width: auto;
     border-radius: 20px;
     scrollbar-color: #9921e8;
     min-height: 60vh;
