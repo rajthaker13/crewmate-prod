@@ -55,6 +55,8 @@ function Login() {
         let pfp
 
         await axios.get(link, { headers: { Authorization: `Bearer ${token}` } }).then((res) => {
+            console.log("FUCK")
+            console.log(res)
             id = res.data.id
             firstName = res.data.localizedFirstName
             lastName = res.data.localizedLastName
@@ -63,6 +65,8 @@ function Login() {
         }).catch((err) => {
             console.log(err)
         })
+
+        console.log(id)
 
         await axios.get(contact_link, { headers: { Authorization: `Bearer ${token}` } }).then((result) => {
             const data = result.data

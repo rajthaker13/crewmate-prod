@@ -1,8 +1,8 @@
-import sample from '../data/sample.json';
 import cosineSimilarity from 'cosine-similarity';
 import db, { auth } from '../firebase/firebase';
 import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "firebase/firestore";
-
+import data_sample from '../data/sample.json'
+import axios from 'axios';
 const { Configuration, OpenAIApi } = require("openai");
 
 
@@ -25,27 +25,70 @@ export async function getCrewmateReccomendation(userInput) {
     else {
         email = auth.currentUser.email
     }
+    let embeddings = []
 
-    usersSnap.forEach((user) => {
-        if (user.data()['email'] != email) {
-            users.push(user.data())
-        }
+
+    usersSnap.forEach(async (user) => {
+        // if (user.data()['email'] != email) {
+        users.push(user.data())
+        const data = user.data()['data']
+        const response = await openai.createEmbedding({
+            model: "text-embedding-ada-002",
+            input: JSON.stringify({ "data": data.member_experience_collection }),
+        });
+        embeddings.push(response)
+        // }
     })
-    return users
+
+
+    console.log(embeddings)
+
+    const query_embedding = await openai.createEmbedding({
+        model: "text-embedding-ada-002",
+        input: JSON.stringify({ "prompt": userInput }),
+    });
+
+
+    let scores = []
+
+    console.log(users.length)
+
+    for (var s = 0; s < users.length; s++) {
+        console.log("s", s)
+        const query = query_embedding.data.data[0].embedding = undefined ? null : query_embedding.data.data[0].embedding
+        const embed = embeddings[s].data.data[0].embedding = undefined ? null : embeddings[s].data.data[0].embedding
+
+        console.log(query)
+        console.log(embed)
+        if (query != null && embed != null) {
+            const cosine_simi = cosineSimilarity(
+                query,
+                embed
+            )
+
+            console.log("Cosine similarity for index", s, ":", cosine_simi);
+            scores.push({ "index": s, "rating": cosine_simi })
+        }
+    }
+    scores.sort((a, b) => b.rating - a.rating);
+    console.log(scores)
+    console.log(users)
+    return users[scores[0].index].email
+
 
 
 }
 
 
 
-
 export async function getJobRecommendation(userInput) {
 
     let embeddings = []
-    for (let i = 0; i < sample.length; i++) {
+    console.log(data_sample)
+    for (let i = 0; i < 1000; i++) {
         const response = await openai.createEmbedding({
             model: "text-embedding-ada-002",
-            input: JSON.stringify(sample[i]),
+            input: JSON.stringify(data_sample[i]),
         });
         embeddings.push(response)
     }

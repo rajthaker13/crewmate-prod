@@ -22,22 +22,22 @@ function App() {
   return (
     <div className="App">
       <Router>
-        {!user ? (
+        {/* {!user ? (
           <Routes>
             <Route exact path="/linkedin" element={<LinkedInCallback />} />
             <Route path="/" element={<Login />} />
           </Routes>
-        ) : (
-          <>
-            <Header />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/community" element={<CommunityExplorer />} />
+        ) : ( */}
+        <>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/community" element={<CommunityExplorer />} />
 
-            </Routes>
-          </>
-        )}
+          </Routes>
+        </>
+        {/* )} */}
       </Router>
     </div>
   );

@@ -7,7 +7,7 @@ import fetch from 'node-fetch'
 import '../../styles/JobCard.css'
 import { FaPeriscope, FaTelegramPlane, FaBlackTie, FaWarehouse, FaBookmark, FaPeopleArrows } from 'react-icons/fa';
 
-export function JobCard({ job, xs = 4, profile = false, index = 0 }) {
+export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }) {
     const [pfp, setPfp] = useState('')
     const [jobFunction, setJobFunction] = useState('')
     const [jobIndustry, setIndustry] = useState('')
@@ -48,6 +48,12 @@ export function JobCard({ job, xs = 4, profile = false, index = 0 }) {
                         await setDoc(doc(db, "companies", job.company_name), {
                             data: json
                         })
+                        console.log("Fuck")
+                        icon = json[0].icon
+                        if (icon == null) {
+                            icon = json[1].icon
+                        }
+                        console.log(icon)
                     })
                     .catch(err => console.error('error:' + err));
             }
@@ -64,16 +70,15 @@ export function JobCard({ job, xs = 4, profile = false, index = 0 }) {
                     icon = data.icon
                 }
             }
-
             setPfp(icon)
         }
 
         function getJobData() {
             console.log(job)
-            const job_function = job.job_functions_collection[0].job_function_list.function
-            const industry = job.job_industries_collection[0].job_industry_list.industry
-            setJobFunction(job_function)
-            setIndustry(industry)
+            // const job_function = job.job_functions_collection[0].job_function_list.function
+            // const industry = job.job_industries_collection[0].job_industry_list.industry
+            // setJobFunction(job_function)
+            // setIndustry(industry)
         }
 
         async function isJobSaved() {
@@ -125,14 +130,16 @@ export function JobCard({ job, xs = 4, profile = false, index = 0 }) {
             }
 
         }
-        getCompanyData()
-        getJobData()
-        isJobSaved()
-        isWaitlisted()
+        if (!isSearching && job != null) {
+            getCompanyData()
+            getJobData()
+            isJobSaved()
+            isWaitlisted()
+        }
 
 
 
-    }, [])
+    }, [isSearching, job.company_name])
 
     async function joinWaitlist() {
         if (!companyWaitlisted) {
@@ -230,24 +237,33 @@ export function JobCard({ job, xs = 4, profile = false, index = 0 }) {
                 <h5 className="job_location">{job.location}</h5>
             </div>
             <div className="line_break" />
-            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '3vh', maxHeight: '3vh' }}>
+            {/* <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '3vh', maxHeight: '3vh' }}>
                 <FaBlackTie color='#FAFAFA' size={25} className="job_info_icon" />
                 <h6 className="job_info">{`Job Function: ${jobFunction}`}</h6>
-            </div>
-            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '4vh', maxHeight: '4vh' }}>
+            </div> */}
+            {/* <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '4vh', maxHeight: '4vh' }}>
                 <FaWarehouse color='#FAFAFA' size={25} className="job_info_icon" />
                 <h6 className="job_info">{`Job Industry: ${jobIndustry}`}</h6>
-            </div>
+            </div> */}
             <div className="line_break" />
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '3vh', maxHeight: '3vh' }}>
                 <h6 className="job_info">{`${job.employment_type} Position`}</h6>
             </div>
             <div style={{ flexDirection: 'row', display: 'inline-flex', }}>
                 <button className="job_apply_button" onClick={() => {
-                    window.open(
-                        job.redirected_url,
-                        '_blank'
-                    );
+                    if (job.external_url != null) {
+                        window.open(
+                            job.external_url,
+                            '_blank'
+                        );
+                    }
+                    else {
+                        window.open(
+                            job.redirected_url,
+                            '_blank'
+                        );
+
+                    }
                 }}>
                     <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '50vh', minWidth: '10vw', justifyContent: 'center' }}>
                         <img src={require("../../assets/crewmate-emblem.png")} className="apply_icon" ></img>
@@ -270,55 +286,6 @@ export function JobCard({ job, xs = 4, profile = false, index = 0 }) {
 
 
         </div >
-        // <Grid xs={xs}>
-        //     <Card css={{ p: "$6", mw: "500px" }} style={{ backgroundColor: '#2E1069', height: '80%' }}>
-        //         <Card.Header>
-        //             <img
-        //                 alt="nextui logo"
-        //                 src={pfp}
-        //                 width="34px"
-        //                 height="34px"
-        //             />
-        //             <Grid.Container css={{ pl: "$6" }}>
-        //                 <Grid xs={12}>
-        //                     <Text h4 css={{ lineHeight: "$xs", color: '#FFFFFF', fontFamily: 'Inter' }}>
-        //                         {job.company_name}
-        //                     </Text>
-        //                 </Grid>
-        //                 <Grid xs={10}>
-        //                     <Text css={{ color: "$accents8" }}>{job.location}</Text>
-        //                 </Grid>
-        //             </Grid.Container>
-        //         </Card.Header>
-        //         <Card.Body css={{ py: "$2" }}>
-        //             <Text css={{ color: '#FFFFFF', fontFamily: 'Inter' }}>
-        //                 {job.title}
-        //             </Text>
-        //         </Card.Body>
-        //         <Card.Footer>
-        //             <Grid.Container gap={5}>
-        //                 <Grid>
-        //                     <Link
-        //                         icon
-        //                         color="primary"
-        //                         target="_blank"
-        //                         href={job.redirected_url}
-        //                         style={{ marginTop: '10%' }}
-        //                     >
-        //                         View Job
-        //                     </Link>
-        //                 </Grid>
-        //                 {!profile && <Grid>
-        //                     <Button color="secondary" auto onClick={saveJob}>
-        //                         Save Job
-        //                     </Button>
-        //                 </Grid>}
-
-        //             </Grid.Container>
-        //         </Card.Footer>
-        //     </Card>
-        // </Grid>
-
     )
 }
 

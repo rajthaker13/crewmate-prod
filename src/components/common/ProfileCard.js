@@ -11,11 +11,15 @@ import { FaPeriscope, FaTelegramPlane, FaBlackTie, FaWarehouse, FaBookmark, FaPe
 function ProfileCard({ profileRec = false }) {
 
     const [addedToCrew, setAddedToCrew] = useState(false)
+
+    useEffect(() => {
+        console.log(profileRec)
+    }, [])
     return (
         <div className="card_profile">
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '10vh', maxHeight: '10vh' }}>
                 <img className="crewmate_profile_icon" src={require('../../assets/amani.jpeg')} style={{ height: '75px', width: '75px' }}></img>
-                <h3 className="company_name">Amani Sunkara</h3>
+                <h3 className="company_name">{profileRec}</h3>
             </div>
 
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '7vh', maxHeight: '7vh' }}>

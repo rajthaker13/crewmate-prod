@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app'
 import { GoogleAuthProvider, getAuth, OAuthProvider } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 import { getFunctions } from 'firebase/functions';
+import { getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -24,6 +25,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app)
 const auth = getAuth()
 const functions = getFunctions(app)
+const storage = getStorage(app, "gs://crewmate-job-data")
 // const provider = new GoogleAuthProvider()
 const provider = new OAuthProvider('oidc.linkedin');
 provider.credential({
@@ -33,5 +35,5 @@ provider.addScope('r_liteprofile');
 provider.addScope('r_emailaddress');
 provider.addScope('w_member_social')
 
-export { auth, provider, functions }
+export { auth, provider, functions, storage }
 export default db

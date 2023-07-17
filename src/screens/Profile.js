@@ -16,6 +16,10 @@ import JobCard from "../components/common/JobCard";
 function Profile() {
     const [savedJobs, setSavedJobs] = useState([])
     const [name, setName] = useState('')
+    const [pfp, setPfp] = useState('')
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
+    const [experience, setExperience] = useState([])
 
     useEffect(() => {
         async function getSavedJobs() {
@@ -28,15 +32,29 @@ function Profile() {
             }
             const userSnap = await getDoc(userRef)
             if (userSnap.exists()) {
+                const userData = userSnap.data()['data']
+                console.log(userData.name)
                 let userSavedJobs = userSnap.data()['savedJobs']
-                const displayName = userSnap.data()['displayName']
 
                 if (userSavedJobs == null) {
                     userSavedJobs = []
                 }
 
                 setSavedJobs(userSavedJobs)
-                setName(displayName)
+                setName(userData.name)
+                setPfp(userData.logo_url)
+                setTitle(userData.title)
+                setDescription(userData.summary)
+                let work_experience = []
+                let companies = []
+                userData.member_experience_collection.toReversed().map((work) => {
+                    if (!companies.includes(work.company_name)) {
+                        companies.push(work.company_name)
+                        work_experience.push(work)
+                    }
+                })
+
+                setExperience(work_experience)
             }
 
         }
@@ -50,22 +68,20 @@ function Profile() {
             <div className="header_info">
                 <div className="header_info_container">
                     <div className="header_info_container_content">
-                        <img className="profile_icon" src={require('../assets/Raj.jpeg')}></img>
-                        <div style={{ width: '20px' }}></div>
+                        <img className="profile_icon" src={pfp}></img>
+                        <div style={{ width: '50px' }}></div>
                         <div className="header_info_text">
                             <h1 className="header_info_container_name">{name}</h1>
                             <h1 className="header_info_container_membership">Member</h1>
                         </div>
                     </div>
                 </div>
-                <div className="header_info_container" style={{ background: "#B4FFD3" }}>
+                <div className="header_info_container" style={{ background: "#2E1069" }}>
                     <div className="header_info_container_content">
                         <div className="header_info_text">
-                            <h1 className="header_info_container_name">SENIOR UX DESIGNER</h1>
-                            <h1 className="header_info_container_membership">Currently working at Spotify</h1>
+                            <h1 className="header_info_container_name">{title}</h1>
+                            <h1 className="header_info_container_membership">{description}</h1>
                         </div>
-                        <div style={{ width: '20px' }}></div>
-                        <img className="profile_icon" src={require('../assets/Raj.jpeg')}></img>
                     </div>
                 </div>
             </div>

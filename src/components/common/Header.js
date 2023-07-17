@@ -22,7 +22,7 @@ function Header() {
                 />
             </div>
             <div className="header_right">
-                {/* <button class="astext" onClick={() => { navigate("/") }}>
+                <button class="astext" onClick={() => { navigate("/") }}>
                     <h4 class="header_labels">Home</h4>
                 </button>
                 <button class="astext" onClick={() => { navigate("/community") }}>
@@ -30,7 +30,7 @@ function Header() {
                 </button>
                 <button class="astext" onClick={() => { navigate('/profile') }}>
                     <h4 class="header_labels">Profile</h4>
-                </button> */}
+                </button>
             </div>
 
 

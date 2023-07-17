@@ -3,8 +3,8 @@ import { FaSearch } from 'react-icons/fa';
 import '../../styles/SearchBar.css';
 import ClickAwayListener from '@mui/base/ClickAwayListener';
 import { useStateValue } from "../utility/StateProvider";
-import sample from "../../data/sample.json"
 import { getCrewmateReccomendation, getJobRecommendation } from "../../open_ai/OpenAI"
+import axios from 'axios';
 
 const SearchBar = (props) => {
     const [expanded, setExpanded] = useState(false);
@@ -23,26 +23,17 @@ const SearchBar = (props) => {
     }
 
     async function chatGPTDude() {
-        const userInput = "I want a job in Finance prefarably on the West Coast. I have a Bachelor's in Finance from WashU, and just graduated this year. Please find me a job."
-        await getJobRecommendation(userText).then((res) => {
-            console.log(res)
+        props.setIsSearching(true)
+        const link = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://us-central1-crewmate-prod.cloudfunctions.net/getJobRec`
+        await axios.post(link, { text: userText }, { headers: { 'Content-Type': 'application/json' } }).then(async (res) => {
             setUserText('')
-
-            let recs = []
-
-            for (let i = 0; i < 3; i++) {
-                const index = res[i].index
-                const jobRec = sample[index]
-                recs.push(jobRec)
-
-            }
-            props.setJobRecs(recs)
-            props.setHasSearched(true)
+            console.log(res.data)
+            props.setJobRecs(res.data)
         })
-
-        await getCrewmateReccomendation(userText).then((res) => {
-            console.log(res)
-        })
+        // await getCrewmateReccomendation(userText).then((res) => {
+        //     props.setProfileRec(res)
+        // })
+        props.setIsSearching(false)
     }
 
     return (
