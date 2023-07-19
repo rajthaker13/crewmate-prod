@@ -14,12 +14,10 @@ function ProfileCard({ profileRec = false, mini = false, outgoing = false, addCo
     const [experience, setExperience] = useState([])
 
     useEffect(() => {
-        console.log(profileRec)
         let work_experience = []
         let companies = []
-        console.log(profileRec.data.member_experience_collection)
         if (profileRec != false) {
-            profileRec.data.member_experience_collection.toReversed().map((work) => {
+            profileRec.data?.member_experience_collection.toReversed().map((work) => {
                 if (!companies.includes(work.company_name)) {
                     companies.push(work.company_name)
                     work_experience.push(work)
@@ -89,19 +87,19 @@ function ProfileCard({ profileRec = false, mini = false, outgoing = false, addCo
     return (
         <div className="card_profile" >
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
-                <img className="crewmate_profile_icon" src={profileRec.data.logo_url} style={{ height: '75px', width: '75px' }}></img>
-                <h3 className="company_name">{profileRec.data.name}</h3>
+                <img className="crewmate_profile_icon" src={profileRec.data?.logo_url} style={{ height: '75px', width: '75px' }}></img>
+                <h3 className="company_name">{profileRec.data?.name}</h3>
             </div>
 
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
-                <h4 className="crewmate_job_title">{profileRec.data.title}</h4>
+                <h4 className="crewmate_job_title">{profileRec.data?.title}</h4>
             </div>
             {!mini && <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
-                <h6 className="crewmate_description">{profileRec.data.summary} </h6>
+                <h6 className="crewmate_description">{profileRec.data?.summary} </h6>
             </div>}
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
                 <FaPeriscope color='#FAFAFA' size={25} className="crewmate_location_icon" />
-                <h5 className="crewmate_location">{profileRec.data.location}</h5>
+                <h5 className="crewmate_location">{profileRec.data?.location}</h5>
             </div>
             <div className="crew_break" />
             {!mini && <>

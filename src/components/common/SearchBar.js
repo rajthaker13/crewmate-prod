@@ -38,31 +38,33 @@ const SearchBar = (props) => {
             email = auth.currentUser.uid
         }
 
-        const userRef = doc(db, "users", email)
-        const userSnap = await getDoc(userRef)
+        // const userRef = doc(db, "users", email)
+        // const userSnap = await getDoc(userRef)
 
-        let prompts = userSnap.data()['prompts']
-        if (!prompts) {
-            await updateDoc(userRef, {
-                prompts: [userText]
-            })
-        }
-        else {
-            prompts.push(userText)
-            await updateDoc(userRef, {
-                prompts: prompts
-            })
+        // let prompts = userSnap.data()['prompts']
+        // if (!prompts) {
+        //     await updateDoc(userRef, {
+        //         prompts: [userText]
+        //     })
+        // }
+        // else {
+        //     prompts.push(userText)
+        //     await updateDoc(userRef, {
+        //         prompts: prompts
+        //     })
 
-        }
+        // }
         await axios.post(link, { text: input }, { headers: { 'Content-Type': 'application/json' } }).then(async (res) => {
             props.setJobRecs(res.data)
         })
-        await axios.post(link, { text: experienceText }, { headers: { 'Content-Type': 'application/json' } }).then(async (res) => {
-            props.setExperienceRecs(res.data)
-        })
-        await getCrewmateReccomendation(userText).then((res) => {
-            props.setProfileRec(res)
-        })
+        if (!state.guestView) {
+            await axios.post(link, { text: experienceText }, { headers: { 'Content-Type': 'application/json' } }).then(async (res) => {
+                props.setExperienceRecs(res.data)
+            })
+            await getCrewmateReccomendation(userText).then((res) => {
+                props.setProfileRec(res)
+            })
+        }
         props.setIsSearching(false)
     }
 
@@ -72,7 +74,7 @@ const SearchBar = (props) => {
                 className={`search-bar ${expanded ? 'expanded' : ''}`}
                 style={{ backgroundColor: '#121212', outlineWidth: '10px', outlineColor: '#9E9E9E' }}
             >
-                <textarea placeholder={expanded ? '' : "    Ex: I'm interested in internships, have a computer science and finance double major and love energy/fintech/travel"} rows={expanded ? 3 : 1} onClick={handleClick} style={{ backgroundColor: '#121212', borderWidth: 0, width: '100vw', color: 'white', fontFamily: 'Verdana, Arial, Helvetica, sans-serif' }} value={userText} onChange={(e) => { setUserText(e.target.value) }}
+                <textarea placeholder={expanded ? '' : "    Ex: I'm interested in internships, have a computer science and finance double major and love energy/fintech/travel. Then press Enter to submit."} rows={expanded ? 3 : 1} onClick={handleClick} style={{ backgroundColor: '#121212', borderWidth: 0, width: '100vw', color: 'white', fontFamily: 'Verdana, Arial, Helvetica, sans-serif' }} value={userText} onChange={(e) => { setUserText(e.target.value) }}
                     onKeyDown={async (e) => {
                         if (e.key === 'Enter' && !e.shiftKey) {
                             await chatGPTDude()

@@ -57,14 +57,12 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }
             }
             else {
                 const data = companyRef.data()['data']
-                console.log("FUCKTARD", data)
-                console.log(data.length)
                 if (data.length == 0) {
                     icon = require('../../assets/crewmate-emblem.png')
                 }
                 else {
                     icon = data[0].icon
-                    if (icon == null) {
+                    if (!data[0]) {
                         icon = data[1].icon
                     }
                 }

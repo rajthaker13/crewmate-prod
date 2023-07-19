@@ -24,35 +24,22 @@ import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detec
 
 function App() {
   const [{ user }, dispatch] = useStateValue({ user: null });
+  const [{ guestView }, dispatchGuest] = useStateValue({ guestView: null });
 
-  // useEffect(() => {
-  //   function unregisterAuth() {
-  //     auth.onAuthStateChanged((u) => {
-  //       if (u) {
-  //         localStorage.setItem('user', JSON.stringify(u));
-  //       }
-  //       else {
-  //         localStorage.removeItem('user');
-  //       }
-  //     })
-
-  //   }
-  //   return () => unregisterAuth();
-  // }, [])
 
   return (
     <>
       <BrowserView>
         <div className="App">
           <Router>
-            {!user ? (
+            {!user && !guestView ? (
               <Routes>
                 <Route exact path="/linkedin" element={<LinkedInCallback />} />
                 <Route path="/" element={<Login />} />
               </Routes>
             ) : (
               <>
-                <Header />
+                <Header guest={guestView} />
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/profile" element={<Profile />} />
@@ -63,7 +50,7 @@ function App() {
             )}
           </Router>
         </div>
-      </BrowserView>
+      </BrowserView >
       <MobileView>
         <h1>Check us out on Web! Coming soon to mobile...</h1>
       </MobileView>

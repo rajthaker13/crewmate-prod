@@ -8,8 +8,8 @@ import { useStateValue } from "../utility/StateProvider";
 import { Button } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 
-function Header() {
-    const [{ user }] = useStateValue();
+function Header(props) {
+    const [{ user, guestView }] = useStateValue();
     const navigate = useNavigate()
 
     return (
@@ -25,12 +25,12 @@ function Header() {
                 <button class="astext" onClick={() => { navigate("/") }}>
                     <h4 class="header_labels">Home</h4>
                 </button>
-                <button class="astext" onClick={() => { navigate("/community") }}>
+                {!guestView && <button class="astext" onClick={() => { navigate("/community") }}>
                     <h4 class="header_labels">Community</h4>
-                </button>
-                <button class="astext" onClick={() => { navigate('/profile') }}>
+                </button>}
+                {!guestView && <button class="astext" onClick={() => { navigate('/profile') }}>
                     <h4 class="header_labels">Profile</h4>
-                </button>
+                </button>}
             </div>
 
 

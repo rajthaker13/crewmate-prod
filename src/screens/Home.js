@@ -67,7 +67,7 @@ function Home() {
             <SearchBar setJobRecs={setJobRecs} setIsSearching={setIsSearching} isSearching={isSearching} setProfileRec={setProfileRec} experience={experience} setExperienceRecs={setExperienceRecs} location={location} />
             <div style={{ display: 'inline-flex', marginTop: '5vh' }}>
                 <Bucket isFirstBucket={true} jobRecs={jobRecs} isSearching={isSearching} experienceRecs={experienceRecs} />
-                <Bucket profileRec={profileRec} isSearching={isSearching} />
+                {!state.guestView && <Bucket profileRec={profileRec} isSearching={isSearching} />}
             </div>
             {/* <button onClick={() => { createCheckoutSession(auth.currentUser.uid) }}></button> */}
         </div >

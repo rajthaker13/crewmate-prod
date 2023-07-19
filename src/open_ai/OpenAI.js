@@ -29,15 +29,31 @@ export async function getCrewmateReccomendation(userInput) {
 
         const embeddingPromises = [];
 
+        console.log(usersSnap)
+
         usersSnap.forEach((user) => {
+
             if (user.data()['email'] != email) {
                 users.push(user.data());
                 const data = user.data()["data"];
-                const embeddingPromise = openai.createEmbedding({
-                    model: "text-embedding-ada-002",
-                    input: JSON.stringify({ data: data.member_experience_collection }),
-                });
-                embeddingPromises.push(embeddingPromise);
+                let work_experience = []
+                let companies = []
+                if (data) {
+                    data.member_experience_collection.map((work) => {
+                        if (!companies.includes(work.company_name)) {
+                            companies.push(work.company_name)
+                            work_experience.push(work)
+                        }
+                    })
+
+                    const embeddingPromise = openai.createEmbedding({
+                        model: "text-embedding-ada-002",
+                        input: JSON.stringify({ data: work_experience }),
+                    });
+                    embeddingPromises.push(embeddingPromise);
+                }
+
+
             }
         });
 
@@ -53,7 +69,7 @@ export async function getCrewmateReccomendation(userInput) {
         let scores = [];
         console.log(users.length);
 
-        for (var s = 0; s < users.length; s++) {
+        for (let s = 0; s < users.length; s++) {
             console.log("s", s);
             let query;
             let embed;
@@ -61,17 +77,17 @@ export async function getCrewmateReccomendation(userInput) {
             console.log(query_embedding);
 
             if (
-                query_embedding.data.data[0].embedding != undefined &&
-                embeddings[s].data.data[0].embedding != undefined
+                query_embedding &&
+                embeddings[s]
             ) {
                 query =
-                    query_embedding.data.data[0].embedding == undefined
+                    query_embedding.data?.data[0]?.embedding == undefined
                         ? null
-                        : query_embedding.data.data[0].embedding;
+                        : query_embedding?.data?.data[0]?.embedding;
                 embed =
-                    embeddings[s].data.data[0].embedding == undefined
+                    embeddings[s].data?.data[0]?.embedding == undefined
                         ? null
-                        : embeddings[s].data.data[0].embedding;
+                        : embeddings[s].data?.data[0]?.embedding;
             }
 
 
@@ -107,8 +123,7 @@ export async function getJobRecommendation(userInput) {
         model: "text-embedding-ada-002",
         input: JSON.stringify({ "prompt": userInput }),
     });
-    console.log(embeddings[0])
-    console.log(query_embedding.data.data[0].embedding)
+
 
     let scores = []
 

@@ -15,6 +15,11 @@ const reducer = (state, action) => {
                 ...state,
                 user: action.user,
             };
+        case actionTypes.SET_GUEST:
+            return {
+                ...state,
+                guestView: action.guestView,
+            };
         default:
             return state;
     }

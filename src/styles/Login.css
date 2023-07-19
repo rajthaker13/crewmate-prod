@@ -35,12 +35,21 @@
     justify-content: center;
   }
 
+
+
   .login_text_button {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 16;
     color: #121212;
     margin-top: 3%;
     margin-left: 10%;
+  }
+  .login_text_button_guest {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 16;
+    color: #121212;
+    margin-top: 3%;
+    color: #FFFFFF;
   }
 
   .login_icon {

@@ -52,13 +52,12 @@ function Login() {
         let id
         let firstName
         let lastName
-        let pfp
+        let pfp = ""
 
         await axios.get(link, { headers: { Authorization: `Bearer ${token}` } }).then((res) => {
             id = res.data.id
             firstName = res.data.localizedFirstName
             lastName = res.data.localizedLastName
-            pfp = res.data.profilePicture.displayImage
 
         }).catch((err) => {
             console.log(err)
@@ -96,12 +95,6 @@ function Login() {
             });
         }
         else {
-            const existing_user = {
-                displayName: userRef.data()['displayName'],
-                email: userRef.data()['email'],
-                uid: userRef.data()['uid'],
-                photoURL: userRef.data()['photoURL']
-            }
             const email = userRef.data()['email']
             const findUser = httpsCallable(functions, 'getUser')
             findUser({ email: email }).then((result) => {
@@ -133,6 +126,18 @@ function Login() {
                         <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '5vh', minWidth: '20vw', justifyContent: 'left' }}>
                             <img src={require("../assets/linkedin-icon.png")} className="login_icon" ></img>
                             <h5 className="login_text_button">Continue with LinkedIn</h5>
+                        </div>
+                    </button>
+                </div>
+                <div style={{ flexDirection: 'row', display: 'inline-flex', }}>
+                    <button className="login_button" onClick={() => {
+                        dispatch({
+                            type: actionTypes.SET_GUEST,
+                            guestView: true,
+                        });
+                    }} style={{ backgroundColor: '#9921e8' }}>
+                        <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '5vh', minWidth: '20vw', justifyContent: 'center' }}>
+                            <h5 className="login_text_button_guest">Continue as Guest</h5>
                         </div>
                     </button>
                 </div>
