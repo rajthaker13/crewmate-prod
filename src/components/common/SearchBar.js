@@ -35,24 +35,28 @@ const SearchBar = (props) => {
             email = 'rajthaker13@yahoo.com'
         }
         else {
-            email = auth.currentUser.uid
+            email = auth.currentUser.email
         }
 
         const userRef = doc(db, "users", email)
         const userSnap = await getDoc(userRef)
 
-        let prompts = userSnap.data()['userPrompts']
-        if (prompts != null) {
-            prompts.push(userText)
-            await updateDoc(userRef, {
-                userPrompts: prompts
-            })
+        if (userSnap.exists()) {
+            let prompts = userSnap.data()['userPrompts'];
+            if (prompts) {
+                prompts.push(userText)
+                await updateDoc(userRef, {
+                    userPrompts: prompts
+                })
+            }
+            else {
+                await updateDoc(userRef, {
+                    userPrompts: [userText]
+                })
+            }
+
         }
-        else {
-            await updateDoc(userRef, {
-                userPrompts: [userText]
-            })
-        }
+
         await axios.post(link, { text: input }, { headers: { 'Content-Type': 'application/json' } }).then(async (res) => {
             props.setJobRecs(res.data)
         })

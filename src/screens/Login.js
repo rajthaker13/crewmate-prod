@@ -63,8 +63,6 @@ function Login() {
             console.log(err)
         })
 
-        console.log(id)
-
         await axios.get(contact_link, { headers: { Authorization: `Bearer ${token}` } }).then((result) => {
             const data = result.data
             email = data.elements[0]['handle~'].emailAddress
@@ -96,10 +94,6 @@ function Login() {
         }
         else {
             const email = userRef.data()['email']
-            const findUser = httpsCallable(functions, 'getUser')
-            findUser({ email: email }).then((result) => {
-                // console.log(result)
-            })
             signInWithEmailAndPassword(auth, email, "password3894843974j").then((user) => {
                 dispatch({
                     type: actionTypes.SET_USER,

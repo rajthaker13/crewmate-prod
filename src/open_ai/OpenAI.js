@@ -29,8 +29,6 @@ export async function getCrewmateReccomendation(userInput) {
 
         const embeddingPromises = [];
 
-        console.log(usersSnap)
-
         usersSnap.forEach((user) => {
 
             if (user.data()['email'] != email) {
@@ -56,8 +54,6 @@ export async function getCrewmateReccomendation(userInput) {
 
             }
         });
-
-        console.log(embeddings);
 
         embeddings = await Promise.all(embeddingPromises);
 
