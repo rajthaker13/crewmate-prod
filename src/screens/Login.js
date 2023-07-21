@@ -21,7 +21,7 @@ function Login() {
     const { linkedInLogin } = useLinkedIn({
         clientId: `${process.env.REACT_APP_LINKEDIN_CLIENT_ID}`,
         redirectUri: `${window.location.origin}/linkedin`,
-        scope: "r_emailaddress r_liteprofile w_member_social",
+        scope: "r_emailaddress r_liteprofile",
         onSuccess: async (code) => {
             setAuthCode(code)
             await getUserAccessToken(code)
