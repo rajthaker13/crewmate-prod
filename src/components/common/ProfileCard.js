@@ -31,7 +31,7 @@ function ProfileCard({ profileRec = false, mini = false, outgoing = false, addCo
 
     async function onAdd() {
         if (addedToCrew == false) {
-            setAddedToCrew(!addedToCrew)
+            setAddedToCrew(true)
             let curUserEmail
             if (!auth.currentUser) {
                 curUserEmail = 'rajthaker13@yahoo.com'
@@ -60,7 +60,7 @@ function ProfileCard({ profileRec = false, mini = false, outgoing = false, addCo
                 })
             }
 
-            const outgoingSnap = await getDoc(requestRef)
+            const outgoingSnap = await getDoc(outgoingReq)
 
             if (outgoingSnap.exists()) {
                 let curOutgoing = outgoingSnap.data()['outgoing']
