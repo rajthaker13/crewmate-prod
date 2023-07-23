@@ -5,7 +5,7 @@ import "../../styles/Modal.css"
 import axios from 'axios'
 
 
-function Modal({ setOpenModal }) {
+function Modal({ setOpenModal, isSearchingModal = false }) {
     const [url, setUrl] = useState('')
 
     async function handleInput() {
@@ -51,18 +51,29 @@ function Modal({ setOpenModal }) {
     }
 
     return (
-        <div className="modal">
-            <div className="modal-content">
-                <h2>Enter your LinkedIn URL</h2>
-                <div
-
-                    style={{ backgroundColor: 'black', outlineWidth: '10px', outlineColor: '#9E9E9E' }}
-                >
-                    <input type="text" placeholder="https://www.linkedin.com/in/firstNameLastName/" style={{ backgroundColor: 'black', borderWidth: 0, width: '80%', color: 'white', fontFamily: 'Verdana, Arial, Helvetica, sans-serif' }} onChange={(e) => { setUrl(e.target.value) }} />
+        <>
+            {isSearchingModal ?
+                <div className="modal">
+                    <div className="modal-content">
+                        <h2>Generating Response...</h2>
+                    </div>
                 </div>
-                <button onClick={handleInput}>Register</button>
-            </div>
-        </div>
+
+                :
+                <div className="modal">
+                    <div className="modal-content">
+                        <h2>Enter your LinkedIn URL</h2>
+                        <div
+
+                            style={{ backgroundColor: 'black', outlineWidth: '10px', outlineColor: '#9E9E9E' }}
+                        >
+                            <input type="text" placeholder="https://www.linkedin.com/in/firstNameLastName/" style={{ backgroundColor: 'black', borderWidth: 0, width: '80%', color: 'white', fontFamily: 'Verdana, Arial, Helvetica, sans-serif' }} onChange={(e) => { setUrl(e.target.value) }} />
+                        </div>
+                        <button onClick={handleInput}>Register</button>
+                    </div>
+                </div>}
+        </>
+
     )
 }
 

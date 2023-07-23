@@ -63,6 +63,7 @@ function Home() {
 
     return (
         <div style={{ height: '88vh' }}>
+            {isSearching && <Modal setOpenModal={setOpenModal} isSearchingModal={true} />}
             {openModal && <Modal setOpenModal={setOpenModal} />}
             <SearchBar setJobRecs={setJobRecs} setIsSearching={setIsSearching} isSearching={isSearching} setProfileRec={setProfileRec} experience={experience} setExperienceRecs={setExperienceRecs} location={location} />
             <div style={{ display: 'inline-flex', marginTop: '5vh' }}>
