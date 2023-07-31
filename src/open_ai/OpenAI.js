@@ -97,7 +97,7 @@ export async function getCrewmateReccomendation(userInput) {
 
         scores.sort((a, b) => b.rating - a.rating);
 
-        return users[scores[0].index];
+        return users[scores[0]?.index];
     }
 }
 
