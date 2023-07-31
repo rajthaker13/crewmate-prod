@@ -60,6 +60,7 @@ const SearchBar = (props) => {
         await axios.post(link, { text: input }, { headers: { 'Content-Type': 'application/json' } }).then(async (res) => {
             props.setJobRecs(res.data)
         })
+        props.setIsSearching(false)
         if (!state.guestView) {
             await axios.post(link, { text: experienceText }, { headers: { 'Content-Type': 'application/json' } }).then(async (res) => {
                 props.setExperienceRecs(res.data)
@@ -68,7 +69,6 @@ const SearchBar = (props) => {
                 props.setProfileRec(res)
             })
         }
-        props.setIsSearching(false)
     }
 
     return (
