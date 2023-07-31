@@ -36,7 +36,7 @@ function Home() {
             let email
 
             if (!auth.currentUser) {
-                email = "guest"
+                email = "rajthaker13@yahoo.com"
             }
             else {
                 email = auth.currentUser.email
