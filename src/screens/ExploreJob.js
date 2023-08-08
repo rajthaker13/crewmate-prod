@@ -13,6 +13,7 @@ import axios from 'axios';
 import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "firebase/firestore";
 import { createCoverLetter, createResumeText } from "../open_ai/OpenAI";
 import clipboardCopy from 'clipboard-copy';
+import Modal from "../components/home/Modal";
 
 
 function ExploreJob() {
@@ -24,6 +25,7 @@ function ExploreJob() {
     const [videos, setVideos] = useState([])
     const [isCopiedCover, setIsCopiedCover] = useState(false);
     const [isCopiedResume, setIsCopiedResume] = useState(false);
+    const [isGenerating, setIsGenerating] = useState(false)
     const navigation = useNavigate();
 
     const extractWords = (text, wordCount) => {
@@ -51,7 +53,7 @@ function ExploreJob() {
     }, [])
 
     async function generateCoverLetter() {
-        console.log("Cover")
+        setIsGenerating(true)
         let userRef
         if (!auth.currentUser) {
             userRef = doc(db, "users", 'rajthaker13@yahoo.com')
@@ -66,6 +68,7 @@ function ExploreJob() {
             console.log(text)
             clipboardCopy(text);
             setIsCopiedCover(true);
+            setIsGenerating(false)
             setTimeout(() => {
                 setIsCopiedCover(false);
             }, 1500);
@@ -73,7 +76,7 @@ function ExploreJob() {
     }
 
     async function generateResumeText() {
-        console.log("Cover")
+        setIsGenerating(true)
         let userRef
         if (!auth.currentUser) {
             userRef = doc(db, "users", 'rajthaker13@yahoo.com')
@@ -88,6 +91,7 @@ function ExploreJob() {
             console.log(text)
             clipboardCopy(text);
             setIsCopiedResume(true);
+            setIsGenerating(false)
             setTimeout(() => {
                 setIsCopiedResume(false);
             }, 1500);
@@ -95,6 +99,7 @@ function ExploreJob() {
     }
     return (
         <div style={{ height: '88vh', }}>
+            {isGenerating && <Modal setOpenModal={setIsGenerating} isSearchingModal={true} text="Copying Text to Clipboard..." />}
             <div className="card" style={{ width: "auto", }} >
                 <div style={{ height: '88vh', flexDirection: 'column' }}>
                     <button onClick={() => { navigation(jobRecs ? '/' : '/pathways', { state: { jobRecs: jobRecs } }) }}>Go Back</button>
