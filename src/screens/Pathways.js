@@ -72,27 +72,35 @@ function Pathways() {
         switch (columnKey) {
             case "name":
                 return (
-                    <User squared src={user.avatar} name={cellValue} css={{ p: 0 }}>
+
+                    <User squared src={user.avatar} name={cellValue} css={{ d: "flex", backgroundColor: '#ffffff' }}>
                         {user.email}
                     </User>
+
                 );
             case "role":
                 return (
                     <Col>
                         <Row>
-                            <Text b size={14} css={{ tt: "capitalize", color: '#ffffff' }}>
+                            <Text size={14} css={{ tt: "capitalize", color: '#ffffff' }}>
                                 {cellValue}
                             </Text>
                         </Row>
                         <Row>
-                            <Text b size={13} css={{ tt: "capitalize", color: "$accents7" }}>
+                            <Text size={13} css={{ tt: "capitalize", color: "$accents7" }}>
                                 {user.team}
                             </Text>
                         </Row>
                     </Col>
                 );
             case "status":
-                return <StyledBadge type={user.status}>{cellValue}</StyledBadge>;
+                return (
+                    <Col>
+                        <Row>
+                            <StyledBadge type={user.status}>{cellValue}</StyledBadge>;
+                        </Row>
+                    </Col>
+                )
 
             case "actions":
                 return (
