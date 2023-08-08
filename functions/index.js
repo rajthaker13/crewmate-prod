@@ -160,7 +160,7 @@ exports.getJobRec = functions.https.onRequest(async (req, res) => {
         await client.connect();
 
         const db = client.db('jobs'); // Replace with your database name.
-        const collection = db.collection('july'); // Replace with your collection name.
+        const collection = db.collection('august'); // Replace with your collection name.
 
         // Query for similar documents.
         const documents = await collection.aggregate([
