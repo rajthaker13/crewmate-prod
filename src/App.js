@@ -16,6 +16,8 @@ import { useEffect } from 'react'
 import db, { auth } from './firebase/firebase';
 import { actionTypes } from './components/utility/reducer'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
+import ExploreJob from './screens/ExploreJob';
+import Pathways from './screens/Pathways';
 
 
 
@@ -32,22 +34,24 @@ function App() {
       <BrowserView>
         <div className="App">
           <Router>
-            {!user && !guestView ? (
+            {/* {!user && !guestView ? (
               <Routes>
                 <Route exact path="/linkedin" element={<LinkedInCallback />} />
                 <Route path="/" element={<Login />} />
               </Routes>
-            ) : (
-              <>
-                <Header guest={guestView} />
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/community" element={<Chat />} />
+            ) : ( */}
+            <>
+              <Header guest={guestView} />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/community" element={<Chat />} />
+                <Route path="/explore" element={<ExploreJob />} />
+                <Route path="/pathways" element={<Pathways />} />
 
-                </Routes>
-              </>
-            )}
+              </Routes>
+            </>
+            {/* )} */}
           </Router>
         </div>
       </BrowserView >

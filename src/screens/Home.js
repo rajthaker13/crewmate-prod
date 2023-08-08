@@ -67,8 +67,14 @@ function Home() {
             {openModal && <Modal setOpenModal={setOpenModal} />}
             <SearchBar setJobRecs={setJobRecs} setIsSearching={setIsSearching} isSearching={isSearching} setProfileRec={setProfileRec} experience={experience} setExperienceRecs={setExperienceRecs} location={location} />
             <div style={{ display: 'inline-flex', marginTop: '5vh' }}>
-                <Bucket isFirstBucket={true} jobRecs={jobRecs} isSearching={isSearching} experienceRecs={experienceRecs} />
-                {!state.guestView && <Bucket profileRec={profileRec} isSearching={isSearching} />}
+                {jobRecs && jobRecs.map((job, index) => {
+                    return (
+                        <JobCard job={job} index={index} xs={80} isSearching={isSearching} />
+
+                    )
+                })}
+                {/* <Bucket isFirstBucket={true} jobRecs={jobRecs} isSearching={isSearching} experienceRecs={experienceRecs} /> */}
+                {/* {!state.guestView && <Bucket profileRec={profileRec} isSearching={isSearching} />} */}
             </div>
             {/* <button onClick={() => { createCheckoutSession(auth.currentUser.uid) }}></button> */}
         </div >

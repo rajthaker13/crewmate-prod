@@ -6,6 +6,7 @@ import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "fir
 import fetch from 'node-fetch'
 import '../../styles/JobCard.css'
 import { FaPeriscope, FaTelegramPlane, FaBlackTie, FaWarehouse, FaBookmark, FaPeopleArrows } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }) {
     const [pfp, setPfp] = useState('')
@@ -13,6 +14,7 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }
     const [jobIndustry, setIndustry] = useState('')
     const [jobSaved, setJobSaved] = useState(false)
     const [companyWaitlisted, setCompanyWaitlisted] = useState(false)
+    const navigation = useNavigate();
 
     const extractWords = (text, wordCount) => {
         const words = text.split(' ');
@@ -207,6 +209,15 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }
 
         }
     }
+
+
+    async function exploreJob() {
+        navigation('/explore', {
+            state: job
+        })
+
+    }
+
     return (
         <div className="card" style={{ maxWidth: profile == true ? "25vw" : "" }} >
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', minWidth: 'auto', maxWidth: 'auto' }}>
@@ -232,7 +243,14 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }
                 <h6 className="job_info">{`${job.employment_type} Position`}</h6>
             </div>
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', justifyContent: 'center' }}>
-                <button className="job_apply_button" onClick={() => {
+                <button className="job_waitlist_button" onClick={exploreJob}>
+                    <div style={{
+                        flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', minWidth: '8vw', justifyContent: 'center'
+                    }}>
+                        <h4 className="apply_text">Explore Job</h4>
+                    </div>
+                </button>
+                {/* <button className="job_apply_button" onClick={() => {
                     if (job.external_url != null) {
                         window.open(
                             job.external_url,
@@ -261,7 +279,7 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }
                             <h4 className="apply_text">Joined</h4></>}
 
                     </div>
-                </button>
+                </button> */}
             </div >
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '5vh', minWidth: '20vw', justifyContent: 'center', }} />
 

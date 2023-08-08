@@ -63,6 +63,78 @@ exports.getJobData = functions.https.onRequest(async (req, res) => {
         })
 })
 
+
+exports.getYoutubeVideos = functions.https.onRequest(async (req, res) => {
+    cors(req, res, async () => {
+        const google_api_key = 'AIzaSyByFI6MZzjFNYk1vZlyIC-pjgvBn9gkZMQ'
+        try {
+            const notable_companies = ['Meta', 'Apple', 'Amazon', 'Netflix', 'Google', 'Microsoft', 'McKinsey & Company', 'Tesla', 'PwC', 'NVIDIA', 'MongoDB', 'JPMorgan Chase & Co.', 'GE', 'Figma', 'Deloitte', 'Citi', 'Capital One', 'Canva']
+            let returned_videos = []
+            if (notable_companies.includes(req.body.company_name)) {
+                const company_response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
+                    params: {
+                        key: google_api_key,
+                        part: 'snippet',
+                        q: `How to become a ${req.body.title} at ${req.body.company_name}`,
+                        type: 'video',
+                        maxResults: 3, // You can adjust this to get more or fewer results
+                    },
+                });
+
+                returned_videos = company_response.data.items
+
+                const job_response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
+                    params: {
+                        key: google_api_key,
+                        part: 'snippet',
+                        q: `${req.body.title} Interview Preparation`,
+                        type: 'video',
+                        maxResults: 2, // You can adjust this to get more or fewer results
+                    },
+                });
+
+                job_response.data.items.map((job_vid) => {
+                    returned_videos.push(job_vid)
+                })
+            }
+            else {
+
+                const job_response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
+                    params: {
+                        key: google_api_key,
+                        part: 'snippet',
+                        q: `${req.body.title} Interview Preparation`,
+                        type: 'video',
+                        maxResults: 4, // You can adjust this to get more or fewer results
+                    },
+                });
+
+                returned_videos = job_response.data.items
+
+                const company_response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
+                    params: {
+                        key: google_api_key,
+                        part: 'snippet',
+                        q: `${req.body.company_name}`,
+                        type: 'video',
+                        maxResults: 1, // You can adjust this to get more or fewer results
+                    },
+                });
+
+                company_response.data.items.map((job_vid) => {
+                    returned_videos.push(job_vid)
+                })
+            }
+            res.status(200).json(returned_videos)
+        } catch (error) {
+            console.error('Error searching videos:', error);
+            res.status(500).json([]);
+        }
+    })
+})
+
+
+
 exports.getJobRec = functions.https.onRequest(async (req, res) => {
     cors(req, res, async () => {
         const openai_url = 'https://api.openai.com/v1/embeddings';
