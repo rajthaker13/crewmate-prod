@@ -15,12 +15,13 @@ import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "fir
 import Modal from "../components/home/Modal";
 import { createCheckoutSession } from "../stripe/createCheckoutSession";
 import usePremiumStatus from "../stripe/usePremiumStatus";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 
 function Home() {
-    const [state, dispatch] = useStateValue();
-    const [jobRecs, setJobRecs] = useState([])
+    const { state } = useLocation();
+    const [jobRecs, setJobRecs] = useState(state ? state.jobRecs : [])
     const [experienceRecs, setExperienceRecs] = useState([])
     const [profileRec, setProfileRec] = useState([])
     const [isSearching, setIsSearching] = useState(false)
@@ -69,7 +70,7 @@ function Home() {
             <div style={{ display: 'inline-flex', marginTop: '5vh' }}>
                 {jobRecs && jobRecs.map((job, index) => {
                     return (
-                        <JobCard job={job} index={index} xs={80} isSearching={isSearching} />
+                        <JobCard job={job} index={index} xs={80} isSearching={isSearching} jobRecs={jobRecs} />
 
                     )
                 })}

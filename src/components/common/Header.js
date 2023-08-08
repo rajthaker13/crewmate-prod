@@ -28,9 +28,9 @@ function Header(props) {
                 {!guestView && <button class="astext" onClick={() => { navigate("/pathways") }}>
                     <h4 class="header_labels">My Jobs</h4>
                 </button>}
-                {!guestView && <button class="astext" onClick={() => { navigate('/profile') }}>
+                {/* {!guestView && <button class="astext" onClick={() => { navigate('/profile') }}>
                     <h4 class="header_labels">Profile</h4>
-                </button>}
+                </button>} */}
             </div>
 
 

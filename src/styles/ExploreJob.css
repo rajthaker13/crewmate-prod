@@ -1,0 +1,15 @@
+.card_explore {
+    height: auto;
+    width: auto;
+    background-color: #121212;
+    margin-bottom: 3vh;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: .1px;
+    border-color: #9E9E9E;
+    margin-left: 3vw;
+    margin-right: 3vw;
+    display: flex;
+    flex-direction: column;
+    scrollbar-color: #9921e8;
+}

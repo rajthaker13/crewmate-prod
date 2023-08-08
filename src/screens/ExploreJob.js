@@ -7,7 +7,7 @@ import { Card, Grid, Text, Link, Button } from '@nextui-org/react';
 import db, { auth, provider, functions } from '../firebase/firebase';
 import JobCard from "../components/common/JobCard";
 import SearchBar from "../components/common/SearchBar";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FaPeriscope, FaTelegramPlane, FaBlackTie, FaWarehouse, FaBookmark, FaPeopleArrows } from 'react-icons/fa';
 import axios from 'axios';
 import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "firebase/firestore";
@@ -19,10 +19,12 @@ function ExploreJob() {
     const { state } = useLocation();
     const [job, setJob] = useState(state.job)
     const [pic, setPic] = useState(state.pfp)
+    const [jobRecs, setJobRecs] = useState(state.jobRecs)
     const [jobSaved, setJobSaved] = useState(false)
     const [videos, setVideos] = useState([])
     const [isCopiedCover, setIsCopiedCover] = useState(false);
     const [isCopiedResume, setIsCopiedResume] = useState(false);
+    const navigation = useNavigate();
 
     const extractWords = (text, wordCount) => {
         const words = text.split(' ');
@@ -30,10 +32,11 @@ function ExploreJob() {
         return extractedWords.join(' ');
     };
 
-    const description = extractWords(job.description, 20) + "...";
+    // const description = extractWords(job.description, 20) + "...";
+    const description = job.description
 
     useEffect(() => {
-        console.log("HEY", pic)
+        console.log("HEY", jobRecs)
         async function getData() {
             const link = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://us-central1-crewmate-prod.cloudfunctions.net/getYoutubeVideos`
             await axios.post(link, { company_name: job.company_name, title: job.title }, { headers: { 'Content-Type': 'application/json' } }).then(async (res) => {
@@ -91,9 +94,10 @@ function ExploreJob() {
         }
     }
     return (
-        <div style={{ height: '88vh' }}>
-            <div className="card" style={{ maxWidth: "25vw" }} >
+        <div style={{ height: '88vh', }}>
+            <div className="card" style={{ width: "auto", }} >
                 <div style={{ height: '88vh', flexDirection: 'column' }}>
+                    <button onClick={() => { navigation(jobRecs ? '/' : '/pathways', { state: { jobRecs: jobRecs } }) }}>Go Back</button>
                     <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', minWidth: 'auto', maxWidth: 'auto' }}>
                         <img className="profile_icon" src={pic} style={{ height: '75px', width: '75px' }} onError={({ currentTarget }) => {
                             currentTarget.onerror = null; // prevents looping

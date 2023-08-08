@@ -8,7 +8,7 @@ import '../../styles/JobCard.css'
 import { FaPeriscope, FaTelegramPlane, FaBlackTie, FaWarehouse, FaBookmark, FaPeopleArrows } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
-export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }) {
+export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, jobRecs }) {
     const [pfp, setPfp] = useState('')
     const [jobFunction, setJobFunction] = useState('')
     const [jobIndustry, setIndustry] = useState('')
@@ -215,7 +215,8 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }
         navigation('/explore', {
             state: {
                 job: job,
-                pfp: pfp
+                pfp: pfp,
+                jobRecs: jobRecs
             },
         })
 
