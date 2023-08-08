@@ -96,14 +96,14 @@ function Pathways() {
                 return (
                     <Row justify="center" align="center">
                         <Col css={{ d: "flex" }}>
-                            <Tooltip content="Details">
+                            <Tooltip content="Explore Job">
                                 <IconButton onClick={() => console.log("View user", user.id)}>
                                     <EyeIcon size={20} fill="#979797" />
                                 </IconButton>
                             </Tooltip>
                         </Col>
                         <Col css={{ d: "flex" }}>
-                            <Tooltip content="Edit user">
+                            <Tooltip content="Edit">
                                 <IconButton onClick={() => console.log("Edit user", user.id)}>
                                     <EditIcon size={20} fill="#979797" />
                                 </IconButton>
@@ -111,7 +111,7 @@ function Pathways() {
                         </Col>
                         <Col css={{ d: "flex" }}>
                             <Tooltip
-                                content="Delete user"
+                                content="Delete"
                                 color="error"
                                 onClick={() => console.log("Delete user", user.id)}
                             >
