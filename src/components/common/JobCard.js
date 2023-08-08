@@ -213,7 +213,10 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching }
 
     async function exploreJob() {
         navigation('/explore', {
-            state: job
+            state: {
+                job: job,
+                pfp: pfp
+            },
         })
 
     }

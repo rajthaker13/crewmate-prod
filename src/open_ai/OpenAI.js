@@ -11,6 +11,59 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
+export async function createResumeText(job, userData) {
+    let work_experience = []
+    let companies = []
+    userData.member_experience_collection.map((work) => {
+        if (!companies.includes(work.company_name)) {
+            companies.push(work.company_name)
+            work_experience.push(`${work.title} at ${work.company_name}`)
+        }
+    })
+
+    const name = `${userData.first_name}  ${userData.last_name}`
+    const summary = userData.summary
+    const title = job.title
+    const company_name = job.company_name
+    const description = job.description
+    const location = `${job.location}, ${job.country}`
+    const prompt = `Write text for my resume for a ${title} at ${company_name} displaying that I have the skills reflected in the following job description: ${description} \n This is a brief description of me: ${summary} \n Here is an array of my work experiences: ${JSON.stringify(work_experience)}. \n For each job in my work experience I want you to give me a description that fits what I did at that job that reflects the skills I need to land this job.`
+    const response = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: prompt,
+        max_tokens: 1000,
+    }
+    )
+
+    return response.data.choices[0].text
+}
+
+export async function createCoverLetter(job, userData) {
+    let work_experience = []
+    let companies = []
+    userData.member_experience_collection.map((work) => {
+        if (!companies.includes(work.company_name)) {
+            companies.push(work.company_name)
+            work_experience.push(`${work.title} at ${work.company_name}`)
+        }
+    })
+
+    const name = `${userData.first_name}  ${userData.last_name}`
+    const summary = userData.summary
+    const title = job.title
+    const company_name = job.company_name
+    const description = job.description
+    const location = `${job.location}, ${job.country}`
+    const prompt = `Write a cover letter for my application to be a ${title} at ${company_name} displaying that I have the skills reflected in the following job description: ${description} \n This is a brief description of me: ${summary} \n Here is an array of my work experiences (only use my most relevent experiences in the cover letter and connect them to skills in the job description): ${JSON.stringify(work_experience)}. Last, here is my name for the signature: ${name}`
+    const response = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: prompt,
+        max_tokens: 1000,
+    }
+    )
+    return response.data.choices[0].text
+}
+
 
 export async function getCrewmateReccomendation(userInput) {
     let users = [];
@@ -101,40 +154,3 @@ export async function getCrewmateReccomendation(userInput) {
     }
 }
 
-
-
-export async function getJobRecommendation(userInput) {
-
-    let embeddings = []
-    console.log(data_sample)
-    for (let i = 0; i < 1000; i++) {
-        const response = await openai.createEmbedding({
-            model: "text-embedding-ada-002",
-            input: JSON.stringify(data_sample[i]),
-        });
-        embeddings.push(response)
-    }
-
-    const query_embedding = await openai.createEmbedding({
-        model: "text-embedding-ada-002",
-        input: JSON.stringify({ "prompt": userInput }),
-    });
-
-
-    let scores = []
-
-    for (var s = 0; s < embeddings.length; s++) {
-        const cosine_simi = cosineSimilarity(
-            query_embedding.data.data[0].embedding,
-            embeddings[s].data.data[0].embedding
-        )
-        scores.push({ "index": s, "rating": cosine_simi })
-    }
-    scores.sort((a, b) => b.rating - a.rating);
-
-
-
-
-    return scores
-
-}

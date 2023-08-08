@@ -20,6 +20,7 @@ import { DeleteIcon } from "../components/pathways/DeleteIcon";
 import { EyeIcon } from "../components/pathways/EyeIcon"
 import { IconButton } from "../components/pathways/IconButton"
 import { StyledBadge } from "../components/pathways/StyledBadge"
+import { useNavigate } from 'react-router-dom';
 
 
 function Pathways() {
@@ -38,6 +39,7 @@ function Pathways() {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [isLoading, setIsLoading] = useState(true);
+    const navigation = useNavigate();
 
     const statusColorMap = {
         active: "success",
@@ -97,7 +99,14 @@ function Pathways() {
                     <Row justify="center" align="center">
                         <Col css={{ d: "flex" }}>
                             <Tooltip content="Explore Job">
-                                <IconButton onClick={() => console.log("View user", user.id)}>
+                                <IconButton onClick={() => {
+                                    navigation('/explore', {
+                                        state: {
+                                            job: user.job,
+                                            pfp: user.avatar,
+                                        },
+                                    })
+                                }}>
                                     <EyeIcon size={20} fill="#979797" />
                                 </IconButton>
                             </Tooltip>
@@ -196,7 +205,8 @@ function Pathways() {
                         status: "active",
                         age: '29',
                         avatar: icon,
-                        email: job.location
+                        email: job.location,
+                        job: job
                     }
                     userSavedJobsData.push(data)
                 })
