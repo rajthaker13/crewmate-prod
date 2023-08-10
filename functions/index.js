@@ -66,7 +66,7 @@ exports.getJobData = functions.https.onRequest(async (req, res) => {
 
 exports.getYoutubeVideos = functions.https.onRequest(async (req, res) => {
     cors(req, res, async () => {
-        const google_api_key = 'AIzaSyByFI6MZzjFNYk1vZlyIC-pjgvBn9gkZMQ'
+        const google_api_key = 'AIzaSyC06WK6zFThCw5OAdf2SBGEyNzksjYVeT0'
         try {
             const notable_companies = ['Meta', 'Apple', 'Amazon', 'Netflix', 'Google', 'Microsoft', 'McKinsey & Company', 'Tesla', 'PwC', 'NVIDIA', 'MongoDB', 'JPMorgan Chase & Co.', 'GE', 'Figma', 'Deloitte', 'Citi', 'Capital One', 'Canva']
             let returned_videos = []

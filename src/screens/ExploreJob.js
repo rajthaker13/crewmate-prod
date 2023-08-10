@@ -38,7 +38,6 @@ function ExploreJob() {
     const description = job.description
 
     useEffect(() => {
-        console.log("HEY", jobRecs)
         async function getData() {
             const link = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://us-central1-crewmate-prod.cloudfunctions.net/getYoutubeVideos`
             await axios.post(link, { company_name: job.company_name, title: job.title }, { headers: { 'Content-Type': 'application/json' } }).then(async (res) => {
