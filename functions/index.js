@@ -160,7 +160,7 @@ exports.getJobRec = functions.https.onRequest(async (req, res) => {
         await client.connect();
 
         const db = client.db('jobs'); // Replace with your database name.
-        const collection = db.collection('august'); // Replace with your collection name.
+        const collection = db.collection('alphaFinale'); // Replace with your collection name.
 
         // Query for similar documents.
         const documents = await collection.aggregate([
@@ -176,7 +176,21 @@ exports.getJobRec = functions.https.onRequest(async (req, res) => {
             }
         ]).toArray();
 
-        console.log(documents)
+        // const searchResults = await collection.aggregate([
+        //     {
+        //         "$search": {
+        //             "index": "default",
+        //             "text": {
+        //                 "query": req.body.text,
+        //                 "path": {
+        //                     "wildcard": "*"
+        //                 }
+        //             }
+        //         }
+        //     }
+        // ]).toArray();
+
+        // console.log(searchResults)
 
         await client.close();
 

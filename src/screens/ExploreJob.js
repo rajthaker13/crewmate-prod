@@ -3,7 +3,7 @@ import { useStateValue } from "../components/utility/StateProvider";
 import backdrop from "../assets/backdrop.gif";
 import sample from '../data/sample.json';
 import { getUserAndProductEmbeddings, getJobRecommendation } from "../open_ai/OpenAI"
-import { Card, Grid, Text, Link, Button } from '@nextui-org/react';
+import { Card, Grid, Text, Link, Button, Dropdown } from '@nextui-org/react';
 import db, { auth, provider, functions } from '../firebase/firebase';
 import JobCard from "../components/common/JobCard";
 import SearchBar from "../components/common/SearchBar";
@@ -14,6 +14,8 @@ import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "fir
 import { createCoverLetter, createResumeText } from "../open_ai/OpenAI";
 import clipboardCopy from 'clipboard-copy';
 import Modal from "../components/home/Modal";
+import '../styles/ExploreJob.css'
+import GenerateModal from "../components/pathways/GenerateModal";
 
 
 function ExploreJob() {
@@ -26,6 +28,9 @@ function ExploreJob() {
     const [isCopiedCover, setIsCopiedCover] = useState(false);
     const [isCopiedResume, setIsCopiedResume] = useState(false);
     const [isGenerating, setIsGenerating] = useState(false)
+
+    const [isGeneratingResume, setIsGeneratingResume] = useState(false)
+    const [isGeneratingCover, setIsGeneratingCover] = useState(false)
     const navigation = useNavigate();
 
     const extractWords = (text, wordCount) => {
@@ -53,72 +58,91 @@ function ExploreJob() {
 
     async function generateCoverLetter() {
         setIsGenerating(true)
-        let userRef
-        if (!auth.currentUser) {
-            userRef = doc(db, "users", 'rajthaker13@yahoo.com')
-        }
-        else {
-            userRef = doc(db, "users", auth.currentUser.email)
-        }
-        const userSnap = await getDoc(userRef)
-        if (userSnap.exists()) {
-            const userData = userSnap.data()['data']
-            const text = await createCoverLetter(job, userData)
-            console.log(text)
-            clipboardCopy(text);
-            setIsCopiedCover(true);
-            setIsGenerating(false)
-            setTimeout(() => {
-                setIsCopiedCover(false);
-            }, 1500);
-        }
+        setIsGeneratingCover(true)
     }
 
     async function generateResumeText() {
         setIsGenerating(true)
-        let userRef
-        if (!auth.currentUser) {
-            userRef = doc(db, "users", 'rajthaker13@yahoo.com')
-        }
-        else {
-            userRef = doc(db, "users", auth.currentUser.email)
-        }
-        const userSnap = await getDoc(userRef)
-        if (userSnap.exists()) {
-            const userData = userSnap.data()['data']
-            const text = await createResumeText(job, userData)
-            console.log(text)
-            clipboardCopy(text);
-            setIsCopiedResume(true);
-            setIsGenerating(false)
-            setTimeout(() => {
-                setIsCopiedResume(false);
-            }, 1500);
-        }
+        setIsGeneratingResume(true)
     }
     return (
         <div style={{ height: '88vh', }}>
-            {isGenerating && <Modal setOpenModal={setIsGenerating} isSearchingModal={true} text="Copying Text to Clipboard..." />}
-            <div className="card" style={{ width: "auto", }} >
-                <div style={{ height: '88vh', flexDirection: 'column' }}>
-                    <button onClick={() => { navigation(jobRecs ? '/' : '/pathways', { state: { jobRecs: jobRecs } }) }}>Go Back</button>
-                    <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', minWidth: 'auto', maxWidth: 'auto' }}>
-                        <img className="profile_icon" src={pic} style={{ height: '75px', width: '75px' }} onError={({ currentTarget }) => {
-                            currentTarget.onerror = null; // prevents looping
-                            currentTarget.src = require('../assets/crewmate-emblem.png');
-                        }}></img>
-                        <h3 className="company_name">{job.company_name}</h3>
-                        <FaBookmark color={jobSaved ? "#9921e8" : '#FAFAFA'} size={25} className="job_bookmark_icon" />
+            {isGenerating && <GenerateModal isGeneratingResume={isGeneratingResume} isGeneratingCover={isGeneratingCover} job={job} setIsGenerating={setIsGenerating} />}
+            <div className="description_container">
+                <div className="description_job_info">
+                    <img src={pic} className="description_icon" onError={({ currentTarget }) => {
+                        currentTarget.onerror = null; // prevents looping
+                        currentTarget.src = require('../assets/crewmate-emblem.png');
+                    }}></img>
+                    <div className="description_job_title">
+                        <h4 className="description_job_title_heading">{`${job.title} @ ${job.company_name}`}</h4>
                     </div>
-                    <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', minWidth: 'auto' }}>
-                        <h4 className="job_title" style={{ height: 'auto', minHeight: 'auto' }}>{job.title}</h4>
-                    </div>
-                    <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
-                        <h6 className="job_description">{description}</h6>
-                    </div>
-                    <button onClick={generateCoverLetter}>{isCopiedCover ? 'Copied!' : 'Generate Cover Letter'}</button>
-                    <button onClick={generateResumeText}>{isCopiedResume ? 'Copied!' : 'Generate Resume Text'}</button>
-                    {/* {videos.map((video) => {
+                </div>
+                <div className="description_description_cont">
+                    <h5 className="description_text">{job.description}</h5>
+                </div>
+                <div className="description_button_container">
+                    <button className="description_apply_button_container" onClick={() => {
+                        if (job.external_url != null) {
+                            window.open(
+                                job.external_url,
+                                '_blank'
+                            );
+                        }
+                        else {
+                            window.open(
+                                job.redirected_url,
+                                '_blank'
+                            );
+
+                        }
+                    }}>
+                        <h6 className="description_apply_button_text">Apply Now</h6>
+                    </button>
+                </div>
+            </div>
+            <div className="generate_cv_container">
+                <h5 className="generate_cv_text">Craft an AI-imbued cover letter aligning experience with the job description. <br /> Generate AI-infused resume bullet points to match job requisites.</h5>
+                <Dropdown>
+                    <Dropdown.Button color='secondary' shadow className="generate_button">Generate</Dropdown.Button>
+                    <Dropdown.Menu color="secondary" variant="shadow" aria-label="Actions" onSelect={() => { console.log("FUCKOFF") }}>
+                        <Dropdown.Item key="cover" textValue="Generate Cover Letter"><h6 onClick={generateCoverLetter}>Generate Cover Letter</h6></Dropdown.Item>
+                        <Dropdown.Item key="cv" textValue="Generate CV Text"><h6 onClick={generateResumeText}>Generate CV Text</h6></Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div>
+        </div>
+        // <div style={{ height: '88vh', }}>
+        // {isGenerating && <Modal setOpenModal={setIsGenerating} isSearchingModal={true} text="Copying Text to Clipboard..." />}
+        //     <div className="card" style={{ width: "auto", }} >
+        //         <div style={{ height: '88vh', flexDirection: 'column' }}>
+        //             <button onClick={() => { navigation(jobRecs ? '/' : '/pathways', { state: { jobRecs: jobRecs } }) }}>Go Back</button>
+        // <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', minWidth: 'auto', maxWidth: 'auto' }}>
+        //     <img className="profile_icon" src={pic} style={{ height: '75px', width: '75px' }} onError={({ currentTarget }) => {
+        //         currentTarget.onerror = null; // prevents looping
+        //         currentTarget.src = require('../assets/crewmate-emblem.png');
+        //     }}></img>
+        //     <h3 className="company_name">{job.company_name}</h3>
+        //     <FaBookmark color={jobSaved ? "#9921e8" : '#FAFAFA'} size={25} className="job_bookmark_icon" />
+        // </div>
+        //             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', minWidth: 'auto' }}>
+        //                 <h4 className="job_title" style={{ height: 'auto', minHeight: 'auto' }}>{job.title}</h4>
+        //             </div>
+        //             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
+        //                 <h6 className="job_description">{description}</h6>
+        //             </div>
+        //             <button onClick={generateCoverLetter}>{isCopiedCover ? 'Copied!' : 'Generate Cover Letter'}</button>
+        //             <button onClick={generateResumeText}>{isCopiedResume ? 'Copied!' : 'Generate Resume Text'}</button>
+        //         </div>
+        //     </div>
+        // </div>
+    )
+}
+
+export default ExploreJob
+
+
+{/* {videos.map((video) => {
                         return (
                             <div>
                                 <h2>{video.snippet.title}</h2>
@@ -134,10 +158,3 @@ function ExploreJob() {
                             </div>
                         )
                     })} */}
-                </div>
-            </div>
-        </div>
-    )
-}
-
-export default ExploreJob

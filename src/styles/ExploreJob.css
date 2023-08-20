@@ -1,15 +1,157 @@
-.card_explore {
-    height: auto;
-    width: auto;
-    background-color: #121212;
-    margin-bottom: 3vh;
-    border-radius: 20px;
-    border-style: solid;
-    border-width: .1px;
-    border-color: #9E9E9E;
-    margin-left: 3vw;
-    margin-right: 3vw;
+@font-face {
+    font-family: 'Jura';
+    src: url('../styles/fonts/Jura/static/Jura-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Jura';
+    src: url('../styles/fonts/Jura/static/Jura-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+.description_container {
+    width: 90%;
+    height: 40%;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(82, 113, 196, 0.05) 0%, rgba(83, 113, 196, 0.05) 11.79%, rgba(87, 115, 198, 0.05) 21.38%, rgba(93, 116, 200, 0.05) 29.12%, rgba(101, 119, 203, 0.05) 35.34%, rgba(110, 122, 207, 0.05) 40.37%, rgba(121, 125, 211, 0.05) 44.56%, rgba(133, 129, 215, 0.05) 48.24%, rgba(145, 133, 220, 0.05) 51.76%, rgba(159, 137, 225, 0.05) 55.44%, rgba(172, 141, 230, 0.05) 59.63%, rgba(186, 145, 235, 0.05) 64.66%, rgba(199, 150, 240, 0.05) 70.88%, rgba(212, 154, 245, 0.05) 78.62%, rgba(225, 157, 250, 0.05) 88.21%, rgba(236, 161, 254, 0.05) 100%);
+    backdrop-filter: blur(20px);
+    margin-left: 5%;
+    margin-right: 5%;
+    flex-direction: column;
+}
+
+.description_job_info {
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.description_icon {
+    height: 75px;
+    width: 75px;
+    margin-left: 2%;
+    margin-top: 2%;
+}
+
+.description_job_title {
+    flex-direction: column;
+}
+
+.description_job_title_heading {
+    color: #FFF;
+    font-family: 'Jura';
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.48px;
+    margin-left: 5%;
+    margin-top: 5vh;
+    white-space: nowrap;
+}
+
+.description_description_cont {
+    justify-content: flex-start;
     display: flex;
     flex-direction: column;
-    scrollbar-color: #9921e8;
+    max-height: 150px; /* Set a maximum height for the container */
+    overflow-y: hidden; 
+    margin-top: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
 }
+
+.description_text {
+    color: rgba(255, 255, 255, 0.80);
+    overflow-y: auto;
+    font-family: 'Jura';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.32px;
+    text-align: left;
+}
+
+::-webkit-scrollbar {
+    width: 2px; /* Adjust the width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.10);
+}
+
+/* Change the color of the scrollbar thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+    background-color: #fff; /* Set the color of the thumb */
+}
+
+.description_button_container {
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: row;
+}
+.description_apply_button_container {
+    width: 8%;
+    height: 4%;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #7B3AFD 0%, #C962ED 100%);
+    margin-top: 1%;
+    margin-left: 2%;
+}
+.description_apply_button_text {
+    width: auto;
+    color: #FFF;
+    text-align: center;
+    font-family: 'Jura';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.32px;
+}
+
+
+.generate_cv_container {
+    margin-top: 1vh;
+    width: 90%;
+    height: 10vh;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(82, 113, 196, 0.05) 0%, rgba(83, 113, 196, 0.05) 11.79%, rgba(87, 115, 198, 0.05) 21.38%, rgba(93, 116, 200, 0.05) 29.12%, rgba(101, 119, 203, 0.05) 35.34%, rgba(110, 122, 207, 0.05) 40.37%, rgba(121, 125, 211, 0.05) 44.56%, rgba(133, 129, 215, 0.05) 48.24%, rgba(145, 133, 220, 0.05) 51.76%, rgba(159, 137, 225, 0.05) 55.44%, rgba(172, 141, 230, 0.05) 59.63%, rgba(186, 145, 235, 0.05) 64.66%, rgba(199, 150, 240, 0.05) 70.88%, rgba(212, 154, 245, 0.05) 78.62%, rgba(225, 157, 250, 0.05) 88.21%, rgba(236, 161, 254, 0.05) 100%);
+    backdrop-filter: blur(20px);
+    margin-left: 5%;
+    margin-right: 5%;
+    flex-direction: row;
+    display: flex;
+    align-items: center; 
+}
+
+.generate_cv_text {
+    overflow: hidden;
+    color: #FFF;
+    text-overflow: ellipsis;
+    font-family: 'Jura';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+    letter-spacing: 0.32px;
+    text-align: left;
+    margin-left: 2%;
+
+}
+
+.generate_button {
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(82, 113, 196, 0.10) 0%, rgba(83, 113, 196, 0.10) 11.79%, rgba(87, 115, 198, 0.10) 21.38%, rgba(93, 116, 200, 0.10) 29.12%, rgba(101, 119, 203, 0.10) 35.34%, rgba(110, 122, 207, 0.10) 40.37%, rgba(121, 125, 211, 0.10) 44.56%, rgba(133, 129, 215, 0.10) 48.24%, rgba(145, 133, 220, 0.10) 51.76%, rgba(159, 137, 225, 0.10) 55.44%, rgba(172, 141, 230, 0.10) 59.63%, rgba(186, 145, 235, 0.10) 64.66%, rgba(199, 150, 240, 0.10) 70.88%, rgba(212, 154, 245, 0.10) 78.62%, rgba(225, 157, 250, 0.10) 88.21%, rgba(236, 161, 254, 0.10) 100%);
+    margin-left: 40vw;
+    width: 245px;
+    height: 40px;
+    flex-shrink: 0;
+}
+

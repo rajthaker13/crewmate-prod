@@ -59,6 +59,7 @@ const SearchBar = (props) => {
 
         await axios.post(link, { text: input }, { headers: { 'Content-Type': 'application/json' } }).then(async (res) => {
             props.setJobRecs(res.data)
+            console.log(res.data)
         })
         props.setIsSearching(false)
         if (!state.guestView) {
