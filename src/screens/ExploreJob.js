@@ -11,7 +11,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { FaPeriscope, FaTelegramPlane, FaBlackTie, FaWarehouse, FaBookmark, FaPeopleArrows } from 'react-icons/fa';
 import axios from 'axios';
 import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "firebase/firestore";
-import { createCoverLetter, createResumeText } from "../open_ai/OpenAI";
 import clipboardCopy from 'clipboard-copy';
 import Modal from "../components/home/Modal";
 import '../styles/ExploreJob.css'
@@ -67,7 +66,7 @@ function ExploreJob() {
     }
     return (
         <div style={{ height: '88vh', }}>
-            {isGenerating && <GenerateModal isGeneratingResume={isGeneratingResume} isGeneratingCover={isGeneratingCover} job={job} setIsGenerating={setIsGenerating} />}
+            {isGenerating && <GenerateModal isGeneratingResume={isGeneratingResume} isGeneratingCover={isGeneratingCover} job={job} setIsGenerating={setIsGenerating} setIsGeneratingCover={setIsGeneratingCover} setIsGeneratingResume={setIsGeneratingResume} />}
             <div className="description_container">
                 <div className="description_job_info">
                     <img src={pic} className="description_icon" onError={({ currentTarget }) => {

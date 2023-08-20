@@ -6,48 +6,53 @@ import { createCoverLetter, createResumeText } from "../../open_ai/OpenAI";
 import db, { auth, provider, functions } from '../../firebase/firebase';
 import clipboardCopy from 'clipboard-copy';
 
-function GenerateModal({ isGeneratingResume, isGeneratingCover, job, setIsGenerating }) {
+function GenerateModal({ isGeneratingResume, isGeneratingCover, job, setIsGenerating, setIsGeneratingCover, setIsGeneratingResume }) {
     const [header, setHeader] = useState('')
     const [text, setText] = useState('Generating text, please wait...')
     const [disabled, setDisabled] = useState(true)
     const [isCopied, setIsCopied] = useState(false)
     const [needsData, setNeedsData] = useState(true)
+    const [isGenResume, setIsGenResume] = useState(isGeneratingResume)
+    const [isGenCover, setIsGenCover] = useState(isGeneratingCover)
+
 
     useEffect(() => {
         async function getData() {
-            setNeedsData(false)
-            let userRef
-            if (!auth.currentUser) {
-                userRef = doc(db, "users", 'rajthaker13@yahoo.com')
-            }
-            else {
-                userRef = doc(db, "users", auth.currentUser.email)
-            }
-            const userSnap = await getDoc(userRef)
-            if (userSnap.exists()) {
-                const userData = userSnap.data()['data']
-                let new_text
-                if (isGeneratingResume) {
-                    new_text = await createResumeText(job, userData)
+            if (needsData) {
+                setNeedsData(false)
+                if (isGenResume) {
+                    setHeader('Generate CV Text')
                 }
-                else if (isGeneratingCover) {
-                    new_text = await createCoverLetter(job, userData)
+                else if (isGenCover) {
+                    setHeader('Generate Cover Letter')
                 }
-                setText(new_text)
-                setDisabled(false)
+                let userRef
+                if (!auth.currentUser) {
+                    userRef = doc(db, "users", 'rajthaker13@yahoo.com')
+                }
+                else {
+                    userRef = doc(db, "users", auth.currentUser.email)
+                }
+                const userSnap = await getDoc(userRef)
+                if (userSnap.exists()) {
+                    const userData = userSnap.data()['data']
+                    let new_text
+                    if (isGenResume) {
+                        new_text = await createResumeText(job, userData)
+                    }
+                    else if (isGenCover) {
+                        new_text = await createCoverLetter(job, userData)
+                    }
+                    setText(new_text)
+                    setDisabled(false)
+                }
+
             }
+
 
         }
 
         if (needsData) {
-            if (isGeneratingResume) {
-                setHeader('Generate CV Text')
-            }
-            else if (isGeneratingCover) {
-                setHeader('Generate Cover Letter')
-            }
-
-
             getData()
         }
 
@@ -76,10 +81,10 @@ function GenerateModal({ isGeneratingResume, isGeneratingCover, job, setIsGenera
         if (userSnap.exists()) {
             const userData = userSnap.data()['data']
             let new_text
-            if (isGeneratingResume) {
+            if (isGenResume) {
                 new_text = await createResumeText(job, userData)
             }
-            else if (isGeneratingCover) {
+            else if (isGenCover) {
                 new_text = await createCoverLetter(job, userData)
             }
             setText(new_text)
@@ -90,7 +95,16 @@ function GenerateModal({ isGeneratingResume, isGeneratingCover, job, setIsGenera
 
     return (
         <div className="generate_modal_container">
-            <div onClick={() => { setIsGenerating(false) }} className="x_icon_generate">
+            <div onClick={() => {
+                {
+                    setIsGeneratingResume(false)
+                    setIsGeneratingCover(false)
+                    setNeedsData(true)
+                    setIsGenCover(false)
+                    setIsGenResume(false)
+                    setIsGenerating(false)
+                }
+            }} className="x_icon_generate">
                 <XIcon />
             </div>
             <h1 className="generate_modal_header">{header}</h1>
