@@ -23,10 +23,8 @@ function ExploreJob() {
     const [pic, setPic] = useState(state.pfp)
     const [jobRecs, setJobRecs] = useState(state.jobRecs)
     const [jobSaved, setJobSaved] = useState(false)
-    const [videos, setVideos] = useState([])
-    const [isCopiedCover, setIsCopiedCover] = useState(false);
-    const [isCopiedResume, setIsCopiedResume] = useState(false);
     const [isGenerating, setIsGenerating] = useState(false)
+    const [newsContent, setNewsContent] = useState([])
 
     const [isGeneratingResume, setIsGeneratingResume] = useState(false)
     const [isGeneratingCover, setIsGeneratingCover] = useState(false)
@@ -43,15 +41,61 @@ function ExploreJob() {
 
     useEffect(() => {
         async function getData() {
-            const link = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://us-central1-crewmate-prod.cloudfunctions.net/getYoutubeVideos`
-            await axios.post(link, { company_name: job.company_name, title: job.title }, { headers: { 'Content-Type': 'application/json' } }).then(async (res) => {
-                console.log(res.data)
-                setVideos(res.data)
-            })
+            //Youtube Shit
+            // const link = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://us-central1-crewmate-prod.cloudfunctions.net/getYoutubeVideos`
+            // await axios.post(link, { company_name: job.company_name, title: job.title }, { headers: { 'Content-Type': 'application/json' } }).then(async (res) => {
+            //     console.log(res.data)
+            //     setVideos(res.data)
+            // })
+
+            //Udemy
+            // const url = "https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://www.udemy.com/api-2.0/courses/?search=java";
+            // const clientID = 'tRVpeJE6riqDONUVPNd7M6xNmiOTM1KF1SKNCKsg';
+            // const clientSecret = '2W1pcG3C8M1VpxXZ2cIvzIBS8zCWQnyDl4hU8TgszzkoPPnFiqlxWHKtMlLZHOsgHAAM2kYXNcrFX0NY9HWqSqEtYqJW28S0vNwnfylQ48wOlOAQNhn9Be2QxzIsxONz';
+
+            // const headers = new Headers({
+            //     'Content-Type': 'application/json',
+            //     'Authorization': 'Basic ' + btoa(`${clientID}:${clientSecret}`),
+            // });
+
+            // await fetch(url, {
+            //     method: 'GET',
+            //     headers: headers,
+            // })
+            //     .then(response => response.json())
+            //     .then(json => {
+            //         json.results.forEach(result => {
+            //             const title = result.title;
+            //             console.log(title);
+            //         });
+            //     })
+            //     .catch(error => {
+            //         console.error('Error:', error);
+            //     });
+
+
+
+            // const link = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://www.udemy.com/api-2.0/courses/`
+            // await axios.get(link, { 'Authorization': `Basic ${encodedCredentials}` }).then(async (res) => {
+            //     console.log(res.data)
+            // })
+
+            const job_func = job.job_functions_collection[0].job_function_list.function
+
+            const keywords = `${encodeURIComponent(job_func)}`;
+            const baseURL = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://newsdata.io/api/1/news?apikey=pub_27949b722706632bfadee3b38de0956a3f91a&q=${keywords}`;
+
+            await axios.get(baseURL)
+                .then(response => {
+                    setNewsContent(response.data['results'])
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                })
 
         }
-        console.log(job)
-        // getData()
+
+        getData()
 
     }, [])
 
@@ -104,37 +148,41 @@ function ExploreJob() {
                 <h5 className="generate_cv_text">Craft an AI-imbued cover letter aligning experience with the job description. <br /> Generate AI-infused resume bullet points to match job requisites.</h5>
                 <Dropdown>
                     <Dropdown.Button color='secondary' shadow className="generate_button">Generate</Dropdown.Button>
-                    <Dropdown.Menu color="secondary" variant="shadow" aria-label="Actions" onSelect={() => { console.log("FUCKOFF") }}>
+                    <Dropdown.Menu color="secondary" variant="shadow" aria-label="Actions">
                         <Dropdown.Item key="cover" textValue="Generate Cover Letter"><h6 onClick={generateCoverLetter}>Generate Cover Letter</h6></Dropdown.Item>
                         <Dropdown.Item key="cv" textValue="Generate CV Text"><h6 onClick={generateResumeText}>Generate CV Text</h6></Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             </div>
+            <div style={{ flexDirection: 'row', display: 'flex' }}>
+                <div className="generate_courses_container">
+                    <h5 className="content_header_text">Get relevant experience</h5>
+                </div>
+                <div className="generate_content_container">
+                    <div className="content_header_info">
+                        <h5 className="content_header_text">Culture of this industry</h5>
+                    </div>
+                    <div style={{ overflowY: 'auto' }}>
+                        {newsContent.map((news) => {
+                            return (
+                                <div className="content_container" onClick={() => {
+                                    window.open(
+                                        news.link,
+                                        '_blank'
+                                    );
+                                }}>
+                                    <img src={require('../assets/news-default.png')} className="content_img" />
+                                    <div className="content_title_container">
+                                        <h5 className="content_title_text_description">{news.title}</h5>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
+            </div>
+
         </div>
-        // <div style={{ height: '88vh', }}>
-        // {isGenerating && <Modal setOpenModal={setIsGenerating} isSearchingModal={true} text="Copying Text to Clipboard..." />}
-        //     <div className="card" style={{ width: "auto", }} >
-        //         <div style={{ height: '88vh', flexDirection: 'column' }}>
-        //             <button onClick={() => { navigation(jobRecs ? '/' : '/pathways', { state: { jobRecs: jobRecs } }) }}>Go Back</button>
-        // <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', minWidth: 'auto', maxWidth: 'auto' }}>
-        //     <img className="profile_icon" src={pic} style={{ height: '75px', width: '75px' }} onError={({ currentTarget }) => {
-        //         currentTarget.onerror = null; // prevents looping
-        //         currentTarget.src = require('../assets/crewmate-emblem.png');
-        //     }}></img>
-        //     <h3 className="company_name">{job.company_name}</h3>
-        //     <FaBookmark color={jobSaved ? "#9921e8" : '#FAFAFA'} size={25} className="job_bookmark_icon" />
-        // </div>
-        //             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', minWidth: 'auto' }}>
-        //                 <h4 className="job_title" style={{ height: 'auto', minHeight: 'auto' }}>{job.title}</h4>
-        //             </div>
-        //             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
-        //                 <h6 className="job_description">{description}</h6>
-        //             </div>
-        //             <button onClick={generateCoverLetter}>{isCopiedCover ? 'Copied!' : 'Generate Cover Letter'}</button>
-        //             <button onClick={generateResumeText}>{isCopiedResume ? 'Copied!' : 'Generate Resume Text'}</button>
-        //         </div>
-        //     </div>
-        // </div>
     )
 }
 
