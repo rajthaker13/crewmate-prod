@@ -223,15 +223,20 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, 
     }
 
     return (
-        <div className="card" style={{ maxWidth: profile == true ? "25vw" : "" }} >
-            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', minWidth: 'auto', maxWidth: 'auto' }}>
-                <img className="profile_icon" src={pfp} style={{ height: '75px', width: '75px' }} onError={({ currentTarget }) => {
+        <div className="card" >
+            <div style={{ flexDirection: 'row', display: 'inline-flex' }}>
+                <img className="profile_icon" src={pfp} style={{ height: '50px', width: '50px' }} onError={({ currentTarget }) => {
                     currentTarget.onerror = null; // prevents looping
                     currentTarget.src = require('../../assets/crewmate-emblem.png');
                 }}></img>
                 <h3 className="company_name">{job.company_name}</h3>
-                <FaBookmark color={jobSaved ? "#9921e8" : '#FAFAFA'} size={25} className="job_bookmark_icon" onClick={saveJob} />
-                {/* <FaTelegramPlane color='#FAFAFA' size={25} className="job_share_icon" onClick={saveJob} /> */}
+            </div>
+            <div style={{ flexDirection: 'row', display: 'flex', minHeight: 'auto', maxHeight: 'auto' }}>
+                <div className="company_information_location_cont ">
+                    <h6 className="company_information_container_text">{job.location}</h6>
+
+
+                </div>
             </div>
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', minWidth: 'auto' }}>
                 <h4 className="job_title" style={{ height: 'auto', minHeight: 'auto' }}>{job.title}</h4>
@@ -239,14 +244,9 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, 
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
                 <h6 className="job_description">{description}</h6>
             </div>
-            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
-                <FaPeriscope color='#FAFAFA' size={25} className="job_location_icon" />
-                <h5 className="job_location">{job.location}</h5>
-            </div>
-            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
-                <h6 className="job_info">{`${job.employment_type} Position`}</h6>
-            </div>
-            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', justifyContent: 'center' }}>
+
+
+            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', }}>
                 <button className="job_waitlist_button" onClick={exploreJob}>
                     <div style={{
                         flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', minWidth: '8vw', justifyContent: 'center'
@@ -285,7 +285,7 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, 
                     </div>
                 </button> */}
             </div >
-            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '5vh', minWidth: '20vw', justifyContent: 'center', }} />
+
 
 
 

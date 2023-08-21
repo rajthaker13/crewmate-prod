@@ -88,6 +88,7 @@ function ExploreJob() {
             await axios.get(baseURL)
                 .then(response => {
                     setNewsContent(response.data['results'])
+                    console.log(newsContent)
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);
@@ -171,7 +172,10 @@ function ExploreJob() {
                                         '_blank'
                                     );
                                 }}>
-                                    <img src={require('../assets/news-default.png')} className="content_img" />
+                                    <img src={news.image_url} className="content_img" onError={({ currentTarget }) => {
+                                        currentTarget.onerror = null; // prevents looping
+                                        currentTarget.src = require('../assets/news-default.png');
+                                    }} />
                                     <div className="content_title_container">
                                         <h5 className="content_title_text_description">{news.title}</h5>
                                     </div>

@@ -16,6 +16,7 @@ import Modal from "../components/home/Modal";
 import { createCheckoutSession } from "../stripe/createCheckoutSession";
 import usePremiumStatus from "../stripe/usePremiumStatus";
 import { useLocation, useNavigate } from "react-router-dom";
+import '../styles/SearchBar.css'
 
 
 
@@ -66,7 +67,17 @@ function Home() {
         <div style={{ height: '88vh' }}>
             {isSearching && <Modal setOpenModal={setOpenModal} isSearchingModal={true} />}
             {openModal && <Modal setOpenModal={setOpenModal} />}
-            <SearchBar setJobRecs={setJobRecs} setIsSearching={setIsSearching} isSearching={isSearching} setProfileRec={setProfileRec} experience={experience} setExperienceRecs={setExperienceRecs} location={location} />
+            <div className="search-bar-container ">
+                <h2 className="search-bar-container-header">Search: Job opportunities, internships and more</h2>
+                <SearchBar setJobRecs={setJobRecs} setIsSearching={setIsSearching} isSearching={isSearching} setProfileRec={setProfileRec} experience={experience} setExperienceRecs={setExperienceRecs} location={location} />
+                <div className="search-bar-container-enter-text">
+                    <h5>Press Enter <span className="">to search</span></h5>
+
+
+                </div>
+
+            </div>
+
             <div style={{ display: 'inline-flex', marginTop: '5vh' }}>
                 {jobRecs && jobRecs.map((job, index) => {
                     return (
