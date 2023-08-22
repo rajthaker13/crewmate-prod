@@ -147,15 +147,33 @@
   .job_card_slide_container {
     background: var(--gr-03, linear-gradient(150deg, #161624 0%, #25243C 100%));
     width: 100%; /* Take up full width */
-    height: 30vh;
+    height: 32vh;
     margin-top: 2%;
     overflow: hidden; /* Hide overflow to hide extra cards */
     position: relative;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
   }
 
   .ticker-track {
     display: flex;
-    transition: transform 0.5s ease; 
+    animation: tickerSlide 20s linear infinite;
+    width: 300%;
+    overflow: hidden; 
+  }
+
+  .ticker_track > div {
+  flex: 0 0 auto; /* Prevent cards from shrinking */
+}
+
+  @keyframes tickerSlide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%); /* Adjust the distance as needed */
+    }
   }
 
   .login_text {
@@ -201,5 +219,60 @@
     width: 25px;
     margin-top: 3%;
     margin-left: 3%;
+  }
+
+  .login-slide-2-pic-cont  {
+    width: 30vw;
+    height: 30vh;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(82, 113, 196, 0.05) 0%, rgba(83, 113, 196, 0.05) 11.79%, rgba(87, 115, 198, 0.05) 21.38%, rgba(93, 116, 200, 0.05) 29.12%, rgba(101, 119, 203, 0.05) 35.34%, rgba(110, 122, 207, 0.05) 40.37%, rgba(121, 125, 211, 0.05) 44.56%, rgba(133, 129, 215, 0.05) 48.24%, rgba(145, 133, 220, 0.05) 51.76%, rgba(159, 137, 225, 0.05) 55.44%, rgba(172, 141, 230, 0.05) 59.63%, rgba(186, 145, 235, 0.05) 64.66%, rgba(199, 150, 240, 0.05) 70.88%, rgba(212, 154, 245, 0.05) 78.62%, rgba(225, 157, 250, 0.05) 88.21%, rgba(236, 161, 254, 0.05) 100%);
+    backdrop-filter: blur(20px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+
+  .login-big-text-2 {
+    color: #FFF;
+    font-family: 'Jura';
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.64px;
+    text-align: left;
+
+  }
+
+  .login-small-text-2 {
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.80);
+    text-overflow: ellipsis;
+    font-family: Jura;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 32px; /* 160% */
+    display: -webkit-box;
+    width: 774px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-align: left;
+
+  }
+
+
+  .other_button {
+    margin-top: 5%;
+    margin-left: 3%;
+    margin-right: 3%;
+    height: 2%;
+    border-radius: 15px;
+    justify-content: center;
+    background: linear-gradient(135deg, #7B3AFD 0%, #C962ED 100%);
   }
 

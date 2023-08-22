@@ -14,6 +14,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { LinkedInLogo } from "../components/common/LinkedInLogo";
 import sample from '../data/sample.json'
 import JobCard from "../components/common/JobCard";
+import Ticker from 'react-ticker'
 
 
 
@@ -138,53 +139,63 @@ function Login() {
                 </div>
             </div>
             <div className="job_card_slide_container">
-                <div className="ticker-track" style={{ transform: `translateX(-${tickerPosition * 100}%)` }}>
+                <div className="ticker-track">
+
                     {sampleJobs.map((job, index) => {
                         return (
-                            <JobCard job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
+                            <JobCard key={index} job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
 
                         )
+                    })}
+                    {sampleJobs.map((job, index) => {
+                        return (
+                            <JobCard key={index + sampleJobs.length} job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
 
+                        )
                     })}
                 </div>
 
             </div>
 
-
-
-
-            {/* <div className="login-flash-ui"/> */}
-
-
-            {/* <div className="login_container">
-                <img
-                    src={require('../assets/crewmate-logo.png')}
-                    alt="crewmate-emblem"
-                    className="crewmate_image"
-                />
-                <h3 className="login_text">Sign In</h3>
-                <h5 className="login_text">joincrewmate.com</h5>
-                <div style={{ flexDirection: 'row', display: 'inline-flex', }}>
-                    <button className="login_button" onClick={linkedInLogin}>
-                        <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '5vh', minWidth: '20vw', justifyContent: 'left' }}>
-                            <img src={require("../assets/linkedin-icon.png")} className="login_icon" ></img>
-                            <h5 className="login_text_button">Continue with LinkedIn</h5>
-                        </div>
+            <div className="login-slide-1 ">
+                <div className="login-slide-2-pic-cont">
+                    <img className="ss1" src={require('../assets/search.png')}></img>
+                </div>
+                <div className="login-text-container">
+                    <h1 className="login-big-text-2">AI-powered Job Search</h1>
+                    <h1 className="login-small-text-2">Find millions of active jobs that fit your experience and interests using generative search prompting.</h1>
+                    <button className="other_button" disabled={true}>
+                        <h5 className="signIn-button-text">Sign Up with LinkedIn</h5>
                     </button>
                 </div>
-                <div style={{ flexDirection: 'row', display: 'inline-flex', }}>
-                    <button className="login_button" onClick={() => {
-                        dispatch({
-                            type: actionTypes.SET_GUEST,
-                            guestView: true,
-                        });
-                    }} style={{ backgroundColor: '#9921e8' }}>
-                        <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '5vh', minWidth: '20vw', justifyContent: 'center' }}>
-                            <h5 className="login_text_button_guest">Continue as Guest</h5>
-                        </div>
+            </div>
+
+            <div className="login-slide-1 ">
+                <div className="login-text-container">
+                    <h1 className="login-big-text-2">AI-powered Job Search</h1>
+                    <h1 className="login-small-text-2">Find millions of active jobs that fit your experience and interests using generative search prompting.</h1>
+                    <button className="signIn-button" onClick={linkedInLogin}>
+                        <LinkedInLogo />
+                        <h5 className="signIn-button-text">Sign Up with LinkedIn</h5>
                     </button>
                 </div>
-            </div> */}
+                <div className="login-slide-2-pic-cont">
+                    <img className="ss1" src={require('../assets/search.png')}></img>
+                </div>
+            </div>
+            <div className="login-slide-1 ">
+                <div className="login-slide-2-pic-cont">
+                    <img className="ss1" src={require('../assets/search.png')}></img>
+                </div>
+                <div className="login-text-container">
+                    <h1 className="login-big-text-2">AI-powered Job Search</h1>
+                    <h1 className="login-small-text-2">Find millions of active jobs that fit your experience and interests using generative search prompting.</h1>
+                    <button className="other_button" disabled={true}>
+                        <h5 className="signIn-button-text">Sign Up with LinkedIn</h5>
+                    </button>
+                </div>
+            </div>
+
         </div>
 
     );

@@ -42,7 +42,6 @@ function App() {
                   <Route path="/" element={<Login />} />
                 </Routes>
               </>
-
             ) : (
               <>
                 <Header guest={guestView} />
