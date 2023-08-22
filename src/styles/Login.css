@@ -146,11 +146,16 @@
 
   .job_card_slide_container {
     background: var(--gr-03, linear-gradient(150deg, #161624 0%, #25243C 100%));
-    width: 100vw;
+    width: 100%; /* Take up full width */
     height: 30vh;
     margin-top: 2%;
+    overflow: hidden; /* Hide overflow to hide extra cards */
+    position: relative;
+  }
 
-    
+  .ticker-track {
+    display: flex;
+    transition: transform 0.5s ease; 
   }
 
   .login_text {

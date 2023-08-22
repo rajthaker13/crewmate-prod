@@ -12,12 +12,17 @@ import { getFunctions, httpsCallable } from 'firebase/functions'
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { LinkedInLogo } from "../components/common/LinkedInLogo";
+import sample from '../data/sample.json'
+import JobCard from "../components/common/JobCard";
+
 
 
 function Login() {
     const [state, dispatch] = useStateValue();
     const [authCode, setAuthCode] = useState('')
     const [userToken, setUserToken] = useState('')
+    const [sampleJobs, setSampleJobs] = useState(sample)
+    const [tickerPosition, setTickerPosition] = useState(0);
 
     const { linkedInLogin } = useLinkedIn({
         clientId: `${process.env.REACT_APP_LINKEDIN_CLIENT_ID}`,
@@ -104,6 +109,15 @@ function Login() {
         }
 
     }
+    useEffect(() => {
+        const tickerInterval = setInterval(() => {
+            setTickerPosition((prevPosition) => (prevPosition + 1) % sampleJobs.length);
+        }, 8000); // Adjust the interval for slower movement
+
+        return () => {
+            clearInterval(tickerInterval);
+        };
+    }, [sampleJobs.length]);
 
 
     return (
@@ -113,7 +127,7 @@ function Login() {
                     <h1 className="login-big-text">Search & Upskill</h1>
                     <h1 className="login-medium-text">for millions of active jobs</h1>
                     <h1 className="login-small-text">Join our innovative and dynamic IT team based in the heart of Palo Alto. We are a leading technology company. Our mission is to secure and optimize network infrastructure, ensuring seamless connectivity and protecting our clients' valuable data.</h1>
-                    <button className="signIn-button">
+                    <button className="signIn-button" onClick={linkedInLogin}>
                         <LinkedInLogo />
                         <h5 className="signIn-button-text">Sign Up with LinkedIn</h5>
                     </button>
@@ -124,6 +138,15 @@ function Login() {
                 </div>
             </div>
             <div className="job_card_slide_container">
+                <div className="ticker-track" style={{ transform: `translateX(-${tickerPosition * 100}%)` }}>
+                    {sampleJobs.map((job, index) => {
+                        return (
+                            <JobCard job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
+
+                        )
+
+                    })}
+                </div>
 
             </div>
 
