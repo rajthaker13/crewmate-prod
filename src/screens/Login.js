@@ -11,6 +11,7 @@ import linkedin from 'react-linkedin-login-oauth2/assets/linkedin.png';
 import { getFunctions, httpsCallable } from 'firebase/functions'
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { LinkedInLogo } from "../components/common/LinkedInLogo";
 
 
 function Login() {
@@ -107,7 +108,32 @@ function Login() {
 
     return (
         <div className="login">
-            <div className="login_container">
+            <div className="login-slide-1 ">
+                <div className="login-text-container">
+                    <h1 className="login-big-text">Search & Upskill</h1>
+                    <h1 className="login-medium-text">for millions of active jobs</h1>
+                    <h1 className="login-small-text">Join our innovative and dynamic IT team based in the heart of Palo Alto. We are a leading technology company. Our mission is to secure and optimize network infrastructure, ensuring seamless connectivity and protecting our clients' valuable data.</h1>
+                    <button className="signIn-button">
+                        <LinkedInLogo />
+                        <h5 className="signIn-button-text">Sign Up with LinkedIn</h5>
+                    </button>
+                </div>
+
+                <div className="login-slide-1-pic-cont">
+                    <img className="ss1" src={require('../assets/ss1.png')}></img>
+                </div>
+            </div>
+            <div className="job_card_slide_container">
+
+            </div>
+
+
+
+
+            {/* <div className="login-flash-ui"/> */}
+
+
+            {/* <div className="login_container">
                 <img
                     src={require('../assets/crewmate-logo.png')}
                     alt="crewmate-emblem"
@@ -135,10 +161,7 @@ function Login() {
                         </div>
                     </button>
                 </div>
-
-
-
-            </div>
+            </div> */}
         </div>
 
     );

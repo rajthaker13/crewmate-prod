@@ -34,24 +34,28 @@ function App() {
       <BrowserView>
         <div className="App">
           <Router>
-            {/* {!user && !guestView ? (
-              <Routes>
-                <Route exact path="/linkedin" element={<LinkedInCallback />} />
-                <Route path="/" element={<Login />} />
-              </Routes>
-            ) : ( */}
-            <>
-              <Header guest={guestView} />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/community" element={<Chat />} />
-                <Route path="/explore" element={<ExploreJob />} />
-                <Route path="/pathways" element={<Pathways />} />
+            {!user && !guestView ? (
+              <>
+                <Header guest={true} />
+                <Routes>
+                  <Route exact path="/linkedin" element={<LinkedInCallback />} />
+                  <Route path="/" element={<Login />} />
+                </Routes>
+              </>
 
-              </Routes>
-            </>
-            {/* )} */}
+            ) : (
+              <>
+                <Header guest={guestView} />
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/community" element={<Chat />} />
+                  <Route path="/explore" element={<ExploreJob />} />
+                  <Route path="/pathways" element={<Pathways />} />
+
+                </Routes>
+              </>
+            )}
           </Router>
         </div>
       </BrowserView >
