@@ -34,7 +34,7 @@ function App() {
       <BrowserView>
         <div className="App">
           <Router>
-            {!user && !guestView ? (
+            {/* {!user && !guestView ? (
               <>
                 <Header guest={true} />
                 <Routes>
@@ -42,19 +42,19 @@ function App() {
                   <Route path="/" element={<Login />} />
                 </Routes>
               </>
-            ) : (
-              <>
-                <Header guest={false} />
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/community" element={<Chat />} />
-                  <Route path="/explore" element={<ExploreJob />} />
-                  <Route path="/pathways" element={<Pathways />} />
+            ) : ( */}
+            <>
+              <Header guest={false} />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/community" element={<Chat />} />
+                <Route path="/explore" element={<ExploreJob />} />
+                <Route path="/pathways" element={<Pathways />} />
 
-                </Routes>
-              </>
-            )}
+              </Routes>
+            </>
+            {/* )} */}
           </Router>
         </div>
       </BrowserView >

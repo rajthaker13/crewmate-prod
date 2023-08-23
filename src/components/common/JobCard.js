@@ -224,7 +224,7 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, 
 
     return (
         <div className="card" >
-            <div style={{ flexDirection: 'row', display: 'inline-flex' }}>
+            <div style={{ flexDirection: 'row', display: 'flex', minHeight: '9vh' }}>
                 <img className="profile_icon" src={job.src ? require(`../../assets/demo/${job.src}`) : pfp} style={{ height: '50px', width: '50px' }} onError={({ currentTarget }) => {
                     currentTarget.onerror = null; // prevents looping
                     currentTarget.src = require('../../assets/crewmate-emblem.png');
@@ -236,14 +236,12 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, 
                     <h6 className="company_information_container_text">{job.location}</h6>
                 </div>
             </div>
-            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', minWidth: 'auto' }}>
+            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '7vh', maxHeight: '7vh', minWidth: 'auto' }}>
                 <h4 className="job_title" style={{ height: 'auto', minHeight: '3vh' }}>{job.title}</h4>
             </div>
-            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '5vh', maxHeight: 'auto' }}>
+            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '10vh', maxHeight: '10vh' }}>
                 <h6 className="job_description">{description}</h6>
             </div>
-
-
             <div style={{ flexDirection: 'row', display: 'flex', minHeight: 'auto', maxHeight: 'auto', justifyContent: 'center' }}>
                 <button className="job_waitlist_button" onClick={exploreJob} disabled={job.src ? true : false}>
                     <div style={{
@@ -252,6 +250,13 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, 
                         <h4 className="apply_text">Explore Job</h4>
                     </div>
                 </button>
+
+                <button className="job_save_button " onClick={saveJob} disabled={job.src ? true : false}>
+
+                    <FaBookmark fill={jobSaved ? "#fff" : ''} />
+
+                </button>
+
                 {/* <button className="job_apply_button" onClick={() => {
                     if (job.external_url != null) {
                         window.open(

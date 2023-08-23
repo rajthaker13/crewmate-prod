@@ -152,7 +152,7 @@
   .job_card_slide_container {
     background: var(--gr-03, linear-gradient(150deg, #161624 0%, #25243C 100%));
     width: 100%; /* Take up full width */
-    height: 32vh;
+    height: 40vh;
     margin-top: 2%;
     overflow: hidden; /* Hide overflow to hide extra cards */
     position: relative;

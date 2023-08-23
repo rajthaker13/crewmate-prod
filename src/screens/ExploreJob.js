@@ -156,9 +156,9 @@ function ExploreJob() {
                 </Dropdown>
             </div>
             <div style={{ flexDirection: 'row', display: 'flex' }}>
-                <div className="generate_courses_container">
+                {/* <div className="generate_courses_container">
                     <h5 className="content_header_text">Get relevant experience</h5>
-                </div>
+                </div> */}
                 {/* <div className="generate_content_container">
                     <div className="content_header_info">
                         <h5 className="content_header_text">Culture of this industry</h5>
