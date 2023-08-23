@@ -135,7 +135,7 @@ function Login() {
                 </div>
 
                 <div className="login-slide-1-pic-cont">
-                    <img className="ss1" src={require('../assets/ss1.png')}></img>
+                    <img className="ss1" src={require('../assets/upskill.png')}></img>
                 </div>
             </div>
             <div className="job_card_slide_container">
@@ -164,35 +164,25 @@ function Login() {
                 <div className="login-text-container">
                     <h1 className="login-big-text-2">AI-powered Job Search</h1>
                     <h1 className="login-small-text-2">Find millions of active jobs that fit your experience and interests using generative search prompting.</h1>
-                    <button className="other_button" disabled={true}>
-                        <h5 className="signIn-button-text">Sign Up with LinkedIn</h5>
-                    </button>
                 </div>
             </div>
 
             <div className="login-slide-1 ">
-                <div className="login-text-container">
-                    <h1 className="login-big-text-2">AI-powered Job Search</h1>
-                    <h1 className="login-small-text-2">Find millions of active jobs that fit your experience and interests using generative search prompting.</h1>
-                    <button className="signIn-button" onClick={linkedInLogin}>
-                        <LinkedInLogo />
-                        <h5 className="signIn-button-text">Sign Up with LinkedIn</h5>
-                    </button>
+                <div className="new-text-container-new">
+                    <h1 className="login-big-text-2">Explore & Upskill for the job you love</h1>
+                    <h1 className="login-small-text-2">Explore the path to receive a job through curated certificates and online resources based on positions you’re interested in.</h1>
                 </div>
                 <div className="login-slide-2-pic-cont">
-                    <img className="ss1" src={require('../assets/search.png')}></img>
+                    <img className="ss1" src={require('../assets/upskill.png')}></img>
                 </div>
             </div>
             <div className="login-slide-1 ">
                 <div className="login-slide-2-pic-cont">
-                    <img className="ss1" src={require('../assets/search.png')}></img>
+                    <img className="ss1" src={require('../assets/crew.png')}></img>
                 </div>
                 <div className="login-text-container">
-                    <h1 className="login-big-text-2">AI-powered Job Search</h1>
-                    <h1 className="login-small-text-2">Find millions of active jobs that fit your experience and interests using generative search prompting.</h1>
-                    <button className="other_button" disabled={true}>
-                        <h5 className="signIn-button-text">Sign Up with LinkedIn</h5>
-                    </button>
+                    <h1 className="login-big-text-2">Meet your Crew & Companies</h1>
+                    <h1 className="login-small-text-2">Join talent communities for your favorite companies to meet other applicants while getting access to hiring events, recruiters, and more!</h1>
                 </div>
             </div>
 

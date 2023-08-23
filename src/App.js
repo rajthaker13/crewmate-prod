@@ -44,7 +44,7 @@ function App() {
               </>
             ) : (
               <>
-                <Header guest={guestView} />
+                <Header guest={false} />
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/profile" element={<Profile />} />

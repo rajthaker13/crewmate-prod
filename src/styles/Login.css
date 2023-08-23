@@ -45,7 +45,12 @@
     margin-right: 25%;
     margin-left: 10%;
     margin-top: 5%;
+  }
 
+  .new-text-container-new {
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-top: 5%;
   }
 
   .login-big-text {
@@ -161,10 +166,11 @@
     animation: tickerSlide 20s linear infinite;
     width: 300%;
     overflow: hidden; 
+    margin-top: 1%;
   }
 
   .ticker_track > div {
-  flex: 0 0 auto; /* Prevent cards from shrinking */
+    flex: 0 0 auto; /* Prevent cards from shrinking */
 }
 
   @keyframes tickerSlide {

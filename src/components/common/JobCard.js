@@ -122,7 +122,7 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, 
             }
 
         }
-        if (!isSearching && job != null) {
+        if (!isSearching && job != null && job.src == null) {
             getCompanyData()
             isJobSaved()
             isWaitlisted()
@@ -225,7 +225,7 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, 
     return (
         <div className="card" >
             <div style={{ flexDirection: 'row', display: 'inline-flex' }}>
-                <img className="profile_icon" src={pfp} style={{ height: '50px', width: '50px' }} onError={({ currentTarget }) => {
+                <img className="profile_icon" src={job.src ? require(`../../assets/demo/${job.src}`) : pfp} style={{ height: '50px', width: '50px' }} onError={({ currentTarget }) => {
                     currentTarget.onerror = null; // prevents looping
                     currentTarget.src = require('../../assets/crewmate-emblem.png');
                 }}></img>
@@ -234,22 +234,20 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, 
             <div style={{ flexDirection: 'row', display: 'flex', minHeight: 'auto', maxHeight: 'auto' }}>
                 <div className="company_information_location_cont ">
                     <h6 className="company_information_container_text">{job.location}</h6>
-
-
                 </div>
             </div>
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', minWidth: 'auto' }}>
-                <h4 className="job_title" style={{ height: 'auto', minHeight: 'auto' }}>{job.title}</h4>
+                <h4 className="job_title" style={{ height: 'auto', minHeight: '3vh' }}>{job.title}</h4>
             </div>
-            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto' }}>
+            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '5vh', maxHeight: 'auto' }}>
                 <h6 className="job_description">{description}</h6>
             </div>
 
 
-            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', maxHeight: 'auto', }}>
-                <button className="job_waitlist_button" onClick={exploreJob}>
+            <div style={{ flexDirection: 'row', display: 'flex', minHeight: 'auto', maxHeight: 'auto', justifyContent: 'center' }}>
+                <button className="job_waitlist_button" onClick={exploreJob} disabled={job.src ? true : false}>
                     <div style={{
-                        flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', minWidth: '8vw', justifyContent: 'center'
+                        flexDirection: 'row', display: 'flex', minHeight: 'auto', minWidth: '8vw', justifyContent: 'center'
                     }}>
                         <h4 className="apply_text">Explore Job</h4>
                     </div>

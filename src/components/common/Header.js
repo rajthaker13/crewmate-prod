@@ -21,35 +21,19 @@ function Header(props) {
                     style={{ height: '3vw', width: 'auto', }}
                 />
             </div>
-
-            <div className="header_right">
-                <button class="astext" onClick={() => { navigate("/") }}>
-                    <h4 class="header_labels">Home</h4>
-                </button>
-                {!guestView && <button class="astext" onClick={() => { navigate("/pathways") }}>
-                    <h4 class="header_labels">My Jobs</h4>
-                </button>}
-            </div>
+            {props.guest == false &&
+                <div className="header_right">
+                    <button class="astext" onClick={() => { navigate("/") }}>
+                        <h4 class="header_labels">Home</h4>
+                    </button>
+                    <button class="astext" onClick={() => { navigate("/pathways") }}>
+                        <h4 class="header_labels">My Jobs</h4>
+                    </button>
+                </div>
+            }
 
 
         </div>
-        // <div className="header">
-        //     <div className="header_left">
-        // <Avatar
-        //     alt='crewmate-logo'
-        //     src={require('../../assets/crewmate-emblem.png')}
-        //     sx={{ height: '70px', width: '70px' }}
-        // />
-        //         <AccessTimeIcon />
-        //     </div>
-        //     <div className="header_search">
-        //         <SearchIcon />
-        //         <input placeholder="Search something here" style={{ backgroundColor: 'white' }} />
-        //     </div>
-        // <div className="header_right">
-        //     <HelpOutlineIcon />
-        // </div>
-        // </div>
     );
 }
 

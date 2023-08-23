@@ -96,7 +96,7 @@ function ExploreJob() {
 
         }
 
-        getData()
+        // getData()
 
     }, [])
 
@@ -159,7 +159,7 @@ function ExploreJob() {
                 <div className="generate_courses_container">
                     <h5 className="content_header_text">Get relevant experience</h5>
                 </div>
-                <div className="generate_content_container">
+                {/* <div className="generate_content_container">
                     <div className="content_header_info">
                         <h5 className="content_header_text">Culture of this industry</h5>
                     </div>
@@ -183,7 +183,7 @@ function ExploreJob() {
                             )
                         })}
                     </div>
-                </div>
+                </div> */}
             </div>
 
         </div>

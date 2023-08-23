@@ -59,7 +59,7 @@ function Pathways() {
             case "name":
                 return (
 
-                    <User squared src={user.avatar} name={cellValue} css={{ d: "flex", backgroundColor: 'linear-gradient(135deg, rgba(82, 113, 196, 0.05) 0%, rgba(83, 113, 196, 0.05) 11.79%, rgba(87, 115, 198, 0.05) 21.38%, rgba(93, 116, 200, 0.05) 29.12%, rgba(101, 119, 203, 0.05) 35.34%, rgba(110, 122, 207, 0.05) 40.37%, rgba(121, 125, 211, 0.05) 44.56%, rgba(133, 129, 215, 0.05) 48.24%, rgba(145, 133, 220, 0.05) 51.76%, rgba(159, 137, 225, 0.05) 55.44%, rgba(172, 141, 230, 0.05) 59.63%, rgba(186, 145, 235, 0.05) 64.66%, rgba(199, 150, 240, 0.05) 70.88%, rgba(212, 154, 245, 0.05) 78.62%, rgba(225, 157, 250, 0.05) 88.21%, rgba(236, 161, 254, 0.05) 100%)' }}>
+                    <User squared src={user.avatar} name={cellValue} css={{ d: "flex", backgroundColor: '#fff' }}>
                         {user.email}
                     </User>
 
@@ -105,7 +105,7 @@ function Pathways() {
                                 </IconButton>
                             </Tooltip>
                         </Col>
-                        <Col css={{ d: "flex" }}>
+                        {/* <Col css={{ d: "flex" }}>
                             <Tooltip content="Edit">
                                 <IconButton onClick={() => console.log("Edit user", user.id)}>
                                     <EditIcon size={20} fill="#979797" />
@@ -122,7 +122,7 @@ function Pathways() {
                                     <DeleteIcon size={20} fill="#FF0080" />
                                 </IconButton>
                             </Tooltip>
-                        </Col>
+                        </Col> */}
                     </Row>
                 );
             default:

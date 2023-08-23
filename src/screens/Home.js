@@ -72,8 +72,6 @@ function Home() {
                 <SearchBar setJobRecs={setJobRecs} setIsSearching={setIsSearching} isSearching={isSearching} setProfileRec={setProfileRec} experience={experience} setExperienceRecs={setExperienceRecs} location={location} />
                 <div className="search-bar-container-enter-text">
                     <h5>Press Enter <span className="">to search</span></h5>
-
-
                 </div>
 
             </div>
