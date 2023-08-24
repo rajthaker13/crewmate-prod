@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useStateValue } from "../components/utility/StateProvider";
 import backdrop from "../assets/backdrop.gif";
 import sample from '../data/sample.json';
-import { getUserAndProductEmbeddings, getJobRecommendation } from "../open_ai/OpenAI"
+import { getUserAndProductEmbeddings, getJobRecommendation, interactWithAssistant } from "../open_ai/OpenAI"
 import { Card, Grid, Text, Link, Button, Dropdown } from '@nextui-org/react';
 import db, { auth, provider, functions } from '../firebase/firebase';
 import JobCard from "../components/common/JobCard";
@@ -15,6 +15,7 @@ import clipboardCopy from 'clipboard-copy';
 import Modal from "../components/home/Modal";
 import '../styles/ExploreJob.css'
 import GenerateModal from "../components/pathways/GenerateModal";
+import { ChatFeed, Message } from 'react-chat-ui'
 
 
 function ExploreJob() {
@@ -25,6 +26,15 @@ function ExploreJob() {
     const [jobSaved, setJobSaved] = useState(false)
     const [isGenerating, setIsGenerating] = useState(false)
     const [newsContent, setNewsContent] = useState([])
+    const [messsages, setMessages] = useState([new Message({
+        id: 1,
+        message: `I'm a virtual recruiter for ${job.company_name}. Feel free to ask me anything about this job!`,
+    })])
+    const [gptMessages, setGPTMessages] = useState([
+        { "role": "system", "content": `You are a helpful virtual recruiting assistant for the following role: ${job.title} at ${job.company_name}. The user will ask you questions pertaining to the job and you will respond as if you are a recruiter at Google. Your name is Crewmate Recruiter.` },
+        { "role": "assistant", "content": `I'm a virtual recruiter for ${job.company_name}. Feel free to ask me anything about this job!` },
+    ])
+    const [isSearching, setIsSearching] = useState(false)
 
     const [isGeneratingResume, setIsGeneratingResume] = useState(false)
     const [isGeneratingCover, setIsGeneratingCover] = useState(false)
@@ -39,66 +49,35 @@ function ExploreJob() {
     // const description = extractWords(job.description, 20) + "...";
     const description = job.description
 
-    useEffect(() => {
-        async function getData() {
-            //Youtube Shit
-            // const link = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://us-central1-crewmate-prod.cloudfunctions.net/getYoutubeVideos`
-            // await axios.post(link, { company_name: job.company_name, title: job.title }, { headers: { 'Content-Type': 'application/json' } }).then(async (res) => {
-            //     console.log(res.data)
-            //     setVideos(res.data)
-            // })
+    async function sendMessage(userText) {
+        let temp_msg = messsages
+        temp_msg.push(new Message({
+            id: 0,
+            message: userText
+        }))
+        setMessages(temp_msg)
+        setIsSearching(true)
 
-            //Udemy
-            // const url = "https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://www.udemy.com/api-2.0/courses/?search=java";
-            // const clientID = 'tRVpeJE6riqDONUVPNd7M6xNmiOTM1KF1SKNCKsg';
-            // const clientSecret = '2W1pcG3C8M1VpxXZ2cIvzIBS8zCWQnyDl4hU8TgszzkoPPnFiqlxWHKtMlLZHOsgHAAM2kYXNcrFX0NY9HWqSqEtYqJW28S0vNwnfylQ48wOlOAQNhn9Be2QxzIsxONz';
-
-            // const headers = new Headers({
-            //     'Content-Type': 'application/json',
-            //     'Authorization': 'Basic ' + btoa(`${clientID}:${clientSecret}`),
-            // });
-
-            // await fetch(url, {
-            //     method: 'GET',
-            //     headers: headers,
-            // })
-            //     .then(response => response.json())
-            //     .then(json => {
-            //         json.results.forEach(result => {
-            //             const title = result.title;
-            //             console.log(title);
-            //         });
-            //     })
-            //     .catch(error => {
-            //         console.error('Error:', error);
-            //     });
-
-
-
-            // const link = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://www.udemy.com/api-2.0/courses/`
-            // await axios.get(link, { 'Authorization': `Basic ${encodedCredentials}` }).then(async (res) => {
-            //     console.log(res.data)
-            // })
-
-            const job_func = job.job_functions_collection[0].job_function_list.function
-
-            const keywords = `${encodeURIComponent(job_func)}`;
-            const baseURL = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://newsdata.io/api/1/news?apikey=pub_27949b722706632bfadee3b38de0956a3f91a&q=${keywords}`;
-
-            await axios.get(baseURL)
-                .then(response => {
-                    setNewsContent(response.data['results'])
-                    console.log(newsContent)
+        let temp_gpt = gptMessages
+        temp_gpt.push({
+            "role": "user", "content": userText
+        })
+        await interactWithAssistant(temp_gpt).then((res) => {
+            temp_gpt.push({
+                "role": "assistant", "content": res.content
+            })
+            temp_msg.push(
+                new Message({
+                    id: 1,
+                    message: res.content
                 })
-                .catch(error => {
-                    console.error('Error fetching data:', error);
-                })
+            )
+            setMessages(temp_msg)
+            setGPTMessages(temp_gpt)
+            setIsSearching(false)
+        })
 
-        }
-
-        // getData()
-
-    }, [])
+    }
 
     async function generateCoverLetter() {
         setIsGenerating(true)
@@ -144,6 +123,9 @@ function ExploreJob() {
                         <h6 className="description_apply_button_text">Apply Now</h6>
                     </button>
                 </div>
+
+
+
             </div>
             <div className="generate_cv_container">
                 <h5 className="generate_cv_text">Craft an AI-imbued cover letter aligning experience with the job description. <br /> Generate AI-infused resume bullet points to match job requisites.</h5>
@@ -156,9 +138,26 @@ function ExploreJob() {
                 </Dropdown>
             </div>
             <div style={{ flexDirection: 'row', display: 'flex' }}>
-                {/* <div className="generate_courses_container">
-                    <h5 className="content_header_text">Get relevant experience</h5>
-                </div> */}
+                <div className="generate_courses_container">
+                    <h5 className="content_header_text">Crewmate Virtual Assistant</h5>
+                    <ChatFeed
+                        messages={messsages} // Array: list of message objects
+                        isTyping={isSearching} // Boolean: is the recipient typing
+                        hasInputField={false} // Boolean: use our input, or use your own
+                        showSenderName // show the name of the user who sent the message
+                        bubblesCentered={false} //Boolean should the bubbles be centered in the feed?
+                        bubbleStyles={
+                            {
+                                text: {
+                                    fontSize: 18,
+                                    textAlign: 'left'
+                                },
+                            }
+                        }
+                    // JSON: Custom bubble styles
+                    />
+                    <SearchBar isInputField={true} sendMessage={sendMessage} />
+                </div>
                 {/* <div className="generate_content_container">
                     <div className="content_header_info">
                         <h5 className="content_header_text">Culture of this industry</h5>

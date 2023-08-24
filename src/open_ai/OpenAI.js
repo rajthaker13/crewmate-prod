@@ -11,6 +11,15 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
+export async function interactWithAssistant(messageData) {
+    const response = await openai.createChatCompletion({
+        model: 'gpt-3.5-turbo',
+        messages: messageData,
+        max_tokens: 1000,
+    })
+    return response.data.choices[0].message
+}
+
 export async function createResumeText(job, userData) {
     let work_experience = []
     let companies = []
