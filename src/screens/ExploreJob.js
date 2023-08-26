@@ -123,9 +123,6 @@ function ExploreJob() {
                         <h6 className="description_apply_button_text">Apply Now</h6>
                     </button>
                 </div>
-
-
-
             </div>
             <div className="generate_cv_container">
                 <h5 className="generate_cv_text">Craft an AI-imbued cover letter aligning experience with the job description. <br /> Generate AI-infused resume bullet points to match job requisites.</h5>
@@ -158,31 +155,6 @@ function ExploreJob() {
                     />
                     <SearchBar isInputField={true} sendMessage={sendMessage} />
                 </div>
-                {/* <div className="generate_content_container">
-                    <div className="content_header_info">
-                        <h5 className="content_header_text">Culture of this industry</h5>
-                    </div>
-                    <div style={{ overflowY: 'auto' }}>
-                        {newsContent.map((news) => {
-                            return (
-                                <div className="content_container" onClick={() => {
-                                    window.open(
-                                        news.link,
-                                        '_blank'
-                                    );
-                                }}>
-                                    <img src={news.image_url} className="content_img" onError={({ currentTarget }) => {
-                                        currentTarget.onerror = null; // prevents looping
-                                        currentTarget.src = require('../assets/news-default.png');
-                                    }} />
-                                    <div className="content_title_container">
-                                        <h5 className="content_title_text_description">{news.title}</h5>
-                                    </div>
-                                </div>
-                            )
-                        })}
-                    </div>
-                </div> */}
             </div>
 
         </div>

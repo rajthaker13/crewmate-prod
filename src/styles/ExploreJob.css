@@ -220,6 +220,7 @@
     flex-shrink: 0;
     margin-left: 5%;
     object-fit: contain;
+    align-self: center;
 
 }
 

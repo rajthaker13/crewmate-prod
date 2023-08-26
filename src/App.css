@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   background-color: #0c0f1f;
-  background: url('./assets/black-backdrop-2.gif'), lightgray 50% / cover no-repeat;
+  background: url('./assets/black-backdrop-3.gif'), lightgray 50% / cover no-repeat;
   height: auto;
   min-width: 100vw;
   overflow: auto;

@@ -140,7 +140,6 @@ function Login() {
             </div>
             <div className="job_card_slide_container">
                 <div className="ticker-track">
-
                     {sampleJobs.map((job, index) => {
                         return (
                             <JobCard key={index} job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
@@ -150,7 +149,6 @@ function Login() {
                     {sampleJobs.map((job, index) => {
                         return (
                             <JobCard key={index + sampleJobs.length} job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
-
                         )
                     })}
                 </div>
