@@ -1,14 +1,16 @@
 .App {
   text-align: center;
-  background-image: url('./assets/black-backdrop-2.gif');
-  /* background-color: red; */
+  background-color: #0c0f1f;
+  background: url('./assets/black-backdrop-3.gif'), lightgray 50% / cover no-repeat;
   height: auto;
   min-width: 100vw;
-  background-size: cover;
+  overflow: auto;
+  /* background-size: cover; */
   width: 100vw;
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat; */
   flex-direction: column;
   align-content: start;
+  
 }
 
 .App-logo {

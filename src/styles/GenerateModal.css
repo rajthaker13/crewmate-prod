@@ -1,0 +1,109 @@
+@font-face {
+    font-family: 'Jura';
+    src: url('../styles/fonts/Jura/static/Jura-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Jura';
+    src: url('../styles/fonts/Jura/static/Jura-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+.generate_modal_container {
+    flex-shrink: 0;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(82, 113, 196, 0.05) 0%, rgba(83, 113, 196, 0.05) 11.79%, rgba(87, 115, 198, 0.05) 21.38%, rgba(93, 116, 200, 0.05) 29.12%, rgba(101, 119, 203, 0.05) 35.34%, rgba(110, 122, 207, 0.05) 40.37%, rgba(121, 125, 211, 0.05) 44.56%, rgba(133, 129, 215, 0.05) 48.24%, rgba(145, 133, 220, 0.05) 51.76%, rgba(159, 137, 225, 0.05) 55.44%, rgba(172, 141, 230, 0.05) 59.63%, rgba(186, 145, 235, 0.05) 64.66%, rgba(199, 150, 240, 0.05) 70.88%, rgba(212, 154, 245, 0.05) 78.62%, rgba(225, 157, 250, 0.05) 88.21%, rgba(236, 161, 254, 0.05) 100%);
+    backdrop-filter: blur(1000px);
+    z-index: 2;
+    display: flex;
+    position: fixed;
+    width: 35%;
+    height: 50%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 80vh;
+    flex-direction: column;
+}
+
+.x_icon_generate {
+    margin-left: 90%;
+    margin-top: 2%;
+}
+
+.generate_modal_header {
+    color: #FFF;
+    text-align: center;
+    font-family: 'Jura';
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.48px;
+
+}
+
+.generate_text_container {
+    margin-top: 2vh;
+    align-self: center;
+    width: 30vw;
+    height: 55vh;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.generate_text_input {
+    width: 30vw;
+    height: 55vh;
+    flex-shrink: 0;
+    color: rgba(255, 255, 255, 0.80);
+    text-overflow: ellipsis;
+    font-family: Jura;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 166.667%;
+    letter-spacing: 0.24px;
+    background-color: transparent;
+}
+
+.generate_button_row_container {
+    margin-top: 5%;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.generate_copy_text_button {
+    margin-right: 2%;
+    width: 140px;
+    height: 40px;
+    flex-shrink: 0; 
+    border-radius: 8px;
+    background: linear-gradient(135deg, #7B3AFD 0%, #C962ED 100%);
+}
+
+.generate_regen_button {
+    width: 140px;
+    height: 40px;
+    flex-shrink: 0; 
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(82, 113, 196, 0.10) 0%, rgba(83, 113, 196, 0.10) 11.79%, rgba(87, 115, 198, 0.10) 21.38%, rgba(93, 116, 200, 0.10) 29.12%, rgba(101, 119, 203, 0.10) 35.34%, rgba(110, 122, 207, 0.10) 40.37%, rgba(121, 125, 211, 0.10) 44.56%, rgba(133, 129, 215, 0.10) 48.24%, rgba(145, 133, 220, 0.10) 51.76%, rgba(159, 137, 225, 0.10) 55.44%, rgba(172, 141, 230, 0.10) 59.63%, rgba(186, 145, 235, 0.10) 64.66%, rgba(199, 150, 240, 0.10) 70.88%, rgba(212, 154, 245, 0.10) 78.62%, rgba(225, 157, 250, 0.10) 88.21%, rgba(236, 161, 254, 0.10) 100%);
+}
+
+.generate_button_actions_text {
+    color: #FFF;
+    text-align: center;
+    font-family: 'Jura';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.32px;
+}

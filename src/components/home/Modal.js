@@ -5,7 +5,7 @@ import "../../styles/Modal.css"
 import axios from 'axios'
 
 
-function Modal({ setOpenModal, isSearchingModal = false }) {
+function Modal({ setOpenModal, isSearchingModal = false, text = "Generating Jobs..." }) {
     const [url, setUrl] = useState('')
 
     async function handleInput() {
@@ -55,7 +55,7 @@ function Modal({ setOpenModal, isSearchingModal = false }) {
             {isSearchingModal ?
                 <div className="modal">
                     <div className="modal-content">
-                        <h2>Generating Response...</h2>
+                        <h2>{text}</h2>
                     </div>
                 </div>
 

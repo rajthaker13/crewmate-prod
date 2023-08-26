@@ -11,12 +11,19 @@ import linkedin from 'react-linkedin-login-oauth2/assets/linkedin.png';
 import { getFunctions, httpsCallable } from 'firebase/functions'
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { LinkedInLogo } from "../components/common/LinkedInLogo";
+import sample from '../data/sample.json'
+import JobCard from "../components/common/JobCard";
+import Ticker from 'react-ticker'
+
 
 
 function Login() {
     const [state, dispatch] = useStateValue();
     const [authCode, setAuthCode] = useState('')
     const [userToken, setUserToken] = useState('')
+    const [sampleJobs, setSampleJobs] = useState(sample)
+    const [tickerPosition, setTickerPosition] = useState(0);
 
     const { linkedInLogin } = useLinkedIn({
         clientId: `${process.env.REACT_APP_LINKEDIN_CLIENT_ID}`,
@@ -103,42 +110,80 @@ function Login() {
         }
 
     }
+    useEffect(() => {
+        const tickerInterval = setInterval(() => {
+            setTickerPosition((prevPosition) => (prevPosition + 1) % sampleJobs.length);
+        }, 8000); // Adjust the interval for slower movement
+
+        return () => {
+            clearInterval(tickerInterval);
+        };
+    }, [sampleJobs.length]);
 
 
     return (
         <div className="login">
-            <div className="login_container">
-                <img
-                    src={require('../assets/crewmate-logo.png')}
-                    alt="crewmate-emblem"
-                    className="crewmate_image"
-                />
-                <h3 className="login_text">Sign In</h3>
-                <h5 className="login_text">joincrewmate.com</h5>
-                <div style={{ flexDirection: 'row', display: 'inline-flex', }}>
-                    <button className="login_button" onClick={linkedInLogin}>
-                        <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '5vh', minWidth: '20vw', justifyContent: 'left' }}>
-                            <img src={require("../assets/linkedin-icon.png")} className="login_icon" ></img>
-                            <h5 className="login_text_button">Continue with LinkedIn</h5>
-                        </div>
-                    </button>
-                </div>
-                <div style={{ flexDirection: 'row', display: 'inline-flex', }}>
-                    <button className="login_button" onClick={() => {
-                        dispatch({
-                            type: actionTypes.SET_GUEST,
-                            guestView: true,
-                        });
-                    }} style={{ backgroundColor: '#9921e8' }}>
-                        <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '5vh', minWidth: '20vw', justifyContent: 'center' }}>
-                            <h5 className="login_text_button_guest">Continue as Guest</h5>
-                        </div>
+            <div className="login-slide-1 ">
+                <div className="login-text-container">
+                    <h1 className="login-big-text">Search & Upskill</h1>
+                    <h1 className="login-medium-text">for millions of active jobs</h1>
+                    <h1 className="login-small-text">Join our innovative and dynamic IT team based in the heart of Palo Alto. We are a leading technology company. Our mission is to secure and optimize network infrastructure, ensuring seamless connectivity and protecting our clients' valuable data.</h1>
+                    <button className="signIn-button" onClick={linkedInLogin}>
+                        <LinkedInLogo />
+                        <h5 className="signIn-button-text">Sign Up with LinkedIn</h5>
                     </button>
                 </div>
 
+                <div className="login-slide-1-pic-cont">
+                    <img className="ss1" src={require('../assets/upskill.png')}></img>
+                </div>
+            </div>
+            <div className="job_card_slide_container">
+                <div className="ticker-track">
+                    {sampleJobs.map((job, index) => {
+                        return (
+                            <JobCard key={index} job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
 
+                        )
+                    })}
+                    {sampleJobs.map((job, index) => {
+                        return (
+                            <JobCard key={index + sampleJobs.length} job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
+                        )
+                    })}
+                </div>
 
             </div>
+
+            <div className="login-slide-1 ">
+                <div className="login-slide-2-pic-cont">
+                    <img className="ss1" src={require('../assets/search.png')}></img>
+                </div>
+                <div className="login-text-container">
+                    <h1 className="login-big-text-2">AI-powered Job Search</h1>
+                    <h1 className="login-small-text-2">Find millions of active jobs that fit your experience and interests using generative search prompting.</h1>
+                </div>
+            </div>
+
+            <div className="login-slide-1 ">
+                <div className="new-text-container-new">
+                    <h1 className="login-big-text-2">Explore & Upskill for the job you love</h1>
+                    <h1 className="login-small-text-2">Explore the path to receive a job through curated certificates and online resources based on positions you’re interested in.</h1>
+                </div>
+                <div className="login-slide-2-pic-cont">
+                    <img className="ss1" src={require('../assets/upskill.png')}></img>
+                </div>
+            </div>
+            <div className="login-slide-1 ">
+                <div className="login-slide-2-pic-cont">
+                    <img className="ss1" src={require('../assets/crew.png')}></img>
+                </div>
+                <div className="login-text-container">
+                    <h1 className="login-big-text-2">Meet your Crew & Companies</h1>
+                    <h1 className="login-small-text-2">Join talent communities for your favorite companies to meet other applicants while getting access to hiring events, recruiters, and more!</h1>
+                </div>
+            </div>
+
         </div>
 
     );

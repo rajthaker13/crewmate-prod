@@ -15,12 +15,14 @@ import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "fir
 import Modal from "../components/home/Modal";
 import { createCheckoutSession } from "../stripe/createCheckoutSession";
 import usePremiumStatus from "../stripe/usePremiumStatus";
+import { useLocation, useNavigate } from "react-router-dom";
+import '../styles/SearchBar.css'
 
 
 
 function Home() {
-    const [state, dispatch] = useStateValue();
-    const [jobRecs, setJobRecs] = useState([])
+    const { state } = useLocation();
+    const [jobRecs, setJobRecs] = useState(state ? state.jobRecs : [])
     const [experienceRecs, setExperienceRecs] = useState([])
     const [profileRec, setProfileRec] = useState([])
     const [isSearching, setIsSearching] = useState(false)
@@ -65,10 +67,24 @@ function Home() {
         <div style={{ height: '88vh' }}>
             {isSearching && <Modal setOpenModal={setOpenModal} isSearchingModal={true} />}
             {openModal && <Modal setOpenModal={setOpenModal} />}
-            <SearchBar setJobRecs={setJobRecs} setIsSearching={setIsSearching} isSearching={isSearching} setProfileRec={setProfileRec} experience={experience} setExperienceRecs={setExperienceRecs} location={location} />
+            <div className="search-bar-container ">
+                <h2 className="search-bar-container-header">Search: Job opportunities, internships and more</h2>
+                <SearchBar setJobRecs={setJobRecs} setIsSearching={setIsSearching} isSearching={isSearching} setProfileRec={setProfileRec} experience={experience} setExperienceRecs={setExperienceRecs} location={location} />
+                <div className="search-bar-container-enter-text">
+                    <h5>Press Enter <span className="">to search</span></h5>
+                </div>
+
+            </div>
+
             <div style={{ display: 'inline-flex', marginTop: '5vh' }}>
-                <Bucket isFirstBucket={true} jobRecs={jobRecs} isSearching={isSearching} experienceRecs={experienceRecs} />
-                {!state.guestView && <Bucket profileRec={profileRec} isSearching={isSearching} />}
+                {jobRecs && jobRecs.map((job, index) => {
+                    return (
+                        <JobCard job={job} index={index} xs={80} isSearching={isSearching} jobRecs={jobRecs} />
+
+                    )
+                })}
+                {/* <Bucket isFirstBucket={true} jobRecs={jobRecs} isSearching={isSearching} experienceRecs={experienceRecs} /> */}
+                {/* {!state.guestView && <Bucket profileRec={profileRec} isSearching={isSearching} />} */}
             </div>
             {/* <button onClick={() => { createCheckoutSession(auth.currentUser.uid) }}></button> */}
         </div >

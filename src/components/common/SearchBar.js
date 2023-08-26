@@ -17,7 +17,10 @@ const SearchBar = (props) => {
     const [response, setResponse] = useState([])
 
     const handleClick = () => {
-        setExpanded(!expanded);
+        if (!props.isInputField) {
+            setExpanded(!expanded);
+        }
+
     };
 
     const handleClickAway = () => {
@@ -25,69 +28,68 @@ const SearchBar = (props) => {
     }
 
     async function chatGPTDude() {
-        props.setIsSearching(true)
-        const link = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://us-central1-crewmate-prod.cloudfunctions.net/getJobRec`
-        const experienceText = "I am looking for jobs in " + props.location + " and I want the job to do this: " + userText + " and this is my Prior Work Experience of user: " + props.experience
-        const input = userText + " in " + props.location
-
-        let email
-        if (!auth.currentUser) {
-            email = 'guest'
+        if (props.isInputField) {
+            setUserText('')
+            props.sendMessage(userText)
         }
         else {
-            email = auth.currentUser.email
-        }
+            props.setIsSearching(true)
+            const link = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://us-central1-crewmate-prod.cloudfunctions.net/getJobRec`
+            const experienceText = "I am looking for jobs in " + props.location + " and I want the job to do this: " + userText + " and this is my Prior Work Experience of user: " + props.experience
+            const input = userText + " in " + props.location
 
-        const userRef = doc(db, "users", email)
-        const userSnap = await getDoc(userRef)
-
-        if (userSnap.exists()) {
-            let prompts = userSnap.data()['userPrompts'];
-            if (prompts) {
-                prompts.push(userText)
-                await updateDoc(userRef, {
-                    userPrompts: prompts
-                })
+            let email
+            if (!auth.currentUser) {
+                email = 'guest'
             }
             else {
-                await updateDoc(userRef, {
-                    userPrompts: [userText]
-                })
+                email = auth.currentUser.email
             }
 
+            const userRef = doc(db, "users", email)
+            const userSnap = await getDoc(userRef)
+
+            if (userSnap.exists()) {
+                let prompts = userSnap.data()['userPrompts'];
+                if (prompts) {
+                    prompts.push(userText)
+                    await updateDoc(userRef, {
+                        userPrompts: prompts
+                    })
+                }
+                else {
+                    await updateDoc(userRef, {
+                        userPrompts: [userText]
+                    })
+                }
+
+            }
+
+            await axios.post(link, { text: input }, { headers: { 'Content-Type': 'application/json' } }).then(async (res) => {
+                props.setJobRecs(res.data)
+                console.log(res.data)
+            })
+            props.setIsSearching(false)
         }
 
-        await axios.post(link, { text: input }, { headers: { 'Content-Type': 'application/json' } }).then(async (res) => {
-            props.setJobRecs(res.data)
-        })
-        props.setIsSearching(false)
-        if (!state.guestView) {
-            await axios.post(link, { text: experienceText }, { headers: { 'Content-Type': 'application/json' } }).then(async (res) => {
-                props.setExperienceRecs(res.data)
-            })
-            await getCrewmateReccomendation(userText).then((res) => {
-                props.setProfileRec(res)
-            })
-        }
     }
 
     return (
         <ClickAwayListener onClickAway={handleClickAway}>
             <div
                 className={`search-bar ${expanded ? 'expanded' : ''}`}
-                style={{ backgroundColor: '#121212', outlineWidth: '10px', outlineColor: '#9E9E9E' }}
+                style={{ backgroundColor: 'rgba(0, 0, 0, 0.10)', borderWidth: '20px', outlineColor: '#9E9E9E', marginLeft: props.isInputField ? '0%' : '3%' }}
             >
-                <textarea placeholder={expanded ? '' : "    Ex: I'm interested in internships, have a computer science and finance double major and love energy/fintech/travel. Then press Enter to submit."} rows={expanded ? 3 : 1} onClick={handleClick} style={{ backgroundColor: '#121212', borderWidth: 0, width: '100vw', color: 'white', fontFamily: 'Verdana, Arial, Helvetica, sans-serif' }} value={userText} onChange={(e) => { setUserText(e.target.value) }}
+                {!props.isInputField && <button onClick={async () => { await chatGPTDude() }}>
+                    <FaSearch color='#9E89E1' size={25} />
+                </button>}
+
+                <textarea placeholder={expanded ? '' : props.isInputField ? "Type a message to Crewmate's Virtual Assistant" : "Type a few sentences about yourself, your goals, your interests, and what type of opportunities you are looking for here..."} rows={expanded ? 3 : 1} onClick={handleClick} className='search-bar-input-new' value={userText} onChange={(e) => { setUserText(e.target.value) }}
                     onKeyDown={async (e) => {
                         if (e.key === 'Enter' && !e.shiftKey) {
                             await chatGPTDude()
                         }
-
-
                     }} />
-                <button onClick={async () => { await chatGPTDude() }}>
-                    <FaSearch color='#8C52FF' size={25} />
-                </button>
             </div>
         </ClickAwayListener>
     );
