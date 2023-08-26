@@ -83,10 +83,7 @@ function Home() {
 
                     )
                 })}
-                {/* <Bucket isFirstBucket={true} jobRecs={jobRecs} isSearching={isSearching} experienceRecs={experienceRecs} /> */}
-                {/* {!state.guestView && <Bucket profileRec={profileRec} isSearching={isSearching} />} */}
             </div>
-            {/* <button onClick={() => { createCheckoutSession(auth.currentUser.uid) }}></button> */}
         </div >
 
     );
