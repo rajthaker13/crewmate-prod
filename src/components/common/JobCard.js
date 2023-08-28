@@ -208,7 +208,8 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, 
             state: {
                 job: job,
                 pfp: pfp,
-                jobRecs: jobRecs
+                jobRecs: jobRecs,
+                isMobile: isMobile
             },
         })
 

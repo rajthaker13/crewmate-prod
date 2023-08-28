@@ -16,6 +16,7 @@ function ExploreJob() {
     const { state } = useLocation();
     const [job, setJob] = useState(state.job)
     const [pic, setPic] = useState(state.pfp)
+    const [isMobile, setIsMobile] = useState(state.isMobile)
     const [jobRecs, setJobRecs] = useState(state.jobRecs)
     const [jobSaved, setJobSaved] = useState(false)
     const [isGenerating, setIsGenerating] = useState(false)
@@ -144,85 +145,170 @@ function ExploreJob() {
 
     }
     return (
-        <div style={{ height: '88vh', }}>
-            {isGenerating && <GenerateModal isGeneratingResume={isGeneratingResume} isGeneratingCover={isGeneratingCover} job={job} setIsGenerating={setIsGenerating} setIsGeneratingCover={setIsGeneratingCover} setIsGeneratingResume={setIsGeneratingResume} />}
-            <div className="back-button-cont" onClick={goBack}>
-                <BackIcon />
-                <h5 className="back-button-text ">{jobRecs ? 'Back to Search' : 'Back to Saved Jobs'}</h5>
-            </div>
-            <div className="description_container">
-                <div className="description_job_info">
-                    <img src={pic} className="description_icon" onError={({ currentTarget }) => {
-                        currentTarget.onerror = null; // prevents looping
-                        currentTarget.src = require('../assets/crewmate-emblem.png');
-                    }}></img>
-                    <div className="description_job_title">
-                        <h4 className="description_job_title_heading">{`${job.title} @ ${job.company_name}`}</h4>
+        <div>
+            {!isMobile && <div style={{ height: '88vh', }}>
+                {isGenerating && <GenerateModal isGeneratingResume={isGeneratingResume} isGeneratingCover={isGeneratingCover} job={job} setIsGenerating={setIsGenerating} setIsGeneratingCover={setIsGeneratingCover} setIsGeneratingResume={setIsGeneratingResume} />}
+                <div className="back-button-cont" onClick={goBack}>
+                    <BackIcon />
+                    <h5 className="back-button-text ">{jobRecs ? 'Back to Search' : 'Back to Saved Jobs'}</h5>
+                </div>
+                <div className="description_container">
+                    <div className="description_job_info">
+                        <img src={pic} className="description_icon" onError={({ currentTarget }) => {
+                            currentTarget.onerror = null; // prevents looping
+                            currentTarget.src = require('../assets/crewmate-emblem.png');
+                        }}></img>
+                        <div className="description_job_title">
+                            <h4 className="description_job_title_heading">{`${job.title} @ ${job.company_name}`}</h4>
+                        </div>
                     </div>
-                </div>
-                <div className="description_description_cont">
-                    <h5 className="description_text">{job.description}</h5>
-                </div>
-                <div className="description_button_container">
-                    <button className="description_apply_button_container" onClick={() => {
-                        if (job.external_url != null) {
-                            window.open(
-                                job.external_url,
-                                '_blank'
-                            );
-                        }
-                        else {
-                            window.open(
-                                job.redirected_url,
-                                '_blank'
-                            );
-
-                        }
-                    }}>
-                        <h6 className="description_apply_button_text">Apply Now</h6>
-                    </button>
-                    <button className="description_save_button_container" onClick={saveJob}>
-                        <FaBookmark fill={jobSaved ? "#fff" : ''} />
-                        <h6 className="description_save_button_text">{jobSaved ? 'Saved' : 'Save'}</h6>
-                    </button>
-                </div>
-            </div>
-            <div className="generate_cv_container">
-                <h5 className="generate_cv_text">Craft an AI-imbued cover letter aligning experience with the job description. <br /> Generate AI-infused resume bullet points to match job requisites.</h5>
-                <Dropdown>
-                    <Dropdown.Button color='secondary' shadow className="generate_button">Generate</Dropdown.Button>
-                    <Dropdown.Menu color="secondary" variant="shadow" aria-label="Actions">
-                        <Dropdown.Item key="cover" textValue="Generate Cover Letter"><h6 onClick={generateCoverLetter}>Generate Cover Letter</h6></Dropdown.Item>
-                        <Dropdown.Item key="cv" textValue="Generate CV Text"><h6 onClick={generateResumeText}>Generate CV Text</h6></Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-            </div>
-            <div style={{ flexDirection: 'row', display: 'flex' }}>
-                <div className="generate_courses_container">
-                    <h5 className="content_header_text">Crewmate Virtual Assistant</h5>
-                    <ChatFeed
-                        messages={messsages} // Array: list of message objects
-                        isTyping={isSearching} // Boolean: is the recipient typing
-                        hasInputField={false} // Boolean: use our input, or use your own
-                        showSenderName // show the name of the user who sent the message
-                        bubblesCentered={false} //Boolean should the bubbles be centered in the feed?
-                        bubbleStyles={
-                            {
-                                text: {
-                                    fontSize: 18,
-                                    textAlign: 'left'
-                                },
+                    <div className="description_description_cont">
+                        <h5 className="description_text">{job.description}</h5>
+                    </div>
+                    <div className="description_button_container">
+                        <button className="description_apply_button_container" onClick={() => {
+                            if (job.external_url != null) {
+                                window.open(
+                                    job.external_url,
+                                    '_blank'
+                                );
                             }
-                        }
-                    />
-                    <SearchBar isInputField={true} sendMessage={sendMessage} />
-                    <div className="explore-enter-text">
-                        <h5>Press Enter <span className="">to send message</span></h5>
+                            else {
+                                window.open(
+                                    job.redirected_url,
+                                    '_blank'
+                                );
+
+                            }
+                        }}>
+                            <h6 className="description_apply_button_text">Apply Now</h6>
+                        </button>
+                        <button className="description_save_button_container" onClick={saveJob}>
+                            <FaBookmark fill={jobSaved ? "#fff" : ''} />
+                            <h6 className="description_save_button_text">{jobSaved ? 'Saved' : 'Save'}</h6>
+                        </button>
                     </div>
                 </div>
-            </div>
+                <div className="generate_cv_container">
+                    <h5 className="generate_cv_text">Craft an AI-imbued cover letter aligning experience with the job description. <br /> Generate AI-infused resume bullet points to match job requisites.</h5>
+                    <Dropdown>
+                        <Dropdown.Button color='secondary' shadow className="generate_button">Generate</Dropdown.Button>
+                        <Dropdown.Menu color="secondary" variant="shadow" aria-label="Actions">
+                            <Dropdown.Item key="cover" textValue="Generate Cover Letter"><h6 onClick={generateCoverLetter}>Generate Cover Letter</h6></Dropdown.Item>
+                            <Dropdown.Item key="cv" textValue="Generate CV Text"><h6 onClick={generateResumeText}>Generate CV Text</h6></Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </div>
+                <div style={{ flexDirection: 'row', display: 'flex' }}>
+                    <div className="generate_courses_container">
+                        <h5 className="content_header_text">Crewmate Virtual Assistant</h5>
+                        <ChatFeed
+                            messages={messsages} // Array: list of message objects
+                            isTyping={isSearching} // Boolean: is the recipient typing
+                            hasInputField={false} // Boolean: use our input, or use your own
+                            showSenderName // show the name of the user who sent the message
+                            bubblesCentered={false} //Boolean should the bubbles be centered in the feed?
+                            bubbleStyles={
+                                {
+                                    text: {
+                                        fontSize: 18,
+                                        textAlign: 'left'
+                                    },
+                                }
+                            }
+                        />
+                        <SearchBar isInputField={true} sendMessage={sendMessage} />
+                        <div className="explore-enter-text">
+                            <h5>Press Enter <span className="">to send message</span></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>}
+
+            {isMobile && <div style={{ height: 'auto', }}>
+                {isGenerating && <GenerateModal isGeneratingResume={isGeneratingResume} isGeneratingCover={isGeneratingCover} job={job} setIsGenerating={setIsGenerating} setIsGeneratingCover={setIsGeneratingCover} setIsGeneratingResume={setIsGeneratingResume} isMobile={true} />}
+                <div className="back-button-cont" onClick={goBack}>
+                    <BackIcon />
+                    <h5 className="back-button-text ">{jobRecs ? 'Back to Search' : 'Back to Saved Jobs'}</h5>
+                </div>
+                <div className="description_container-mobile">
+                    <div className="description_job_info">
+                        <img src={pic} className="description_icon-mobile" onError={({ currentTarget }) => {
+                            currentTarget.onerror = null; // prevents looping
+                            currentTarget.src = require('../assets/crewmate-emblem.png');
+                        }}></img>
+                        <h4 className="description_job_title_heading-mobile">{`${job.company_name}`}</h4>
+                    </div>
+                    <div className="description_job_title">
+                        <h4 className="description_job_title_heading-2-mobile">{`${job.title} @ ${job.company_name}`}</h4>
+                    </div>
+                    <div className="description_description_cont">
+                        <h5 className="description_text">{job.description}</h5>
+                    </div>
+                    <div className="description_button_container">
+                        <button className="description_apply_button_container-mobile" onClick={() => {
+                            if (job.external_url != null) {
+                                window.open(
+                                    job.external_url,
+                                    '_blank'
+                                );
+                            }
+                            else {
+                                window.open(
+                                    job.redirected_url,
+                                    '_blank'
+                                );
+
+                            }
+                        }}>
+                            <h6 className="description_apply_button_text">Apply Now</h6>
+                        </button>
+                        <button className="description_save_button_container-mobile" onClick={saveJob}>
+                            <FaBookmark fill={jobSaved ? "#fff" : ''} />
+                            <h6 className="description_save_button_text">{jobSaved ? 'Saved' : 'Save'}</h6>
+                        </button>
+                    </div>
+                </div>
+                <div className="generate_cv_container-mobile">
+                    <h5 className="generate_cv_text-mobile">Craft an AI-imbued cover letter aligning experience with the job description. <br /> Generate AI-infused resume bullet points to match job requisites.</h5>
+                    <Dropdown>
+                        <Dropdown.Button color='secondary' shadow className="generate_button-mobile">Generate</Dropdown.Button>
+                        <Dropdown.Menu color="secondary" variant="shadow" aria-label="Actions">
+                            <Dropdown.Item key="cover" textValue="Generate Cover Letter"><h6 onClick={generateCoverLetter}>Generate Cover Letter</h6></Dropdown.Item>
+                            <Dropdown.Item key="cv" textValue="Generate CV Text"><h6 onClick={generateResumeText}>Generate CV Text</h6></Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </div>
+                <div style={{ flexDirection: 'row', display: 'flex' }}>
+                    <div className="generate_courses_container">
+                        <h5 className="content_header_text">Crewmate Virtual Assistant</h5>
+                        <ChatFeed
+                            messages={messsages} // Array: list of message objects
+                            isTyping={isSearching} // Boolean: is the recipient typing
+                            hasInputField={false} // Boolean: use our input, or use your own
+                            showSenderName // show the name of the user who sent the message
+                            bubblesCentered={false} //Boolean should the bubbles be centered in the feed?
+                            bubbleStyles={
+                                {
+                                    text: {
+                                        fontSize: 14,
+                                        textAlign: 'left'
+                                    },
+                                }
+                            }
+                        />
+                        <SearchBar isInputField={true} sendMessage={sendMessage} />
+                        <div className="explore-enter-text">
+                            <h5>Press Enter <span className="">to send message</span></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>}
+
 
         </div>
+
+
     )
 }
 
