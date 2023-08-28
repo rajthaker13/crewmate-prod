@@ -15,6 +15,7 @@ const SearchBar = (props) => {
     const [embeddings, setEmbeddings] = useState([])
     const [userText, setUserText] = useState('')
     const [response, setResponse] = useState([])
+    const [isMobile, setIsMobile] = useState(props.isMobile)
 
     const handleClick = () => {
         if (!props.isInputField) {
@@ -77,21 +78,21 @@ const SearchBar = (props) => {
     return (
         <ClickAwayListener onClickAway={handleClickAway}>
             <div
-                className={`search-bar ${expanded ? 'expanded' : ''}`}
+                className={isMobile ? `search-bar-mobile ${expanded ? 'expanded' : ''}` : `search-bar ${expanded ? 'expanded' : ''}`}
                 style={{ backgroundColor: 'rgba(0, 0, 0, 0.10)', borderWidth: '20px', outlineColor: '#9E9E9E', marginLeft: props.isInputField ? '0%' : '3%' }}
             >
                 {!props.isInputField && <button onClick={async () => { await chatGPTDude() }}>
                     <FaSearch color='#9E89E1' size={25} />
                 </button>}
 
-                <textarea placeholder={expanded ? '' : props.isInputField ? "Type a message to Crewmate's Virtual Assistant" : "Type a few sentences about yourself, your goals, your interests, and what type of opportunities you are looking for here..."} rows={expanded ? 3 : 1} onClick={handleClick} className='search-bar-input-new' value={userText} onChange={(e) => { setUserText(e.target.value) }}
+                <textarea placeholder={expanded ? '' : props.isInputField ? "Type a message to Crewmate's Virtual Assistant" : "Type a few sentences about yourself, your goals, your interests, and what type of opportunities you are looking for here..."} rows={expanded ? 3 : 1} onClick={handleClick} className={isMobile ? 'search-bar-input-new-mobile' : 'search-bar-input-new'} value={userText} onChange={(e) => { setUserText(e.target.value) }}
                     onKeyDown={async (e) => {
                         if (e.key === 'Enter' && !e.shiftKey) {
                             await chatGPTDude()
                         }
                     }} />
             </div>
-        </ClickAwayListener>
+        </ClickAwayListener >
     );
 };
 

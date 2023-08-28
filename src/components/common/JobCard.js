@@ -6,7 +6,7 @@ import '../../styles/JobCard.css'
 import { FaBookmark } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
-export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, jobRecs }) {
+export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, jobRecs, isMobile, loggedIn }) {
     const [pfp, setPfp] = useState('')
     const [jobSaved, setJobSaved] = useState(false)
     const [companyWaitlisted, setCompanyWaitlisted] = useState(false)
@@ -208,14 +208,15 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, 
             state: {
                 job: job,
                 pfp: pfp,
-                jobRecs: jobRecs
+                jobRecs: jobRecs,
+                isMobile: isMobile
             },
         })
 
     }
 
     return (
-        <div className="card" >
+        <div className={isMobile && loggedIn ? "card-mobile" : "card"} >
             <div style={{ flexDirection: 'row', display: 'flex', minHeight: '9vh' }}>
                 <img className="profile_icon" src={job.src ? require(`../../assets/demo/${job.src}`) : pfp} style={{ height: '50px', width: '50px' }} onError={({ currentTarget }) => {
                     currentTarget.onerror = null; // prevents looping
@@ -228,7 +229,7 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, 
                     <h6 className="company_information_container_text">{job.location}</h6>
                 </div>
             </div>
-            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '7vh', maxHeight: '7vh', minWidth: 'auto' }}>
+            <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '10vh', maxHeight: '10vh', minWidth: 'auto' }}>
                 <h4 className="job_title" style={{ height: 'auto', minHeight: '3vh' }}>{job.title}</h4>
             </div>
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '10vh', maxHeight: '10vh' }}>

@@ -46,7 +46,28 @@ function App() {
         </div>
       </BrowserView >
       <MobileView>
-        <h1>Check us out on Web! Coming soon to mobile...</h1>
+        <div className="App">
+          <Router>
+            {!user && !guestView ? (
+              <>
+                <Header guest={true} mobile={true} />
+                <Routes>
+                  <Route exact path="/linkedin" element={<LinkedInCallback />} />
+                  <Route path="/" element={<Login mobile={true} />} />
+                </Routes>
+              </>
+            ) : (
+              <>
+                <Header guest={false} mobile={true} />
+                <Routes>
+                  <Route path="/" element={<Home mobile={true} />} />
+                  <Route path="/explore" element={<ExploreJob mobile={true} />} />
+                  <Route path="/pathways" element={<Pathways mobile={true} />} />
+                </Routes>
+              </>
+            )}
+          </Router>
+        </div>
       </MobileView>
     </>
 

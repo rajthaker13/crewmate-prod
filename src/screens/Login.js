@@ -14,12 +14,14 @@ import JobCard from "../components/common/JobCard";
 
 
 
-function Login() {
+function Login(props) {
     const [state, dispatch] = useStateValue();
     const [authCode, setAuthCode] = useState('')
     const [userToken, setUserToken] = useState('')
     const [sampleJobs, setSampleJobs] = useState(sample)
     const [tickerPosition, setTickerPosition] = useState(0);
+    const [isMobile, setIsMobile] = useState(props.mobile)
+    const [isLoggingIn, setIsLoggingIn] = useState(false)
 
     const { linkedInLogin } = useLinkedIn({
         clientId: `${process.env.REACT_APP_LINKEDIN_CLIENT_ID}`,
@@ -34,6 +36,11 @@ function Login() {
             console.log(error);
         },
     });
+
+    async function login() {
+        setIsLoggingIn(true)
+        linkedInLogin()
+    }
 
     async function getUserAccessToken(code) {
         const link_temp = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://www.linkedin.com/oauth/v2/accessToken?code=${code}&grant_type=authorization_code&client_id=${process.env.REACT_APP_LINKEDIN_CLIENT_ID}&client_secret=${process.env.REACT_APP_LINKEDIN_SECRET_ID}&redirect_uri=${window.location.origin}/linkedin`
@@ -107,87 +114,150 @@ function Login() {
 
     }
     useEffect(() => {
-        const tickerInterval = setInterval(() => {
-            setTickerPosition((prevPosition) => (prevPosition + 1) % sampleJobs.length);
-        }, 8000); // Adjust the interval for slower movement
+        if (!isLoggingIn) {
+            const tickerInterval = setInterval(() => {
+                setTickerPosition((prevPosition) => (prevPosition + 1) % sampleJobs.length);
+            }, 8000); // Adjust the interval for slower movement
 
-        return () => {
-            clearInterval(tickerInterval);
-        };
-    }, [sampleJobs.length]);
+            return () => {
+                clearInterval(tickerInterval);
+            };
+
+        }
+    }, [sampleJobs.length, isLoggingIn]);
 
 
     return (
-        <div className="login">
-            <div className="login-slide-1 ">
-                <div className="login-text-container">
-                    <h1 className="login-big-text">Search & Upskill</h1>
-                    <h1 className="login-medium-text">for millions of active jobs</h1>
-                    <h1 className="login-small-text">Join our innovative and dynamic career planning platform. Our mission is to help applicants find their passions and get in touch with recruiters using the power of AI.</h1>
-                    <button className="signIn-button" onClick={linkedInLogin}>
-                        <LinkedInLogo />
-                        <h5 className="signIn-button-text">Sign Up with LinkedIn</h5>
-                    </button>
+        <div>
+            {!isMobile && <div className="login">
+                <div className="login-slide-1">
+                    <div className="login-text-container">
+                        <h1 className="login-big-text">Search & Upskill</h1>
+                        <h1 className="login-medium-text">for millions of active jobs</h1>
+                        <h1 className="login-small-text">Join our innovative and dynamic career planning platform. Our mission is to help applicants find their passions and get in touch with recruiters using the power of AI.</h1>
+                        <button className="signIn-button" onClick={login}>
+                            <LinkedInLogo />
+                            <h5 className="signIn-button-text">Sign Up with LinkedIn</h5>
+                        </button>
+                    </div>
+
+                    <div className="login-slide-1-pic-cont">
+                        <img className="ss1" src={require('../assets/upskill.png')}></img>
+                    </div>
+                </div>
+                <div className="job_card_slide_container">
+                    <div className="ticker-track">
+                        {sampleJobs.map((job, index) => {
+                            return (
+                                <JobCard key={index} job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
+
+                            )
+                        })}
+                        {sampleJobs.map((job, index) => {
+                            return (
+                                <JobCard key={index + sampleJobs.length} job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
+                            )
+                        })}
+                    </div>
+
+                </div>
+                <div className="login-slide-1 ">
+                    <div className="login-slide-2-pic-cont">
+                        <img className="ss1" src={require('../assets/search.png')}></img>
+                    </div>
+                    <div className="login-text-container">
+                        <h1 className="login-big-text-2">AI-powered Job Search</h1>
+                        <h1 className="login-small-text-2">Find millions of active jobs that fit your experience and interests using generative search prompting.</h1>
+                    </div>
                 </div>
 
-                <div className="login-slide-1-pic-cont">
-                    <img className="ss1" src={require('../assets/upskill.png')}></img>
+                <div className="login-slide-1 ">
+                    <div className="new-text-container-new">
+                        <h1 className="login-big-text-2">Explore & Upskill for the job you love</h1>
+                        <h1 className="login-small-text-2">Explore the path to receive a job through curated certificates and online resources based on positions you’re interested in.</h1>
+                    </div>
+                    <div className="login-slide-2-pic-cont">
+                        <img className="ss1" src={require('../assets/upskill.png')}></img>
+                    </div>
                 </div>
-            </div>
-            <div className="job_card_slide_container">
-                <div className="ticker-track">
-                    {sampleJobs.map((job, index) => {
-                        return (
-                            <JobCard key={index} job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
+                <div className="login-slide-1 ">
+                    <div className="login-slide-2-pic-cont">
+                        <img className="ss1" src={require('../assets/crew.png')}></img>
+                    </div>
+                    <div className="login-text-container">
+                        <h1 className="login-big-text-2">Meet your Crew & Companies</h1>
+                        <h1 className="login-small-text-2">Join talent communities for your favorite companies to meet other applicants while getting access to hiring events, recruiters, and more!</h1>
+                    </div>
+                </div>
+                <div className="footer-container">
+                    <div className="footer-content-container">
+                        <img src={require('../assets/group3Gang.png')} className="footer-img" />
+                        <h5 className="footer-text">Crewmate, 2023</h5>
+                    </div>
+                </div>
+            </div>}
+            {isMobile &&
+                <div className="login-mobile">
+                    <div className="login-slide-1-mobile">
+                        <div>
+                            <h1 className="login-big-text-mobile">Search & Upskill</h1>
+                            <h1 className="login-medium-text-mobile">for millions of active jobs</h1>
+                            <div className="login-slide-1-pic-cont-mobile">
+                                <img className="ss1" src={require('../assets/upskill.png')}></img>
+                            </div>
+                            <h1 className="login-small-text-mobile">Join our innovative and dynamic career planning platform. Our mission is to help applicants find their passions and get in touch with recruiters using the power of AI.</h1>
+                            <button className="signIn-button-mobile" onClick={login}>
+                                <LinkedInLogo />
+                                <h5 className="signIn-button-text-mobile">Sign Up with LinkedIn</h5>
+                            </button>
+                        </div>
+                        <div className="job_card_slide_container-mobile">
+                            <div className="ticker-track-mobile">
+                                {sampleJobs.map((job, index) => {
+                                    return (
+                                        <JobCard key={index} job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
 
-                        )
-                    })}
-                    {sampleJobs.map((job, index) => {
-                        return (
-                            <JobCard key={index + sampleJobs.length} job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
-                        )
-                    })}
+                                    )
+                                })}
+                                {sampleJobs.map((job, index) => {
+                                    return (
+                                        <JobCard key={index + sampleJobs.length} job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
+                                    )
+                                })}
+                            </div>
+                        </div>
+                        <div className="login-slide-1-mobile">
+                            <h1 className="login-big-text-2-mobile">AI-powered Job Search</h1>
+                            <div className="login-slide-2-pic-cont-mobile">
+                                <img className="ss1" src={require('../assets/search.png')}></img>
+                            </div>
+                            <h1 className="login-small-text-2-mobile">Find millions of active jobs that fit your experience and interests using generative search prompting.</h1>
+                        </div>
+                        <div className="login-slide-1-mobile">
+                            <h1 className="login-big-text-2-mobile">Explore & Upskill for the job you love</h1>
+                            <div className="login-slide-2-pic-cont-mobile">
+                                <img className="ss1" src={require('../assets/upskill.png')}></img>
+                            </div>
+                            <h1 className="login-small-text-2-mobile">Explore the path to receive a job through curated certificates and online resources based on positions you’re interested in.</h1>
+                        </div>
+                        <div className="footer-container">
+                            <div className="footer-content-container">
+                                <img src={require('../assets/group3Gang.png')} className="footer-img-mobile" />
+                                <h5 className="footer-text">Crewmate, 2023</h5>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
                 </div>
 
-            </div>
-
-            <div className="login-slide-1 ">
-                <div className="login-slide-2-pic-cont">
-                    <img className="ss1" src={require('../assets/search.png')}></img>
-                </div>
-                <div className="login-text-container">
-                    <h1 className="login-big-text-2">AI-powered Job Search</h1>
-                    <h1 className="login-small-text-2">Find millions of active jobs that fit your experience and interests using generative search prompting.</h1>
-                </div>
-            </div>
-
-            <div className="login-slide-1 ">
-                <div className="new-text-container-new">
-                    <h1 className="login-big-text-2">Explore & Upskill for the job you love</h1>
-                    <h1 className="login-small-text-2">Explore the path to receive a job through curated certificates and online resources based on positions you’re interested in.</h1>
-                </div>
-                <div className="login-slide-2-pic-cont">
-                    <img className="ss1" src={require('../assets/upskill.png')}></img>
-                </div>
-            </div>
-            <div className="login-slide-1 ">
-                <div className="login-slide-2-pic-cont">
-                    <img className="ss1" src={require('../assets/crew.png')}></img>
-                </div>
-                <div className="login-text-container">
-                    <h1 className="login-big-text-2">Meet your Crew & Companies</h1>
-                    <h1 className="login-small-text-2">Join talent communities for your favorite companies to meet other applicants while getting access to hiring events, recruiters, and more!</h1>
-                </div>
-            </div>
-            <div className="footer-container">
-                <div className="footer-content-container">
-                    <img src={require('../assets/group3Gang.png')} className="footer-img" />
-                    <h5 className="footer-text">Crewmate, 2023</h5>
-                </div>
-
-            </div>
+            }
 
         </div>
+
+
 
     );
 }

@@ -1,29 +1,16 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { useStateValue } from "../components/utility/StateProvider";
-import backdrop from "../assets/backdrop.gif";
-import sample from '../data/sample.json';
-import { getUserAndProductEmbeddings, getJobRecommendation } from "../open_ai/OpenAI"
-import db, { auth, provider, functions, storage } from '../firebase/firebase';
-import JobCard from "../components/common/JobCard";
-import SearchBar from "../components/common/SearchBar";
-import Bucket from "../components/home/Bucket";
-import profile from '../data/profile.json';
-import axios from 'axios';
-import { getStorage, ref, listAll } from "firebase/storage";
-import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "firebase/firestore";
-import Modal from "../components/home/Modal";
-import { createCheckoutSession } from "../stripe/createCheckoutSession";
+import db, { auth } from '../firebase/firebase';
+import { setDoc, doc, getDoc } from "firebase/firestore";
 import usePremiumStatus from "../stripe/usePremiumStatus";
 import { Table, Row, Col, Tooltip, User, Text } from "@nextui-org/react";
-import { EditIcon } from "../components/pathways/EditIcon"
-import { DeleteIcon } from "../components/pathways/DeleteIcon";
 import { EyeIcon } from "../components/pathways/EyeIcon"
 import { IconButton } from "../components/pathways/IconButton"
 import { StyledBadge } from "../components/pathways/StyledBadge"
 import { useNavigate } from 'react-router-dom';
 
 
-function Pathways() {
+function Pathways(props) {
     const [state, dispatch] = useStateValue();
     const [jobRecs, setJobRecs] = useState([])
     const [experienceRecs, setExperienceRecs] = useState([])
@@ -39,6 +26,7 @@ function Pathways() {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [isLoading, setIsLoading] = useState(true);
+    const [isMobile, setIsMobile] = useState(props.mobile)
     const navigation = useNavigate();
 
     const statusColorMap = {
@@ -98,6 +86,7 @@ function Pathways() {
                                         state: {
                                             job: user.job,
                                             pfp: user.avatar,
+                                            isMobile: isMobile
                                         },
                                     })
                                 }}>

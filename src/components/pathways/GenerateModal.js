@@ -6,7 +6,7 @@ import { createCoverLetter, createResumeText } from "../../open_ai/OpenAI";
 import db, { auth, provider, functions } from '../../firebase/firebase';
 import clipboardCopy from 'clipboard-copy';
 
-function GenerateModal({ isGeneratingResume, isGeneratingCover, job, setIsGenerating, setIsGeneratingCover, setIsGeneratingResume }) {
+function GenerateModal({ isGeneratingResume, isGeneratingCover, job, setIsGenerating, setIsGeneratingCover, setIsGeneratingResume, isMobile }) {
     const [header, setHeader] = useState('')
     const [text, setText] = useState('Generating text, please wait...')
     const [disabled, setDisabled] = useState(true)
@@ -94,7 +94,7 @@ function GenerateModal({ isGeneratingResume, isGeneratingCover, job, setIsGenera
     }
 
     return (
-        <div className="generate_modal_container">
+        <div className={isMobile ? "generate_modal_container-mobile" : "generate_modal_container"}>
             <div onClick={() => {
                 {
                     setIsGeneratingResume(false)
@@ -108,8 +108,8 @@ function GenerateModal({ isGeneratingResume, isGeneratingCover, job, setIsGenera
                 <XIcon />
             </div>
             <h1 className="generate_modal_header">{header}</h1>
-            <div className="generate_text_container">
-                <textarea className="generate_text_input" disabled={disabled} value={text} onChange={(e) => { setText(e.target.value) }} />
+            <div className={isMobile ? "generate_text_container-mobile" : "generate_text_container"}>
+                <textarea className="generate_text_input-mobile" disabled={disabled} value={text} onChange={(e) => { setText(e.target.value) }} />
             </div>
             <div className="generate_button_row_container">
                 <button className="generate_copy_text_button" onClick={copyText} disabled={disabled}>

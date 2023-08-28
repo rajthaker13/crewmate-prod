@@ -10,7 +10,7 @@ import '../styles/SearchBar.css'
 
 
 
-function Home() {
+function Home(props) {
     const { state } = useLocation();
     const [jobRecs, setJobRecs] = useState(state ? state.jobRecs : [])
     const [experienceRecs, setExperienceRecs] = useState([])
@@ -20,6 +20,9 @@ function Home() {
     const [experience, setExperience] = useState('')
     const userIsPremium = usePremiumStatus(auth.currentUser)
     const [location, setLocation] = useState('')
+    const [isMobile, setIsMobile] = useState(props.mobile)
+    const chunkSize = isMobile ? 1 : 5
+
 
     useEffect(() => {
         async function getData() {
@@ -62,24 +65,25 @@ function Home() {
     }
 
     return (
-        <div style={{ height: '88vh' }}>
-            {isSearching && <Modal setOpenModal={setOpenModal} isSearchingModal={true} />}
-            {openModal && <Modal setOpenModal={setOpenModal} />}
-            <div className="search-bar-container ">
-                <h2 className="search-bar-container-header">Search: Job opportunities, internships and more</h2>
-                <SearchBar setJobRecs={setJobRecs} setIsSearching={setIsSearching} isSearching={isSearching} setProfileRec={setProfileRec} experience={experience} setExperienceRecs={setExperienceRecs} location={location} />
-                <div className="search-bar-container-enter-text">
+        <div style={{ minHeight: '88vh' }}>
+            {isSearching && <Modal setOpenModal={setOpenModal} isSearchingModal={true} isMobile={isMobile} />}
+            {openModal && <Modal setOpenModal={setOpenModal} isMobile={isMobile} />}
+            <div className={isMobile ? "search-bar-container-mobile" : "search-bar-container"}>
+                <h2 className={isMobile ? "search-bar-container-header-mobile" : "search-bar-container-header"}>Search: Job opportunities, internships and more</h2>
+                <SearchBar setJobRecs={setJobRecs} setIsSearching={setIsSearching} isSearching={isSearching} setProfileRec={setProfileRec} experience={experience} setExperienceRecs={setExperienceRecs} location={location} isMobile={isMobile} />
+                {!isMobile && <div className="search-bar-container-enter-text">
                     <h5>Press Enter <span className="">to search</span></h5>
-                </div>
+                </div>}
+
 
             </div>
 
             <div style={{ marginTop: '5vh' }}>
-                {jobRecs && chunkArray(jobRecs, 5).map((row, rowIndex) => {
+                {jobRecs && chunkArray(jobRecs, chunkSize).map((row, rowIndex) => {
                     return (
                         <div key={rowIndex} style={{ display: 'flex', marginBottom: '1rem' }}>
                             {row.map((job, index) => (
-                                <JobCard key={index} job={job} index={index} xs={80} isSearching={isSearching} jobRecs={jobRecs} />
+                                <JobCard key={index} job={job} index={index} xs={80} isSearching={isSearching} jobRecs={jobRecs} isMobile={isMobile} loggedIn={true} />
                             ))}
                         </div>
                     )

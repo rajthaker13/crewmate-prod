@@ -5,7 +5,7 @@ import "../../styles/Modal.css"
 import axios from 'axios'
 
 
-function Modal({ setOpenModal, isSearchingModal = false, text = "Generating Jobs..." }) {
+function Modal({ setOpenModal, isSearchingModal = false, text = "Generating Jobs...", isMobile }) {
     const [url, setUrl] = useState('')
 
     async function handleInput() {
@@ -53,25 +53,24 @@ function Modal({ setOpenModal, isSearchingModal = false, text = "Generating Jobs
     return (
         <>
             {isSearchingModal ?
-                <div className="modal">
-                    <div className="modal-content">
-                        <h2>{text}</h2>
-                    </div>
+                <div className={isMobile ? "modal-mobile" : "modal"}>
+                    <h1 className="generate_modal_header">{text}</h1>
                 </div>
-
                 :
-                <div className="modal">
-                    <div className="modal-content">
-                        <h2>Enter your LinkedIn URL</h2>
-                        <div
+                <div className={isMobile ? "modal-mobile" : "modal"}>
+                    <h1 className="generate_modal_header">
+                        Enter your LinkedIn URL
 
-                            style={{ backgroundColor: 'black', outlineWidth: '10px', outlineColor: '#9E9E9E' }}
-                        >
-                            <input type="text" placeholder="https://www.linkedin.com/in/firstNameLastName/" style={{ backgroundColor: 'black', borderWidth: 0, width: '80%', color: 'white', fontFamily: 'Verdana, Arial, Helvetica, sans-serif' }} onChange={(e) => { setUrl(e.target.value) }} />
-                        </div>
-                        <button onClick={handleInput}>Register</button>
+                    </h1>
+                    <div className={isMobile ? "generate_text_container-mobile" : "generate_text_container"}>
+                        <textarea className="generate_text_input-mobile" value={url} onChange={(e) => { setUrl(e.target.value) }} placeholder="https://www.linkedin.com/in/firstNameLastName/" />
                     </div>
-                </div>}
+                    <div className="generate_button_row_container">
+                        <button className="generate_copy_text_button" onClick={handleInput}>
+                            <h5 className="generate_button_actions_text">Register</h5>
+                        </button>
+                    </div>
+                </div >}
         </>
 
     )
