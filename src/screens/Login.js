@@ -21,6 +21,7 @@ function Login(props) {
     const [sampleJobs, setSampleJobs] = useState(sample)
     const [tickerPosition, setTickerPosition] = useState(0);
     const [isMobile, setIsMobile] = useState(props.mobile)
+    const [isLoggingIn, setIsLoggingIn] = useState(false)
 
     const { linkedInLogin } = useLinkedIn({
         clientId: `${process.env.REACT_APP_LINKEDIN_CLIENT_ID}`,
@@ -35,6 +36,11 @@ function Login(props) {
             console.log(error);
         },
     });
+
+    async function login() {
+        setIsLoggingIn(true)
+        linkedInLogin()
+    }
 
     async function getUserAccessToken(code) {
         const link_temp = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://www.linkedin.com/oauth/v2/accessToken?code=${code}&grant_type=authorization_code&client_id=${process.env.REACT_APP_LINKEDIN_CLIENT_ID}&client_secret=${process.env.REACT_APP_LINKEDIN_SECRET_ID}&redirect_uri=${window.location.origin}/linkedin`
@@ -108,14 +114,17 @@ function Login(props) {
 
     }
     useEffect(() => {
-        const tickerInterval = setInterval(() => {
-            setTickerPosition((prevPosition) => (prevPosition + 1) % sampleJobs.length);
-        }, 8000); // Adjust the interval for slower movement
+        if (!isLoggingIn) {
+            const tickerInterval = setInterval(() => {
+                setTickerPosition((prevPosition) => (prevPosition + 1) % sampleJobs.length);
+            }, 8000); // Adjust the interval for slower movement
 
-        return () => {
-            clearInterval(tickerInterval);
-        };
-    }, [sampleJobs.length]);
+            return () => {
+                clearInterval(tickerInterval);
+            };
+
+        }
+    }, [sampleJobs.length, isLoggingIn]);
 
 
     return (
@@ -126,7 +135,7 @@ function Login(props) {
                         <h1 className="login-big-text">Search & Upskill</h1>
                         <h1 className="login-medium-text">for millions of active jobs</h1>
                         <h1 className="login-small-text">Join our innovative and dynamic career planning platform. Our mission is to help applicants find their passions and get in touch with recruiters using the power of AI.</h1>
-                        <button className="signIn-button" onClick={linkedInLogin}>
+                        <button className="signIn-button" onClick={login}>
                             <LinkedInLogo />
                             <h5 className="signIn-button-text">Sign Up with LinkedIn</h5>
                         </button>
@@ -197,7 +206,7 @@ function Login(props) {
                                 <img className="ss1" src={require('../assets/upskill.png')}></img>
                             </div>
                             <h1 className="login-small-text-mobile">Join our innovative and dynamic career planning platform. Our mission is to help applicants find their passions and get in touch with recruiters using the power of AI.</h1>
-                            <button className="signIn-button-mobile" onClick={linkedInLogin}>
+                            <button className="signIn-button-mobile" onClick={login}>
                                 <LinkedInLogo />
                                 <h5 className="signIn-button-text-mobile">Sign Up with LinkedIn</h5>
                             </button>

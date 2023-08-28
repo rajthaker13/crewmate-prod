@@ -62,10 +62,10 @@ function Header(props) {
                 <div style={{ height: '10vh', display: 'flex', flexDirection: 'row' }}>
 
                     <Menu>
-                        <a className="menu-item" href="/">
+                        <a className="menu-item" onClick={() => { navigate("/") }}>
                             Search
                         </a>
-                        <a className="menu-item" href="/pathways">
+                        <a className="menu-item" onClick={() => { navigate("/pathways") }}>
                             My Jobs
                         </a>
                     </Menu>

@@ -419,7 +419,7 @@
   .job_card_slide_container-mobile {
     background: var(--gr-03, linear-gradient(150deg, #161624 0%, #25243C 100%));
     width: 100vw; /* Take up full width */
-    height: 33vh;
+    height: 40vh;
     margin-top: 5vh;
     overflow: hidden; /* Hide overflow to hide extra cards */
     position: relative;
