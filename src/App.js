@@ -48,7 +48,7 @@ function App() {
       <MobileView>
         <div className="App">
           <Router>
-            {!user && !guestView ? (
+            {/* {!user && !guestView ? (
               <>
                 <Header guest={true} mobile={true} />
                 <Routes>
@@ -56,16 +56,16 @@ function App() {
                   <Route path="/" element={<Login mobile={true} />} />
                 </Routes>
               </>
-            ) : (
-              <>
-                <Header guest={false} mobile={true} />
-                <Routes>
-                  <Route path="/" element={<Home mobile={true} />} />
-                  <Route path="/explore" element={<ExploreJob mobile={true} />} />
-                  <Route path="/pathways" element={<Pathways mobile={true} />} />
-                </Routes>
-              </>
-            )}
+            ) : ( */}
+            <>
+              <Header guest={false} mobile={true} />
+              <Routes>
+                <Route path="/" element={<Home mobile={true} />} />
+                <Route path="/explore" element={<ExploreJob mobile={true} />} />
+                <Route path="/pathways" element={<Pathways mobile={true} />} />
+              </Routes>
+            </>
+            {/* )} */}
           </Router>
         </div>
       </MobileView>

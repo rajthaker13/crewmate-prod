@@ -7,11 +7,14 @@ import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import { useStateValue } from "../utility/StateProvider";
 import { Button } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
+import { slide as Menu } from 'react-burger-menu';
 
 function Header(props) {
     const [{ user, guestView }] = useStateValue();
     const [isMobile, setIsMobile] = useState(props.mobile)
+    const [navbarOpen, setNavbarOpen] = useState(false);
     const navigate = useNavigate()
+
 
     return (
         <div>
@@ -34,8 +37,8 @@ function Header(props) {
                     </div>
                 }
             </div>}
-            {isMobile &&
-                <div style={{ height: '8vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            {isMobile && props.guest &&
+                < div style={{ height: '8vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <Avatar
                         alt='crewmate-logo'
                         src={require('../../assets/group3Gang.png')}
@@ -51,11 +54,25 @@ function Header(props) {
                             </button>
                         </div>
                     }
-
-
                 </div>
             }
-        </div>
+
+            {isMobile && !props.guest &&
+
+                <div style={{ height: '10vh', display: 'flex', flexDirection: 'row' }}>
+
+                    <Menu>
+                        <a className="menu-item" href="/">
+                            Search
+                        </a>
+                        <a className="menu-item" href="/pathways">
+                            My Jobs
+                        </a>
+                    </Menu>
+                </div>
+
+            }
+        </div >
 
     );
 }
