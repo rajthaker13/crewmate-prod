@@ -9,12 +9,14 @@ import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "fir
 import '../styles/ExploreJob.css'
 import GenerateModal from "../components/pathways/GenerateModal";
 import { ChatFeed, Message } from 'react-chat-ui'
+import { BackIcon } from "../components/pathways/BackIcon";
 
 
 function ExploreJob() {
     const { state } = useLocation();
     const [job, setJob] = useState(state.job)
     const [pic, setPic] = useState(state.pfp)
+    const [jobRecs, setJobRecs] = useState(state.jobRecs)
     const [jobSaved, setJobSaved] = useState(false)
     const [isGenerating, setIsGenerating] = useState(false)
     const [messsages, setMessages] = useState([new Message({
@@ -125,9 +127,29 @@ function ExploreJob() {
             setJobSaved(true)
         }
     }
+
+    function goBack() {
+        if (!jobRecs) {
+            navigation('/pathways')
+
+        }
+        else {
+            navigation('/', {
+                state: {
+                    jobRecs: jobRecs
+                },
+            })
+
+        }
+
+    }
     return (
         <div style={{ height: '88vh', }}>
             {isGenerating && <GenerateModal isGeneratingResume={isGeneratingResume} isGeneratingCover={isGeneratingCover} job={job} setIsGenerating={setIsGenerating} setIsGeneratingCover={setIsGeneratingCover} setIsGeneratingResume={setIsGeneratingResume} />}
+            <div className="back-button-cont" onClick={goBack}>
+                <BackIcon />
+                <h5 className="back-button-text ">{jobRecs ? 'Back to Search' : 'Back to Saved Jobs'}</h5>
+            </div>
             <div className="description_container">
                 <div className="description_job_info">
                     <img src={pic} className="description_icon" onError={({ currentTarget }) => {

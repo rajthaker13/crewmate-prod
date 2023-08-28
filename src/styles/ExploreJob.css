@@ -12,6 +12,32 @@
     font-style: normal;
 }
 
+.back-button-cont {
+    display: flex;
+    flex-direction: 'row';
+    margin-left: 5%;
+    margin-bottom: 1%;
+    background-color: transparent;
+    border-width: .1px;
+}
+
+.back-button-button {
+    background-color: transparent;
+    border-width: .1px;
+}
+
+.back-button-text {
+    color: #FFF;
+    font-family: 'Jura';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.32px;
+    margin-left: 1%;
+}
+
+
 .description_container {
     width: 90%;
     height: 35%;
