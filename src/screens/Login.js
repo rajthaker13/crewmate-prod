@@ -1,20 +1,16 @@
-import { Button } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import '../styles/Login.css'
-import db, { auth, provider, functions } from '../firebase/firebase';
+import db, { auth } from '../firebase/firebase';
 import { useStateValue } from "../components/utility/StateProvider";
 import { actionTypes } from '../components/utility/reducer';
-import { createUserWithEmailAndPassword, fetchSignInMethodsForEmail } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import axios from 'axios';
 import { useLinkedIn } from 'react-linkedin-login-oauth2';
-import linkedin from 'react-linkedin-login-oauth2/assets/linkedin.png';
-import { getFunctions, httpsCallable } from 'firebase/functions'
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { LinkedInLogo } from "../components/common/LinkedInLogo";
 import sample from '../data/sample.json'
 import JobCard from "../components/common/JobCard";
-import Ticker from 'react-ticker'
 
 
 
@@ -127,7 +123,7 @@ function Login() {
                 <div className="login-text-container">
                     <h1 className="login-big-text">Search & Upskill</h1>
                     <h1 className="login-medium-text">for millions of active jobs</h1>
-                    <h1 className="login-small-text">Join our innovative and dynamic IT team based in the heart of Palo Alto. We are a leading technology company. Our mission is to secure and optimize network infrastructure, ensuring seamless connectivity and protecting our clients' valuable data.</h1>
+                    <h1 className="login-small-text">Join our innovative and dynamic career planning platform. Our mission is to help applicants find their passions and get in touch with recruiters using the power of AI.</h1>
                     <button className="signIn-button" onClick={linkedInLogin}>
                         <LinkedInLogo />
                         <h5 className="signIn-button-text">Sign Up with LinkedIn</h5>
@@ -182,6 +178,13 @@ function Login() {
                     <h1 className="login-big-text-2">Meet your Crew & Companies</h1>
                     <h1 className="login-small-text-2">Join talent communities for your favorite companies to meet other applicants while getting access to hiring events, recruiters, and more!</h1>
                 </div>
+            </div>
+            <div className="footer-container">
+                <div className="footer-content-container">
+                    <img src={require('../assets/group3Gang.png')} className="footer-img" />
+                    <h5 className="footer-text">Crewmate, 2023</h5>
+                </div>
+
             </div>
 
         </div>

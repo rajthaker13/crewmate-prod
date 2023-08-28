@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useStateValue } from "../utility/StateProvider";
-import { Card, Grid, Text, Link, Button } from '@nextui-org/react';
-import db, { auth, provider, functions } from '../../firebase/firebase';
-import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "firebase/firestore";
+import db, { auth } from '../../firebase/firebase';
+import { setDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import fetch from 'node-fetch'
 import '../../styles/JobCard.css'
-import { FaPeriscope, FaTelegramPlane, FaBlackTie, FaWarehouse, FaBookmark, FaPeopleArrows } from 'react-icons/fa';
+import { FaBookmark } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, jobRecs }) {
     const [pfp, setPfp] = useState('')
-    const [jobFunction, setJobFunction] = useState('')
-    const [jobIndustry, setIndustry] = useState('')
     const [jobSaved, setJobSaved] = useState(false)
     const [companyWaitlisted, setCompanyWaitlisted] = useState(false)
     const navigation = useNavigate();
@@ -23,10 +19,6 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, 
     };
 
     const description = extractWords(job.description, 20) + "...";
-
-
-
-
 
     useEffect(() => {
         async function getCompanyData() {
@@ -242,7 +234,7 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, 
             <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: '10vh', maxHeight: '10vh' }}>
                 <h6 className="job_description">{description}</h6>
             </div>
-            <div style={{ flexDirection: 'row', display: 'flex', minHeight: 'auto', maxHeight: 'auto', justifyContent: 'center' }}>
+            {!job.src && <div style={{ flexDirection: 'row', display: 'flex', minHeight: 'auto', maxHeight: 'auto', justifyContent: 'center' }}>
                 <button className="job_waitlist_button" onClick={exploreJob} disabled={job.src ? true : false}>
                     <div style={{
                         flexDirection: 'row', display: 'flex', minHeight: 'auto', minWidth: '8vw', justifyContent: 'center'
@@ -250,44 +242,11 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, 
                         <h4 className="apply_text">Explore Job</h4>
                     </div>
                 </button>
-
                 <button className="job_save_button " onClick={saveJob} disabled={job.src ? true : false}>
-
                     <FaBookmark fill={jobSaved ? "#fff" : ''} />
-
                 </button>
+            </div >}
 
-                {/* <button className="job_apply_button" onClick={() => {
-                    if (job.external_url != null) {
-                        window.open(
-                            job.external_url,
-                            '_blank'
-                        );
-                    }
-                    else {
-                        window.open(
-                            job.redirected_url,
-                            '_blank'
-                        );
-
-                    }
-                }}>
-                    <div style={{ flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', minWidth: '8vw', justifyContent: 'center', overflow: 'hidden', width: 'auto' }}>
-                        <h4 className="apply_text">Apply</h4>
-                    </div>
-                </button>
-                <button className="job_waitlist_button" onClick={joinWaitlist}>
-                    <div style={{
-                        flexDirection: 'row', display: 'inline-flex', minHeight: 'auto', minWidth: '8vw', justifyContent: 'center'
-                    }}>
-                        {!companyWaitlisted && <>
-                            <h4 className="apply_text">Join Waitlist</h4></>}
-                        {companyWaitlisted && <>
-                            <h4 className="apply_text">Joined</h4></>}
-
-                    </div>
-                </button> */}
-            </div >
 
 
 

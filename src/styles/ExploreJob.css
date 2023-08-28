@@ -12,6 +12,32 @@
     font-style: normal;
 }
 
+.back-button-cont {
+    display: flex;
+    flex-direction: 'row';
+    margin-left: 5%;
+    margin-bottom: 1%;
+    background-color: transparent;
+    border-width: .1px;
+}
+
+.back-button-button {
+    background-color: transparent;
+    border-width: .1px;
+}
+
+.back-button-text {
+    color: #FFF;
+    font-family: 'Jura';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.32px;
+    margin-left: 1%;
+}
+
+
 .description_container {
     width: 90%;
     height: 35%;
@@ -103,6 +129,20 @@
     margin-top: 1%;
     margin-left: 2%;
 }
+
+.description_save_button_container {
+    width: 8%;
+    height: 4%;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(82, 113, 196, 0.10) 0%, rgba(83, 113, 196, 0.10) 11.79%, rgba(87, 115, 198, 0.10) 21.38%, rgba(93, 116, 200, 0.10) 29.12%, rgba(101, 119, 203, 0.10) 35.34%, rgba(110, 122, 207, 0.10) 40.37%, rgba(121, 125, 211, 0.10) 44.56%, rgba(133, 129, 215, 0.10) 48.24%, rgba(145, 133, 220, 0.10) 51.76%, rgba(159, 137, 225, 0.10) 55.44%, rgba(172, 141, 230, 0.10) 59.63%, rgba(186, 145, 235, 0.10) 64.66%, rgba(199, 150, 240, 0.10) 70.88%, rgba(212, 154, 245, 0.10) 78.62%, rgba(225, 157, 250, 0.10) 88.21%, rgba(236, 161, 254, 0.10) 100%);
+    margin-top: 1%;
+    margin-left: 2%;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .description_apply_button_text {
     width: auto;
     color: #FFF;
@@ -113,6 +153,20 @@
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.32px;
+    margin-top: 5%;
+}
+.description_save_button_text {
+    width: auto;
+    color: #FFF;
+    text-align: center;
+    font-family: 'Jura';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.32px;
+    margin-left: 5%;
+    margin-top: 5%;
 }
 
 
@@ -250,4 +304,18 @@
     line-height: 24px;
     letter-spacing: 0.32px;
     text-overflow: ellipsis;
+}
+
+.explore-enter-text {
+  color: #FFF;
+  font-family: 'Jura';
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.48px;
+  opacity: 0.5;
+  white-space: nowrap;
+  display: inline;
+  text-align: left;
 }
