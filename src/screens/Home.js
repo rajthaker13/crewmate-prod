@@ -1,21 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useStateValue } from "../components/utility/StateProvider";
-import backdrop from "../assets/backdrop.gif";
-import sample from '../data/sample.json';
-import { getUserAndProductEmbeddings, getJobRecommendation } from "../open_ai/OpenAI"
-import { Card, Grid, Text, Link, Button } from '@nextui-org/react';
-import db, { auth, provider, functions, storage } from '../firebase/firebase';
+import db, { auth } from '../firebase/firebase';
 import JobCard from "../components/common/JobCard";
 import SearchBar from "../components/common/SearchBar";
-import Bucket from "../components/home/Bucket";
-import profile from '../data/profile.json';
-import axios from 'axios';
-import { getStorage, ref, listAll } from "firebase/storage";
 import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "firebase/firestore";
 import Modal from "../components/home/Modal";
-import { createCheckoutSession } from "../stripe/createCheckoutSession";
 import usePremiumStatus from "../stripe/usePremiumStatus";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import '../styles/SearchBar.css'
 
 
@@ -63,6 +53,14 @@ function Home() {
 
     }, [])
 
+    function chunkArray(arr, chunkSize) {
+        const chunkedArray = [];
+        for (let i = 0; i < arr.length; i += chunkSize) {
+            chunkedArray.push(arr.slice(i, i + chunkSize));
+        }
+        return chunkedArray;
+    }
+
     return (
         <div style={{ height: '88vh' }}>
             {isSearching && <Modal setOpenModal={setOpenModal} isSearchingModal={true} />}
@@ -76,11 +74,16 @@ function Home() {
 
             </div>
 
-            <div style={{ display: 'inline-flex', marginTop: '5vh' }}>
-                {jobRecs && jobRecs.map((job, index) => {
+            <div style={{ marginTop: '5vh' }}>
+                {jobRecs && chunkArray(jobRecs, 5).map((row, rowIndex) => {
                     return (
-                        <JobCard job={job} index={index} xs={80} isSearching={isSearching} jobRecs={jobRecs} />
+                        <div key={rowIndex} style={{ display: 'flex', marginBottom: '1rem' }}>
+                            {row.map((job, index) => (
+                                <JobCard key={index} job={job} index={index} xs={80} isSearching={isSearching} jobRecs={jobRecs} />
+                            ))}
+                        </div>
                     )
+
                 })}
             </div>
         </div >

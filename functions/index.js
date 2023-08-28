@@ -160,7 +160,7 @@ exports.getJobRec = functions.https.onRequest(async (req, res) => {
         await client.connect();
 
         const db = client.db('jobs'); // Replace with your database name.
-      
+
         const collection = db.collection('alphaFinale'); // Replace with your collection name.
 
         // Query for similar documents.
@@ -171,7 +171,7 @@ exports.getJobRec = functions.https.onRequest(async (req, res) => {
                     "knnBeta": {
                         "vector": embedding,
                         "path": "plot_embedding",
-                        "k": 5
+                        "k": 250
                     }
                 }
             }
