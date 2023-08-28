@@ -179,6 +179,13 @@ function Login() {
                     <h1 className="login-small-text-2">Join talent communities for your favorite companies to meet other applicants while getting access to hiring events, recruiters, and more!</h1>
                 </div>
             </div>
+            <div className="footer-container">
+                <div className="footer-content-container">
+                    <img src={require('../assets/group3Gang.png')} className="footer-img" />
+                    <h5 className="footer-text">Crewmate, 2023</h5>
+                </div>
+
+            </div>
 
         </div>
 

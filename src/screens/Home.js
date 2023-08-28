@@ -80,7 +80,6 @@ function Home() {
                 {jobRecs && jobRecs.map((job, index) => {
                     return (
                         <JobCard job={job} index={index} xs={80} isSearching={isSearching} jobRecs={jobRecs} />
-
                     )
                 })}
             </div>

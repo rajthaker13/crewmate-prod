@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useStateValue } from "../components/utility/StateProvider";
-import backdrop from "../assets/backdrop.gif";
-import sample from '../data/sample.json';
-import { getUserAndProductEmbeddings, getJobRecommendation, interactWithAssistant } from "../open_ai/OpenAI"
-import { Card, Grid, Text, Link, Button, Dropdown } from '@nextui-org/react';
+import { interactWithAssistant } from "../open_ai/OpenAI"
+import { Dropdown } from '@nextui-org/react';
 import db, { auth, provider, functions } from '../firebase/firebase';
-import JobCard from "../components/common/JobCard";
 import SearchBar from "../components/common/SearchBar";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FaPeriscope, FaTelegramPlane, FaBlackTie, FaWarehouse, FaBookmark, FaPeopleArrows } from 'react-icons/fa';
-import axios from 'axios';
+import { FaBookmark } from 'react-icons/fa';
 import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "firebase/firestore";
-import clipboardCopy from 'clipboard-copy';
-import Modal from "../components/home/Modal";
 import '../styles/ExploreJob.css'
 import GenerateModal from "../components/pathways/GenerateModal";
 import { ChatFeed, Message } from 'react-chat-ui'
@@ -22,10 +15,8 @@ function ExploreJob() {
     const { state } = useLocation();
     const [job, setJob] = useState(state.job)
     const [pic, setPic] = useState(state.pfp)
-    const [jobRecs, setJobRecs] = useState(state.jobRecs)
     const [jobSaved, setJobSaved] = useState(false)
     const [isGenerating, setIsGenerating] = useState(false)
-    const [newsContent, setNewsContent] = useState([])
     const [messsages, setMessages] = useState([new Message({
         id: 1,
         message: `I'm a virtual recruiter for ${job.company_name}. Feel free to ask me anything about this job!`,
@@ -35,19 +26,39 @@ function ExploreJob() {
         { "role": "assistant", "content": `I'm a virtual recruiter for ${job.company_name}. Feel free to ask me anything about this job!` },
     ])
     const [isSearching, setIsSearching] = useState(false)
-
     const [isGeneratingResume, setIsGeneratingResume] = useState(false)
     const [isGeneratingCover, setIsGeneratingCover] = useState(false)
     const navigation = useNavigate();
 
-    const extractWords = (text, wordCount) => {
-        const words = text.split(' ');
-        const extractedWords = words.slice(0, wordCount);
-        return extractedWords.join(' ');
-    };
+    useEffect(() => {
+        async function isJobSaved() {
+            let userDoc
+            if (!auth.currentUser) {
+                userDoc = doc(db, "users", "rajthaker13@yahoo.com")
+            }
+            else {
+                userDoc = doc(db, "users", auth.currentUser.email)
+            }
+            const userRef = await getDoc(userDoc)
 
-    // const description = extractWords(job.description, 20) + "...";
-    const description = job.description
+            if (userRef.exists()) {
+                let saved = userRef.data()['savedJobs']
+                if (saved == null) {
+                    saved = []
+                }
+                saved.map((saved_job) => {
+                    if (saved_job.id == job.id) {
+                        setJobSaved(true)
+                    }
+                })
+            }
+        }
+
+        isJobSaved()
+
+    }, [])
+
+
 
     async function sendMessage(userText) {
         let temp_msg = messsages
@@ -88,6 +99,32 @@ function ExploreJob() {
         setIsGenerating(true)
         setIsGeneratingResume(true)
     }
+
+    async function saveJob() {
+        if (!jobSaved) {
+            let userRef
+            if (!auth.currentUser) {
+                userRef = doc(db, "users", 'rajthaker13@yahoo.com')
+            }
+            else {
+                userRef = doc(db, "users", auth.currentUser.email)
+            }
+            const userSnap = await getDoc(userRef)
+            if (userSnap.exists()) {
+                let userSavedJobs = userSnap.data()['savedJobs']
+                if (userSavedJobs == null) {
+                    userSavedJobs = [job]
+                }
+                else {
+                    userSavedJobs.push(job)
+                }
+                updateDoc(userRef, {
+                    savedJobs: userSavedJobs
+                })
+            }
+            setJobSaved(true)
+        }
+    }
     return (
         <div style={{ height: '88vh', }}>
             {isGenerating && <GenerateModal isGeneratingResume={isGeneratingResume} isGeneratingCover={isGeneratingCover} job={job} setIsGenerating={setIsGenerating} setIsGeneratingCover={setIsGeneratingCover} setIsGeneratingResume={setIsGeneratingResume} />}
@@ -122,6 +159,10 @@ function ExploreJob() {
                     }}>
                         <h6 className="description_apply_button_text">Apply Now</h6>
                     </button>
+                    <button className="description_save_button_container" onClick={saveJob}>
+                        <FaBookmark fill={jobSaved ? "#fff" : ''} />
+                        <h6 className="description_save_button_text">{jobSaved ? 'Saved' : 'Save'}</h6>
+                    </button>
                 </div>
             </div>
             <div className="generate_cv_container">
@@ -151,9 +192,11 @@ function ExploreJob() {
                                 },
                             }
                         }
-                    // JSON: Custom bubble styles
                     />
                     <SearchBar isInputField={true} sendMessage={sendMessage} />
+                    <div className="explore-enter-text">
+                        <h5>Press Enter <span className="">to send message</span></h5>
+                    </div>
                 </div>
             </div>
 
@@ -162,21 +205,3 @@ function ExploreJob() {
 }
 
 export default ExploreJob
-
-
-{/* {videos.map((video) => {
-                        return (
-                            <div>
-                                <h2>{video.snippet.title}</h2>
-                                <iframe
-                                    title={video.snippet.title}
-                                    width="560"
-                                    height="315"
-                                    src={`https://www.youtube.com/embed/${video.id.videoId}`}
-                                    frameBorder="0"
-                                    allow="autoplay; encrypted-media"
-                                    allowFullScreen
-                                ></iframe>
-                            </div>
-                        )
-                    })} */}
