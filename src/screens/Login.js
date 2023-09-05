@@ -11,6 +11,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { LinkedInLogo } from "../components/common/LinkedInLogo";
 import sample from '../data/sample.json'
 import JobCard from "../components/common/JobCard";
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -22,6 +23,7 @@ function Login(props) {
     const [tickerPosition, setTickerPosition] = useState(0);
     const [isMobile, setIsMobile] = useState(props.mobile)
     const [isLoggingIn, setIsLoggingIn] = useState(false)
+    const navigation = useNavigate();
 
     const { linkedInLogin } = useLinkedIn({
         clientId: `${process.env.REACT_APP_LINKEDIN_CLIENT_ID}`,
@@ -40,6 +42,12 @@ function Login(props) {
     async function login() {
         setIsLoggingIn(true)
         linkedInLogin()
+    }
+
+    async function talentCommunityLogin() {
+        navigation('/login', {
+        })
+
     }
 
     async function getUserAccessToken(code) {
@@ -135,9 +143,8 @@ function Login(props) {
                         <h1 className="login-big-text">Search & Upskill</h1>
                         <h1 className="login-medium-text">for millions of active jobs</h1>
                         <h1 className="login-small-text">Join our innovative and dynamic career planning platform. Our mission is to help applicants find their passions and get in touch with recruiters using the power of AI.</h1>
-                        <button className="signIn-button" onClick={login}>
-                            <LinkedInLogo />
-                            <h5 className="signIn-button-text">Sign Up with LinkedIn</h5>
+                        <button className="signIn-button" onClick={talentCommunityLogin}>
+                            <h5 className="signIn-button-text">Click Here For TC Demo</h5>
                         </button>
                     </div>
 

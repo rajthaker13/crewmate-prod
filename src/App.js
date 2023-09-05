@@ -8,6 +8,7 @@ import { LinkedInCallback } from "react-linkedin-login-oauth2";
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 import ExploreJob from './screens/ExploreJob';
 import Pathways from './screens/Pathways';
+import TalentLogin from './screens/talentLogin/TalentLogin';
 
 
 
@@ -29,6 +30,7 @@ function App() {
                 <Header guest={true} />
                 <Routes>
                   <Route exact path="/linkedin" element={<LinkedInCallback />} />
+                  <Route path="/login" element={<TalentLogin />} />
                   <Route path="/" element={<Login />} />
                 </Routes>
               </>
