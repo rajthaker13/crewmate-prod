@@ -1,16 +1,10 @@
 import React, { useState } from "react";
-import "../../styles/Header.css"
 import { Avatar } from "@material-ui/core";
-import AccessTimeIcon from "@material-ui/icons/AccessTime";
-import SearchIcon from "@material-ui/icons/Search";
-import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import { useStateValue } from "../utility/StateProvider";
-import { Button } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { slide as Menu } from 'react-burger-menu';
 
 function Header(props) {
-    const [{ user, guestView }] = useStateValue();
     const [isMobile, setIsMobile] = useState(props.mobile)
     const [navbarOpen, setNavbarOpen] = useState(false);
     const navigate = useNavigate()
