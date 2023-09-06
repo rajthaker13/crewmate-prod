@@ -12,6 +12,7 @@ import { LinkedInLogo } from "../components/common/LinkedInLogo";
 import sample from '../data/sample.json'
 import JobCard from "../components/common/JobCard";
 import { useNavigate } from 'react-router-dom';
+import LoginModal from "../components/login/LoginModal/LoginModal";
 
 
 
@@ -23,6 +24,7 @@ function Login(props) {
     const [tickerPosition, setTickerPosition] = useState(0);
     const [isMobile, setIsMobile] = useState(props.mobile)
     const [isLoggingIn, setIsLoggingIn] = useState(false)
+    const [isLoggingInTC, setIsLoggingInTc] = useState(false)
     const navigation = useNavigate();
 
     const { linkedInLogin } = useLinkedIn({
@@ -45,9 +47,7 @@ function Login(props) {
     }
 
     async function talentCommunityLogin() {
-        navigation('/login', {
-        })
-
+        setIsLoggingInTc(true)
     }
 
     async function getUserAccessToken(code) {
@@ -122,7 +122,7 @@ function Login(props) {
 
     }
     useEffect(() => {
-        if (!isLoggingIn) {
+        if (!isLoggingIn || !isLoggingInTC) {
             const tickerInterval = setInterval(() => {
                 setTickerPosition((prevPosition) => (prevPosition + 1) % sampleJobs.length);
             }, 8000); // Adjust the interval for slower movement
@@ -132,12 +132,13 @@ function Login(props) {
             };
 
         }
-    }, [sampleJobs.length, isLoggingIn]);
+    }, [sampleJobs.length, isLoggingIn, isLoggingInTC]);
 
 
     return (
         <div>
             {!isMobile && <div className="login">
+                {isLoggingInTC && <LoginModal setOpenModal={isLoggingInTC} isSearchingModal={true} isMobile={isMobile} />}
                 <div className="login-slide-1">
                     <div className="login-text-container">
                         <h1 className="login-big-text">Search & Upskill</h1>
