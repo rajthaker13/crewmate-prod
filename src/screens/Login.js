@@ -122,16 +122,16 @@ function Login(props) {
 
     }
     useEffect(() => {
-        if (!isLoggingIn || !isLoggingInTC) {
-            const tickerInterval = setInterval(() => {
-                setTickerPosition((prevPosition) => (prevPosition + 1) % sampleJobs.length);
-            }, 8000); // Adjust the interval for slower movement
+        // if (!isLoggingIn || !isLoggingInTC) {
+        //     const tickerInterval = setInterval(() => {
+        //         setTickerPosition((prevPosition) => (prevPosition + 1) % sampleJobs.length);
+        //     }, 8000); // Adjust the interval for slower movement
 
-            return () => {
-                clearInterval(tickerInterval);
-            };
+        //     return () => {
+        //         clearInterval(tickerInterval);
+        //     };
 
-        }
+        // }
     }, [sampleJobs.length, isLoggingIn, isLoggingInTC]);
 
 
@@ -153,7 +153,7 @@ function Login(props) {
                         <img className="ss1" src={require('../assets/upskill.png')}></img>
                     </div>
                 </div>
-                <div className="job_card_slide_container">
+                {/* <div className="job_card_slide_container">
                     <div className="ticker-track">
                         {sampleJobs.map((job, index) => {
                             return (
@@ -168,7 +168,7 @@ function Login(props) {
                         })}
                     </div>
 
-                </div>
+                </div> */}
                 <div className="login-slide-1 ">
                     <div className="login-slide-2-pic-cont">
                         <img className="ss1" src={require('../assets/search.png')}></img>

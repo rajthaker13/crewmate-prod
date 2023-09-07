@@ -150,3 +150,40 @@
     line-height: normal;
     letter-spacing: 0.32px;
 }
+
+.generate_text_container {
+    margin-top: 2vh;
+    align-self: center;
+    width: 30vw;
+    height: 55vh;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.generate_text_container-mobile {
+    margin-top: 2vh;
+    align-self: center;
+    width: 95%;
+    height: 55vh;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.generate_text_input {
+    width: 30vw;
+    height: 55vh;
+    flex-shrink: 0;
+    color: rgba(255, 255, 255, 0.80);
+    text-overflow: ellipsis;
+    font-family: Jura;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 166.667%;
+    letter-spacing: 0.24px;
+    background-color: transparent;
+}
+
+
