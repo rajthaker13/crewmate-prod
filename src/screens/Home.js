@@ -67,7 +67,7 @@ function Home(props) {
     return (
         <div style={{ minHeight: '88vh' }}>
             {isSearching && <Modal setOpenModal={setOpenModal} isSearchingModal={true} isMobile={isMobile} />}
-            {openModal && <Modal setOpenModal={setOpenModal} isMobile={isMobile} />}
+            {/* {openModal && <Modal setOpenModal={setOpenModal} isMobile={isMobile} />} */}
             <div className={isMobile ? "search-bar-container-mobile" : "search-bar-container"}>
                 <h2 className={isMobile ? "search-bar-container-header-mobile" : "search-bar-container-header"}>Search: Job opportunities, internships and more</h2>
                 <SearchBar setJobRecs={setJobRecs} setIsSearching={setIsSearching} isSearching={isSearching} setProfileRec={setProfileRec} experience={experience} setExperienceRecs={setExperienceRecs} location={location} isMobile={isMobile} />

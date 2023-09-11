@@ -50,6 +50,16 @@ function Login(props) {
         setIsLoggingInTc(true)
     }
 
+    async function talentCreation() {
+        signInWithEmailAndPassword(auth, 'es63i@elisejoanllc.com', "123456").then((user) => {
+            dispatch({
+                type: actionTypes.SET_USER,
+                user: user,
+            });
+        })
+
+    }
+
     async function getUserAccessToken(code) {
         const link_temp = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://www.linkedin.com/oauth/v2/accessToken?code=${code}&grant_type=authorization_code&client_id=${process.env.REACT_APP_LINKEDIN_CLIENT_ID}&client_secret=${process.env.REACT_APP_LINKEDIN_SECRET_ID}&redirect_uri=${window.location.origin}/linkedin`
         axios.post(link_temp, { Origin: `${window.location.origin}/linkedin` }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(async (res) => {
@@ -142,7 +152,7 @@ function Login(props) {
                         <h1 className="login-big-text">Search & Upskill</h1>
                         <h1 className="login-medium-text">for millions of active jobs</h1>
                         <h1 className="login-small-text">Join our innovative and dynamic career planning platform. Our mission is to help applicants find their passions and get in touch with recruiters using the power of AI.</h1>
-                        <button className="signIn-button" onClick={talentCommunityLogin}>
+                        <button className="signIn-button" onClick={talentCreation}>
                             <h5 className="signIn-button-text">Click Here For TC Demo</h5>
                         </button>
                     </div>

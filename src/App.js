@@ -9,6 +9,7 @@ import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detec
 import ExploreJob from './screens/ExploreJob';
 import Pathways from './screens/Pathways';
 import TalentLogin from './screens/talentLogin/TalentLogin';
+import TalentCreation from './screens/talentCreation/TalentCreation';
 
 
 
@@ -36,9 +37,9 @@ function App() {
               </>
             ) : (
               <>
-                <Header guest={false} />
+                {/* <Header guest={false} /> */}
                 <Routes>
-                  <Route path="/" element={<Home />} />
+                  <Route path="/" element={<TalentCreation />} />
                   <Route path="/explore" element={<ExploreJob />} />
                   <Route path="/pathways" element={<Pathways />} />
                 </Routes>

@@ -133,6 +133,7 @@ function LoginModal({ setOpenModal, isSearchingModal = false, text = "Generating
 
     }
 
+
     return (
         <>
 
