@@ -3,6 +3,9 @@ import db, { auth, provider, functions, storage } from '../../../firebase/fireba
 import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "firebase/firestore";
 import "./LoginModal.css"
 import axios from 'axios'
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
+
 
 
 function LoginModal({ setOpenModal, isSearchingModal = false, text = "Generating Jobs...", isMobile }) {
@@ -72,7 +75,7 @@ function LoginModal({ setOpenModal, isSearchingModal = false, text = "Generating
             },
         })
             .then(async (response) => {
-                await setDoc(doc(db, "users", email), {
+                await setDoc(doc(db, "users-tc", email), {
                     firstName: firstName,
                     lastName: lastName,
                     role: role,
@@ -83,7 +86,13 @@ function LoginModal({ setOpenModal, isSearchingModal = false, text = "Generating
                     avgApplications: avgApplications,
                     data: response.data,
                 })
-
+                await setDoc(doc(db, "companies-tc", companyName), {
+                    companyName: companyName,
+                    companyURL: companyURL,
+                    companySize: companySize,
+                    avgApplications: avgApplications,
+                })
+                await createUserWithEmailAndPassword(auth, email, password)
                 setOpenModal(false)
 
             })
@@ -141,6 +150,12 @@ function LoginModal({ setOpenModal, isSearchingModal = false, text = "Generating
                 </div>
                 <div className={isMobile ? "generate_text_container-mobile" : "login-input-container"}>
                     <h3 className="generate_input_header">
+                        Company URL
+                    </h3>
+                    <textarea className="login-text-input" value={companyURL} onChange={(e) => { setCompanyURL(e.target.value) }} placeholder="www.deathstar.com" />
+                </div>
+                <div className={isMobile ? "generate_text_container-mobile" : "login-input-container"}>
+                    <h3 className="generate_input_header">
                         Company Size
                     </h3>
                     <textarea className="login-text-input" value={companySize} onChange={(e) => { setCompanySize(e.target.value) }} placeholder="10,000+" />
@@ -175,3 +190,5 @@ function LoginModal({ setOpenModal, isSearchingModal = false, text = "Generating
 }
 
 export default LoginModal
+
+//https://link.merge.dev/aHR0cHM6Ly9hcGkubWVyZ2UuZGV2OklGbk9TNWZZMklYWldPZHZEWkc3cTlseTY0RElkMDhaNm1ucEtiNHV3MkIxM3VhUVF1QWlVUQ==

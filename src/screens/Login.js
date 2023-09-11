@@ -47,6 +47,7 @@ function Login(props) {
     }
 
     async function talentCommunityLogin() {
+
         setIsLoggingInTc(true)
     }
 
