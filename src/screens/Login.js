@@ -47,7 +47,6 @@ function Login(props) {
     }
 
     async function talentCommunityLogin() {
-
         setIsLoggingInTc(true)
     }
 
@@ -103,8 +102,6 @@ function Login(props) {
                 email: user.email,
                 uid: user.uid,
                 photoURL: user.photoURL,
-
-
             })
             dispatch({
                 type: actionTypes.SET_USER,

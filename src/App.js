@@ -30,7 +30,7 @@ function App() {
                 <Header guest={true} />
                 <Routes>
                   <Route exact path="/linkedin" element={<LinkedInCallback />} />
-                  <Route path="/login" element={<TalentLogin />} />
+                  <Route path="/ats" element={<TalentLogin />} />
                   <Route path="/" element={<Login />} />
                 </Routes>
               </>

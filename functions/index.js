@@ -16,6 +16,7 @@ const { Readable } = require('stream');
 const Gunzip = require('gunzip-stream');
 const { MongoClient } = require('mongodb')
 const cors = require('cors')({ origin: true });
+const { EndUserDetailsRequest, HttpBearerAuth, LinkTokenApi, AccountTokenApi } = require('@mergeapi/merge-hris-node')
 
 
 exports.linkedinLogin = functions.https.onRequest(async (req, res) => {
@@ -177,25 +178,58 @@ exports.getJobRec = functions.https.onRequest(async (req, res) => {
             }
         ]).toArray();
 
-        // const searchResults = await collection.aggregate([
-        //     {
-        //         "$search": {
-        //             "index": "default",
-        //             "text": {
-        //                 "query": req.body.text,
-        //                 "path": {
-        //                     "wildcard": "*"
-        //                 }
-        //             }
-        //         }
-        //     }
-        // ]).toArray();
-
-        // console.log(searchResults)
-
         await client.close();
 
         res.status(200).json(documents)
 
+    })
+})
+
+
+exports.getMergeToken = functions.https.onRequest(async (req, res) => {
+    cors(req, res, async () => {
+        const auth = new HttpBearerAuth()
+        auth.accessToken = "yJgTMVgQzzdpsxL7HTS2Z3-cxRciwq-D3RUiUm2GziFVHbSwlqzBVA"
+
+        const apiInstance = new LinkTokenApi();
+        apiInstance.setDefaultAuthentication(auth);
+
+        const details = new EndUserDetailsRequest();
+        details.end_user_origin_id = 'CrewmateCrewmate'; // unique entity ID
+        details.end_user_organization_name = 'KOBEBRYANT'; // your user's organization name
+        details.end_user_email_address = 'rajthaker13@yahoo.com'; // your user's email address
+        details.categories = ["ats"]; // choose your category
+
+        apiInstance.linkTokenCreate(details).then(({ body }) => {
+            res.status(200).json(body.link_token)
+        })
+            .catch((error) => {
+                console.log(error);
+            });
+
+    })
+})
+
+
+exports.getMergeAccount = functions.https.onRequest(async (req, res) => {
+    cors(req, res, async () => {
+        const auth = new HttpBearerAuth();
+        // Swap YOUR_API_KEY below with your production key from:
+        // https://app.merge.dev/keys
+        auth.accessToken = "yJgTMVgQzzdpsxL7HTS2Z3-cxRciwq-D3RUiUm2GziFVHbSwlqzBVA";
+
+        const apiInstance = new AccountTokenApi();
+        apiInstance.setDefaultAuthentication(auth);
+
+        const publicToken = req.body.token;
+
+        apiInstance
+            .accountTokenRetrieve(publicToken)
+            .then(({ body }) => {
+                res.status(200).json(body.account_token)
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     })
 })

@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import db, { auth, provider, functions, storage } from '../../../firebase/firebase';
 import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "firebase/firestore";
 import "./LoginModal.css"
 import axios from 'axios'
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useMergeLink } from "@mergeapi/react-merge-link";
+import { useNavigate } from 'react-router-dom';
+
 
 
 
@@ -20,6 +23,8 @@ function LoginModal({ setOpenModal, isSearchingModal = false, text = "Generating
     const [avgApplications, setavgApplications] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+
+    const navigation = useNavigate()
 
     async function handleInput() {
         console.log(url)
@@ -93,13 +98,38 @@ function LoginModal({ setOpenModal, isSearchingModal = false, text = "Generating
                     avgApplications: avgApplications,
                 })
                 await createUserWithEmailAndPassword(auth, email, password)
-                setOpenModal(false)
+                const atsURL = 'https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://us-central1-crewmate-prod.cloudfunctions.net/getMergeToken'
+                axios.get(atsURL, { origin_id: companyName, organization_name: companyName, email: email }, { headers: { 'Content-Type': 'application/json' } }).then((res) => {
+                    const token = res.data
+                    setOpenModal(false)
+                    navigation('/ats', {
+                        state: {
+                            token: token
+
+                        },
+                    })
+
+                })
 
             })
             .catch(error => {
                 // Handle errors here when tokens run low for collect
                 console.error('Error:', error.message);
             });
+    }
+
+    async function mergeATS() {
+        const url = 'https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://us-central1-crewmate-prod.cloudfunctions.net/getMergeToken'
+        axios.get(url, { headers: { 'Content-Type': 'application/json' } }).then((res) => {
+            const token = res.data
+            // setOpenModal(false)
+            navigation('/ats', {
+                state: {
+                    token: token
+
+                },
+            })
+        })
 
     }
 
@@ -179,7 +209,7 @@ function LoginModal({ setOpenModal, isSearchingModal = false, text = "Generating
                     <textarea className="login-text-input" value={confirmPassword} onChange={(e) => { setConfirmPassword(e.target.value) }} placeholder="password" />
                 </div>
                 <div className="generate_button_row_container">
-                    <button className="generate_copy_text_button" onClick={login} >
+                    <button className="generate_copy_text_button" onClick={mergeATS} >
                         <h5 className="generate_button_actions_text">Register</h5>
                     </button>
                 </div>
