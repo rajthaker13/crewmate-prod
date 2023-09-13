@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import '../../styles/SearchBar.css';
-import ClickAwayListener from '@mui/base/ClickAwayListener';
+import ClickAwayListener from 'react-click-away-listener';
 import { useStateValue } from "../utility/StateProvider";
 import { getCrewmateReccomendation, getJobRecommendation } from "../../open_ai/OpenAI"
 import axios from 'axios';
