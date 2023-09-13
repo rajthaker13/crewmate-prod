@@ -10,6 +10,8 @@ import ExploreJob from './screens/ExploreJob';
 import Pathways from './screens/Pathways';
 import TalentLogin from './screens/talentLogin/TalentLogin';
 import TalentCreation from './screens/talentCreation/TalentCreation';
+import ClientDashboard from './screens/dashboard/ClientDashboard';
+
 
 
 
@@ -39,7 +41,7 @@ function App() {
               <>
                 {/* <Header guest={false} /> */}
                 <Routes>
-                  <Route path="/" element={<TalentCreation />} />
+                  <Route path="/" element={<ClientDashboard />} />
                   <Route path="/explore" element={<ExploreJob />} />
                   <Route path="/pathways" element={<Pathways />} />
                 </Routes>
