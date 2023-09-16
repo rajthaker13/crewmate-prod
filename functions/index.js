@@ -17,6 +17,7 @@ const Gunzip = require('gunzip-stream');
 const { MongoClient } = require('mongodb')
 const cors = require('cors')({ origin: true });
 const { EndUserDetailsRequest, HttpBearerAuth, LinkTokenApi, AccountTokenApi } = require('@mergeapi/merge-hris-node')
+const { Duda } = require('@dudadev/partner-api');
 
 
 exports.linkedinLogin = functions.https.onRequest(async (req, res) => {
@@ -233,3 +234,54 @@ exports.getMergeAccount = functions.https.onRequest(async (req, res) => {
             });
     })
 })
+
+
+exports.getDudaURL = functions.https.onRequest(async (req, res) => {
+    cors(req, res, async () => {
+        const duda = new Duda({
+            user: 'a11091ae7a',
+            pass: 'yYrSuAkmPu19'
+        })
+
+        const site_response = await duda.sites.create({
+            template_id: "1003738"
+        })
+
+        const site_name = site_response.site_name
+
+        console.log(site_response)
+        console.log(site_name)
+
+        await duda.accounts.create({
+            account_name: 'test'
+        })
+        await duda.accounts.permissions.grantSiteAccess({
+            account_name: 'test',
+            site_name: site_name,
+            permissions: [
+                "PUSH_NOTIFICATIONS",
+                "REPUBLISH",
+                "EDIT",
+                "INSITE",
+                "PUBLISH",
+                "CUSTOM_DOMAIN",
+                "RESET",
+                "SEO",
+                "STATS_TAB",
+                "BLOG"
+            ]
+        })
+
+        duda.accounts.authentication.getSSOLink({
+            account_name: 'test',
+            site_name: site_name,
+            target: 'RESET_SITE'
+        }).then((response) => {
+            console.log(response.url)
+            res.status(200).json(response.url)
+
+        })
+
+    })
+})
+

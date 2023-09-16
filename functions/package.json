@@ -2,6 +2,7 @@
   "name": "linkedin-auth-functions",
   "description": "Authenticate with LinkedIn Firebase Functions sample",
   "dependencies": {
+    "@dudadev/partner-api": "^2.2.2",
     "@firebase/app": "^0.4.15",
     "@firebase/app-types": "^0.4.3",
     "@google-cloud/functions-framework": "^3.2.1",
