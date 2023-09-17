@@ -13,6 +13,21 @@
   font-style: normal;
 }
 
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../styles/fonts/Inter/static/Inter-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../styles/fonts/Inter/static/Inter-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
 .login {
     min-height: 88vh;
     height: auto;
@@ -21,12 +36,124 @@
     flex-direction: column;
   }
 
+  .landing-slide-1 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .landing-slide-1-header {
+    color: var(--neutral-colors-100, #FFF);
+    font-feature-settings: 'clig' off, 'liga' off;
+    /* Special Headings/Display 2 */
+    font-family: 'Inter';
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 46px; /* 127.778% */
+    width: 501.718px;
+    text-align: left;
+    margin-top: 2%;
+    margin-left: 5%;
+  }
+
+  .landing-slide-1-card-container {
+    flex-direction: row;
+    display: flex;
+    width: 100vw;
+    justify-content: space-around;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+
+  .landing-slide-1-card {
+    width: 25%;
+    height: 25vh;
+    flex-shrink: 0;
+    border-radius: 12px;
+    border: 0.546px solid var(--neutral-colors-400, #5B637C);
+    background: var(--neutral-colors-700, #101627);
+    flex-direction: column;
+  }
+
+  .landing-slide-1-card-header-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15%;
+    justify-content: center;
+  }
+
+  .landing-slide-1-card-img {
+    width: 30px;
+    height: 30px;
+    margin-right: 2%;
+    
+  }
+
+  .landing-slide-1-card-header {
+    color: var(--neutral-colors-100, #FFF);
+    font-feature-settings: 'clig' off, 'liga' off;
+    /* Headings/Typography Size 6 */
+    font-family: 'Inter';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px; /* 137.5% */
+  }
+
 
 .login-slide-1 {
   display: flex;
   flex-direction: row;
 }
 
+
+.landing-page-1 {
+  min-height: 88vh;
+  min-width: 100vw;
+  background: url('../assets/Gradient.svg');
+  background-size: cover;
+  flex-direction: column;
+}
+
+.landing-page-big-text {
+  color: var(--neutral-colors-100, #FFF);
+  text-align: center;
+  font-feature-settings: 'clig' off, 'liga' off;
+  /* Special Headings/Display 1 */
+  font-family: 'Inter';
+  font-size: 70px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 72px; /* 102.857% */
+}
+
+.landing-page-big-text-faded {
+  background: var(--other-gradient-title, linear-gradient(180deg, rgba(250, 250, 250, 0.40) 52.76%, #FFF 88.62%));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-feature-settings: 'clig' off, 'liga' off;
+  /* Special Headings/Display 1 */
+  font-family: 'Inter';
+  font-size: 70px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 72px;
+}
+
+.landing-page-medium-text {
+  color: var(--neutral-colors-200, #E8EBF3);
+  text-align: center;
+  font-feature-settings: 'clig' off, 'liga' off;
+  /* Paragraph/Default */
+  font-family: 'Inter';
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px; /* Adjust to fit 2 lines */
+  height: 28px; /* Exactly 2 lines with a line height of 14px */
+  overflow: hidden;
+}
 
   .login-flash-ui {
     width: 1293.381px;
@@ -407,14 +534,38 @@
   }
 
   .ss1 {
-    width: 90%;
-    height: 90%;
+    width: 50%;
+    height: 50%;
     flex-shrink: 0;
     border-radius: 8px;
     backdrop-filter: blur(20px);
 
   }
-  
+  .landing-page-button-row {
+    flex-direction: row;
+  }
+
+  .landing-page-button-grey {
+    border-radius: 50px;
+    background: var(--primary-colors-color-1, #616D8C);
+    width: 15vw;
+    height: 5vh;
+    margin-bottom:2%;
+  }
+
+  .landing-page-button-text {
+    color: var(--neutral-colors-100, #FFF);
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+    /* Text Single/100/Medium */
+    font-family: 'Inter';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 18px; /* 112.5% */
+  }
+
+
 
   .job_card_slide_container-mobile {
     background: var(--gr-03, linear-gradient(150deg, #161624 0%, #25243C 100%));

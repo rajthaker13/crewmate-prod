@@ -13,6 +13,8 @@ import sample from '../data/sample.json'
 import JobCard from "../components/common/JobCard";
 import { useNavigate } from 'react-router-dom';
 import LoginModal from "../components/login/LoginModal/LoginModal";
+import FadeIn from 'react-fade-in';
+import Graph from '../assets/Graph.svg'
 
 
 
@@ -147,37 +149,62 @@ function Login(props) {
         <div>
             {!isMobile && <div className="login">
                 {isLoggingInTC && <LoginModal setOpenModal={isLoggingInTC} isSearchingModal={true} isMobile={isMobile} />}
-                <div className="login-slide-1">
-                    <div className="login-text-container">
-                        <h1 className="login-big-text">Search & Upskill</h1>
-                        <h1 className="login-medium-text">for millions of active jobs</h1>
-                        <h1 className="login-small-text">Join our innovative and dynamic career planning platform. Our mission is to help applicants find their passions and get in touch with recruiters using the power of AI.</h1>
-                        <button className="signIn-button" onClick={talentCreation}>
-                            <h5 className="signIn-button-text">Click Here For TC Demo</h5>
-                        </button>
-                    </div>
+                <div className="landing-page-1">
+                    <FadeIn delay={200}>
+                        <div>
+                            <h1 className="landing-page-big-text">Careers Pages are Boring</h1>
 
-                    <div className="login-slide-1-pic-cont">
-                        <img className="ss1" src={require('../assets/upskill.png')}></img>
-                    </div>
+                        </div>
+                    </FadeIn>
+                    <FadeIn delay={1000}>
+                        <h1 className="landing-page-big-text-faded">Launch a Talent Community</h1>
+                    </FadeIn>
+                    <FadeIn delay={2000}>
+                        <div style={{ marginTop: '2%' }} key='2'>
+                            <h3 className="landing-page-medium-text">Upgrade your careers page with an embedded talent community</h3>
+                            <h3 className="landing-page-medium-text">that enables you to enage, retain, and monetize your applicant pool.</h3>
+                        </div>
+                    </FadeIn>
+                    <FadeIn delay={2000}>
+
+                        <div className="landing-pae-button-row">
+                            <button className="landing-page-button-grey" onClick={() => {
+                                window.open("https://calendly.com/blakefaulkner/meeting", "_blank")
+                            }}>
+                                <h3 className="landing-page-button-text">Book a demo</h3>
+                            </button>
+                        </div>
+                    </FadeIn>
+                    <FadeIn delay={2000}>
+                        <img className="ss1" src={require('../assets/nikeTC.jpg')}></img>
+                    </FadeIn>
                 </div>
-                {/* <div className="job_card_slide_container">
-                    <div className="ticker-track">
-                        {sampleJobs.map((job, index) => {
-                            return (
-                                <JobCard key={index} job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
-
-                            )
-                        })}
-                        {sampleJobs.map((job, index) => {
-                            return (
-                                <JobCard key={index + sampleJobs.length} job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
-                            )
-                        })}
+                <div className="landing-slide-1">
+                    <h2 className="landing-slide-1-header">More features to power-up your talent brand</h2>
+                    <div className="landing-slide-1-card-container ">
+                        <div className="landing-slide-1-card">
+                            <div className="landing-slide-1-card-header-container">
+                                <img className="landing-slide-1-card-img " src={Graph}></img>
+                                <h3 className="landing-slide-1-card-header">Engage</h3>
+                            </div>
+                        </div>
+                        <div className="landing-slide-1-card">
+                            <div className="landing-slide-1-card-header-container">
+                                <img className="landing-slide-1-card-img " src={require('../assets/monetize.png')}></img>
+                                <h3 className="landing-slide-1-card-header">Monetize</h3>
+                            </div>
+                        </div>
+                        <div className="landing-slide-1-card">
+                            <div className="landing-slide-1-card-header-container">
+                                <img className="landing-slide-1-card-img " src={require('../assets/monetize.png')}></img>
+                                <h3 className="landing-slide-1-card-header">Retain</h3>
+                            </div>
+                        </div>
                     </div>
 
-                </div> */}
-                <div className="login-slide-1 ">
+                </div>
+
+                {/* <div className="login-slide-1 ">
                     <div className="login-slide-2-pic-cont">
                         <img className="ss1" src={require('../assets/search.png')}></img>
                     </div>
@@ -204,7 +231,7 @@ function Login(props) {
                         <h1 className="login-big-text-2">Meet your Crew & Companies</h1>
                         <h1 className="login-small-text-2">Join talent communities for your favorite companies to meet other applicants while getting access to hiring events, recruiters, and more!</h1>
                     </div>
-                </div>
+                </div> */}
                 <div className="footer-container">
                     <div className="footer-content-container">
                         <img src={require('../assets/group3Gang.png')} className="footer-img" />
@@ -212,7 +239,8 @@ function Login(props) {
                     </div>
                 </div>
             </div>}
-            {isMobile &&
+            {
+                isMobile &&
                 <div className="login-mobile">
                     <div className="login-slide-1-mobile">
                         <div>
@@ -271,7 +299,7 @@ function Login(props) {
 
             }
 
-        </div>
+        </div >
 
 
 
@@ -281,3 +309,35 @@ function Login(props) {
 
 
 export default Login;
+
+
+{/* <div className="login-slide-1">
+                    <div className="login-text-container">
+                        <h1 className="login-big-text">Search & Upskill</h1>
+                        <h1 className="login-medium-text">for millions of active jobs</h1>
+                        <h1 className="login-small-text">Join our innovative and dynamic career planning platform. Our mission is to help applicants find their passions and get in touch with recruiters using the power of AI.</h1>
+                        <button className="signIn-button" onClick={talentCreation}>
+                            <h5 className="signIn-button-text">Click Here For TC Demo</h5>
+                        </button>
+                    </div>
+
+                    <div className="login-slide-1-pic-cont">
+                        <img className="ss1" src={require('../assets/upskill.png')}></img>
+                    </div>
+                </div> */}
+{/* <div className="job_card_slide_container">
+                    <div className="ticker-track">
+                        {sampleJobs.map((job, index) => {
+                            return (
+                                <JobCard key={index} job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
+
+                            )
+                        })}
+                        {sampleJobs.map((job, index) => {
+                            return (
+                                <JobCard key={index + sampleJobs.length} job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
+                            )
+                        })}
+                    </div>
+
+                </div> */}

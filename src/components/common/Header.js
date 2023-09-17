@@ -3,6 +3,7 @@ import { Avatar } from "@material-ui/core";
 import { useStateValue } from "../utility/StateProvider";
 import { useNavigate } from "react-router-dom";
 import { slide as Menu } from 'react-burger-menu';
+import '../../styles/Header.css'
 
 function Header(props) {
     const [isMobile, setIsMobile] = useState(props.mobile)
