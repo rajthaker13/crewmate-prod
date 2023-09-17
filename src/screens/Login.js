@@ -208,35 +208,6 @@ function Login(props) {
                     </div>
 
                 </div>
-
-                {/* <div className="login-slide-1 ">
-                    <div className="login-slide-2-pic-cont">
-                        <img className="ss1" src={require('../assets/search.png')}></img>
-                    </div>
-                    <div className="login-text-container">
-                        <h1 className="login-big-text-2">AI-powered Job Search</h1>
-                        <h1 className="login-small-text-2">Find millions of active jobs that fit your experience and interests using generative search prompting.</h1>
-                    </div>
-                </div>
-
-                <div className="login-slide-1 ">
-                    <div className="new-text-container-new">
-                        <h1 className="login-big-text-2">Explore & Upskill for the job you love</h1>
-                        <h1 className="login-small-text-2">Explore the path to receive a job through curated certificates and online resources based on positions you’re interested in.</h1>
-                    </div>
-                    <div className="login-slide-2-pic-cont">
-                        <img className="ss1" src={require('../assets/upskill.png')}></img>
-                    </div>
-                </div>
-                <div className="login-slide-1 ">
-                    <div className="login-slide-2-pic-cont">
-                        <img className="ss1" src={require('../assets/crew.png')}></img>
-                    </div>
-                    <div className="login-text-container">
-                        <h1 className="login-big-text-2">Meet your Crew & Companies</h1>
-                        <h1 className="login-small-text-2">Join talent communities for your favorite companies to meet other applicants while getting access to hiring events, recruiters, and more!</h1>
-                    </div>
-                </div> */}
                 <div className="footer-container">
                     <div className="footer-content-container">
                         <img src={require('../assets/group3Gang.png')} className="footer-img" />
@@ -247,59 +218,69 @@ function Login(props) {
             {
                 isMobile &&
                 <div className="login-mobile">
-                    <div className="login-slide-1-mobile">
-                        <div>
-                            <h1 className="login-big-text-mobile">Search & Upskill</h1>
-                            <h1 className="login-medium-text-mobile">for millions of active jobs</h1>
-                            <div className="login-slide-1-pic-cont-mobile">
-                                <img className="ss1" src={require('../assets/upskill.png')}></img>
-                            </div>
-                            <h1 className="login-small-text-mobile">Join our innovative and dynamic career planning platform. Our mission is to help applicants find their passions and get in touch with recruiters using the power of AI.</h1>
-                            <button className="signIn-button-mobile" onClick={login}>
-                                <LinkedInLogo />
-                                <h5 className="signIn-button-text-mobile">Sign Up with LinkedIn</h5>
-                            </button>
-                        </div>
-                        <div className="job_card_slide_container-mobile">
-                            <div className="ticker-track-mobile">
-                                {sampleJobs.map((job, index) => {
-                                    return (
-                                        <JobCard key={index} job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
+                    {isLoggingInTC && <LoginModal setOpenModal={isLoggingInTC} isSearchingModal={true} isMobile={isMobile} />}
+                    <div className="landing-page-1" style={{ minHeight: '50vh' }}>
+                        <FadeIn delay={200}>
+                            <div>
+                                <h1 className="landing-page-big-text" style={{ fontSize: '30px', lineHeight: '50px' }}>Careers Pages are Boring</h1>
 
-                                    )
-                                })}
-                                {sampleJobs.map((job, index) => {
-                                    return (
-                                        <JobCard key={index + sampleJobs.length} job={job} index={index} xs={80} isSearching={false} jobRecs={[]} />
-                                    )
-                                })}
                             </div>
-                        </div>
-                        <div className="login-slide-1-mobile">
-                            <h1 className="login-big-text-2-mobile">AI-powered Job Search</h1>
-                            <div className="login-slide-2-pic-cont-mobile">
-                                <img className="ss1" src={require('../assets/search.png')}></img>
+                        </FadeIn>
+                        <FadeIn delay={1000}>
+                            <h1 className="landing-page-big-text-faded" style={{ fontSize: '30px', lineHeight: '50px' }}>Launch a Talent Community</h1>
+                        </FadeIn>
+                        <FadeIn delay={2000}>
+                            <div style={{ marginTop: '2%' }} key='2'>
+                                <h3 className="landing-page-medium-text" style={{ fontSize: '20px', height: 'auto', marginBottom: '5vh', lineHeight: '20px' }}>Upgrade your careers page with an embedded talent community that enables you to enage, retain, and monetize your applicant pool.</h3>
                             </div>
-                            <h1 className="login-small-text-2-mobile">Find millions of active jobs that fit your experience and interests using generative search prompting.</h1>
-                        </div>
-                        <div className="login-slide-1-mobile">
-                            <h1 className="login-big-text-2-mobile">Explore & Upskill for the job you love</h1>
-                            <div className="login-slide-2-pic-cont-mobile">
-                                <img className="ss1" src={require('../assets/upskill.png')}></img>
-                            </div>
-                            <h1 className="login-small-text-2-mobile">Explore the path to receive a job through curated certificates and online resources based on positions you’re interested in.</h1>
-                        </div>
-                        <div className="footer-container">
-                            <div className="footer-content-container">
-                                <img src={require('../assets/group3Gang.png')} className="footer-img-mobile" />
-                                <h5 className="footer-text">Crewmate, 2023</h5>
-                            </div>
-                        </div>
+                        </FadeIn>
+                        <FadeIn delay={2000}>
 
+                            <div className="landing-pae-button-row">
+                                <button className="landing-page-button-grey" onClick={() => {
+                                    window.open("https://calendly.com/blakefaulkner/meeting", "_blank")
+                                }} style={{ width: '50vw', marginBottom: '5vh' }}>
+                                    <h3 className="landing-page-button-text">Book a demo</h3>
+                                </button>
+                            </div>
+                        </FadeIn>
+                        <FadeIn delay={2000}>
+                            <img className="ss1" src={require('../assets/nikeTC.jpg')} style={{ width: '90vw' }}></img>
+                        </FadeIn>
+                    </div>
+                    <div className="landing-slide-1" style={{ justifyContent: 'center', alignItems: 'center' }}>
+                        <h2 className="landing-slide-1-header" style={{ fontSize: '18px', textAlign: 'center', marginLeft: '0px', }}>More features to power-up your talent brand</h2>
+                        <div className="landing-slide-1-card-container" style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                            <div className="landing-slide-1-card-mobile">
+                                <div className="landing-slide-1-card-header-container">
+                                    <img className="landing-slide-1-card-img " src={Graph}></img>
+                                    <h3 className="landing-slide-1-card-header">Engage</h3>
+                                </div>
+                                <h3 className="landing-slide-1-card-text">Applicants interact with your content & learn more about your talent brand. Crewmate offers AI-powered talent communities with generative job searching and a virtual recruiter curated to your company's website.</h3>
+                            </div>
+                            <div className="landing-slide-1-card-mobile">
+                                <div className="landing-slide-1-card-header-container">
+                                    <img className="landing-slide-1-card-img " src={User}></img>
+                                    <h3 className="landing-slide-1-card-header">Retain</h3>
+                                </div>
+                                <h3 className="landing-slide-1-card-text">See real-time occupations and social accounts of members in your talent community and how they fit for open positions at your brand.</h3>
+                            </div>
+                            <div className="landing-slide-1-card-mobile">
+                                <div className="landing-slide-1-card-header-container">
+                                    <img className="landing-slide-1-card-img " src={Dollar}></img>
+                                    <h3 className="landing-slide-1-card-header">Monetize</h3>
+                                </div>
+                                <h3 className="landing-slide-1-card-text">Unleash the purchasing power of your applicant pool through trackable talent community offers on top products and services.</h3>
+                            </div>
+                        </div>
 
                     </div>
-
-
+                    <div className="footer-container">
+                        <div className="footer-content-container">
+                            <img src={require('../assets/group3Gang.png')} className="footer-img" />
+                            <h5 className="footer-text">Crewmate, 2023</h5>
+                        </div>
+                    </div>
                 </div>
 
             }
