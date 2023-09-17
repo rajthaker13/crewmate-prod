@@ -76,7 +76,7 @@
 
   .landing-slide-1-card {
     width: 25%;
-    height: 25vh;
+    height: 40vh;
     flex-shrink: 0;
     border-radius: 12px;
     border: 0.546px solid var(--neutral-colors-400, #5B637C);
@@ -586,6 +586,8 @@
     width: 15vw;
     height: 5vh;
     margin-bottom:2%;
+    border-color: #0c0f1f;
+    border-width: 0px;
   }
 
   .landing-page-button-text {

@@ -164,7 +164,7 @@ function Login(props) {
                     <FadeIn delay={2000}>
                         <div style={{ marginTop: '2%' }} key='2'>
                             <h3 className="landing-page-medium-text">Upgrade your careers page with an embedded talent community</h3>
-                            <h3 className="landing-page-medium-text">that enables you to enage, retain, and monetize your applicant pool.</h3>
+                            <h3 className="landing-page-medium-text">that enables you to engage, retain, and monetize your applicant pool.</h3>
                         </div>
                     </FadeIn>
                     <FadeIn delay={2000}>
