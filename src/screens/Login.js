@@ -15,6 +15,8 @@ import { useNavigate } from 'react-router-dom';
 import LoginModal from "../components/login/LoginModal/LoginModal";
 import FadeIn from 'react-fade-in';
 import Graph from '../assets/Graph.svg'
+import User from '../assets/User.svg'
+import Dollar from '../assets/Dollar.svg'
 
 
 
@@ -187,18 +189,21 @@ function Login(props) {
                                 <img className="landing-slide-1-card-img " src={Graph}></img>
                                 <h3 className="landing-slide-1-card-header">Engage</h3>
                             </div>
+                            <h3 className="landing-slide-1-card-text">Applicants interact with your content & learn more about your talent brand. Crewmate offers AI-powered talent communities with generative job searching and a virtual recruiter curated to your company's website.</h3>
                         </div>
                         <div className="landing-slide-1-card">
                             <div className="landing-slide-1-card-header-container">
-                                <img className="landing-slide-1-card-img " src={require('../assets/monetize.png')}></img>
-                                <h3 className="landing-slide-1-card-header">Monetize</h3>
-                            </div>
-                        </div>
-                        <div className="landing-slide-1-card">
-                            <div className="landing-slide-1-card-header-container">
-                                <img className="landing-slide-1-card-img " src={require('../assets/monetize.png')}></img>
+                                <img className="landing-slide-1-card-img " src={User}></img>
                                 <h3 className="landing-slide-1-card-header">Retain</h3>
                             </div>
+                            <h3 className="landing-slide-1-card-text">See real-time occupations and social accounts of members in your talent community and how they fit for open positions at your brand.</h3>
+                        </div>
+                        <div className="landing-slide-1-card">
+                            <div className="landing-slide-1-card-header-container">
+                                <img className="landing-slide-1-card-img " src={Dollar}></img>
+                                <h3 className="landing-slide-1-card-header">Monetize</h3>
+                            </div>
+                            <h3 className="landing-slide-1-card-text">Unleash the purchasing power of your applicant pool through trackable talent community offers on top products and services.</h3>
                         </div>
                     </div>
 
