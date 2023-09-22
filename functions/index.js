@@ -16,7 +16,8 @@ const { Readable } = require('stream');
 const Gunzip = require('gunzip-stream');
 const { MongoClient } = require('mongodb')
 const cors = require('cors')({ origin: true });
-const { EndUserDetailsRequest, HttpBearerAuth, LinkTokenApi, AccountTokenApi } = require('@mergeapi/merge-hris-node')
+const { EndUserDetailsRequest, HttpBearerAuth, LinkTokenApi, AccountTokenApi, EmployeesApi } = require('@mergeapi/merge-hris-node')
+const { JobsApi } = require('@mergeapi/merge-ats-node')
 const { Duda } = require('@dudadev/partner-api');
 
 
@@ -190,6 +191,7 @@ exports.getJobRec = functions.https.onRequest(async (req, res) => {
 exports.getMergeToken = functions.https.onRequest(async (req, res) => {
     cors(req, res, async () => {
         const auth = new HttpBearerAuth()
+
         auth.accessToken = "yJgTMVgQzzdpsxL7HTS2Z3-cxRciwq-D3RUiUm2GziFVHbSwlqzBVA"
 
         const apiInstance = new LinkTokenApi();
@@ -235,9 +237,32 @@ exports.getMergeAccount = functions.https.onRequest(async (req, res) => {
     })
 })
 
+exports.getMergeJobs = functions.https.onRequest(async (req, res) => {
+    cors(req, res, async () => {
+        const auth = new HttpBearerAuth();
+        auth.accessToken = "yJgTMVgQzzdpsxL7HTS2Z3-cxRciwq-D3RUiUm2GziFVHbSwlqzBVA";
+
+        const apiInstance = new JobsApi()
+        apiInstance.setDefaultAuthentication(auth);
+        const xAccountToken = "gglo63Vt4pX9zLECcWErUz9g2uLZEL9tmS44114dn281zMQovzRQdg";
+        const opts = {};
+
+
+        apiInstance.jobsList(xAccountToken, opts).then(({ body }) => {
+            console.log(body)
+            res.status(200).json(body.results)
+        }).catch(((err) => {
+            console.log(error);
+        }))
+
+    })
+})
+
+
 
 exports.getDudaURL = functions.https.onRequest(async (req, res) => {
     cors(req, res, async () => {
+        console.log('trying')
         const duda = new Duda({
             user: 'a11091ae7a',
             pass: 'yYrSuAkmPu19'
@@ -249,14 +274,26 @@ exports.getDudaURL = functions.https.onRequest(async (req, res) => {
 
         const site_name = site_response.site_name
 
-        console.log(site_response)
-        console.log(site_name)
+        if (req.body.isNewAccount == true) {
+            console.log("here")
+            console.log(req.body.email)
+            await duda.accounts.create({
+                account_name: req.body.email
+            })
+            console.log("Worked")
+        }
+        else {
+            console.log(req.body.email)
+            console.log(req.body.isNewAccount)
+            console.log("it's false idiot")
+            await duda.accounts.get({
+                account_name: req.body.email
+            })
 
-        await duda.accounts.create({
-            account_name: 'test'
-        })
+        }
+
         await duda.accounts.permissions.grantSiteAccess({
-            account_name: 'test',
+            account_name: req.body.email,
             site_name: site_name,
             permissions: [
                 "PUSH_NOTIFICATIONS",
@@ -273,7 +310,7 @@ exports.getDudaURL = functions.https.onRequest(async (req, res) => {
         })
 
         duda.accounts.authentication.getSSOLink({
-            account_name: 'test',
+            account_name: req.body.email,
             site_name: site_name,
             target: 'RESET_SITE'
         }).then((response) => {

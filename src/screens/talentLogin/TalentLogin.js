@@ -15,7 +15,7 @@ function TalentLogin() {
 
     const onSuccess = useCallback((public_token) => {
         // Send public_token to server (Step 3)
-        const url = 'https://vast-waters-56699-3595bd537b3a.herokuapp.com/ https://us-central1-crewmate-prod.cloudfunctions.net/getMergeAccount'
+        const url = 'https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://us-central1-crewmate-prod.cloudfunctions.net/getMergeAccount'
         axios.get(url, { token: public_token }, { headers: { 'Content-Type': 'application/json' } }).then((res) => {
             console.log(res)
 

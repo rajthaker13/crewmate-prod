@@ -41,7 +41,7 @@ function App() {
               <>
                 {/* <Header guest={false} /> */}
                 <Routes>
-                  <Route path="/" element={<ClientDashboard />} />
+                  <Route path="/" element={<TalentCreation />} />
                   <Route path="/explore" element={<ExploreJob />} />
                   <Route path="/pathways" element={<Pathways />} />
                 </Routes>

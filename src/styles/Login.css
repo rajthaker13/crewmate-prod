@@ -588,6 +588,18 @@
     margin-bottom:2%;
     border-color: #0c0f1f;
     border-width: 0px;
+    text-align: center;
+  }
+
+  .landing-page-button-black {
+    border-radius: 50px;
+    background: #0c0f1f;
+    width: 15vw;
+    height: 5vh;
+    margin-bottom:2%;
+    border-color: #0c0f1f;
+    border-width: 0px;
+    text-align: center;
   }
 
   .landing-page-button-text {

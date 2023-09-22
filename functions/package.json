@@ -7,6 +7,7 @@
     "@firebase/app-types": "^0.4.3",
     "@google-cloud/functions-framework": "^3.2.1",
     "@google-cloud/storage": "^6.11.0",
+    "@mergeapi/merge-ats-node": "^1.0.10",
     "@mergeapi/merge-hris-node": "^1.3.0",
     "ajv": "^5.5.2",
     "axios": "^1.4.0",

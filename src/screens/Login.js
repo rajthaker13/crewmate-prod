@@ -168,12 +168,14 @@ function Login(props) {
                         </div>
                     </FadeIn>
                     <FadeIn delay={2000}>
-
-                        <div className="landing-pae-button-row">
-                            <button className="landing-page-button-grey" onClick={() => {
+                        <div className="landing-page-button-row">
+                            <button className="landing-page-button-grey" onClick={talentCreation}>
+                                <h3 className="landing-page-button-text">Get Started</h3>
+                            </button>
+                            <button className="landing-page-button-black" onClick={() => {
                                 window.open("https://calendly.com/blakefaulkner/meeting", "_blank")
                             }}>
-                                <h3 className="landing-page-button-text">Book a demo</h3>
+                                <h3 className="landing-page-button-text">Book a Demo</h3>
                             </button>
                         </div>
                     </FadeIn>
@@ -223,7 +225,6 @@ function Login(props) {
                         <FadeIn delay={200}>
                             <div>
                                 <h1 className="landing-page-big-text" style={{ fontSize: '30px', lineHeight: '50px' }}>Careers Pages are Boring</h1>
-
                             </div>
                         </FadeIn>
                         <FadeIn delay={1000}>
