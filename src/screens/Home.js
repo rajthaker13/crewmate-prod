@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import db, { auth } from '../firebase/firebase';
 import JobCard from "../components/common/JobCard";
 import SearchBar from "../components/common/SearchBar";
-import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import Modal from "../components/home/Modal";
 import usePremiumStatus from "../stripe/usePremiumStatus";
 import { useLocation } from "react-router-dom";

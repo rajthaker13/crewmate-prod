@@ -1,8 +1,6 @@
 import cosineSimilarity from 'cosine-similarity';
 import db, { auth } from '../firebase/firebase';
-import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "firebase/firestore";
-import data_sample from '../data/sample.json'
-import axios from 'axios';
+import { collection, getDocs } from "firebase/firestore";
 const { Configuration, OpenAIApi } = require("openai");
 
 

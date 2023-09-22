@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useMergeLink } from "@mergeapi/react-merge-link";
-import { useLocation, useNavigate } from "react-router-dom";
-import db, { auth, provider, functions } from '../../firebase/firebase';
+import { useLocation } from "react-router-dom";
+import { auth } from '../../firebase/firebase';
 import axios from "axios"
 
 

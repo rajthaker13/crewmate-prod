@@ -8,9 +8,7 @@ import axios from 'axios';
 import { useLinkedIn } from 'react-linkedin-login-oauth2';
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { LinkedInLogo } from "../components/common/LinkedInLogo";
 import sample from '../data/sample.json'
-import JobCard from "../components/common/JobCard";
 import { useNavigate } from 'react-router-dom';
 import LoginModal from "../components/login/LoginModal/LoginModal";
 import FadeIn from 'react-fade-in';

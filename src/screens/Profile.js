@@ -1,15 +1,8 @@
-
-
 import React, { useEffect, useState } from "react";
-import { useStateValue } from "../components/utility/StateProvider";
-import backdrop from "../assets/backdrop.gif";
-import sample from '../data/sample.json';
-import { getUserAndProductEmbeddings, getJobRecommendation } from "../open_ai/OpenAI"
 import '../styles/Profile.css'
-import { Card, Grid, Text, Link } from '@nextui-org/react';
-import CommunityCard from "../components/common/CommunityCard";
-import db, { auth, provider, functions } from '../firebase/firebase';
-import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "firebase/firestore";
+import { Grid } from '@nextui-org/react';
+import db, { auth } from '../firebase/firebase';
+import { doc, getDoc } from "firebase/firestore";
 import JobCard from "../components/common/JobCard";
 
 
@@ -86,12 +79,6 @@ function Profile() {
                     </div>
                 </div>
             </div>
-            {/* <h4 className="communities_header">Joined Communities: 3</h4>
-            <Grid.Container gap={5} >
-                <CommunityCard />
-                <CommunityCard />
-                <CommunityCard />
-            </Grid.Container> */}
             <h1 className="profile_header">My Jobs</h1>
             <Grid.Container gap={5} >
 

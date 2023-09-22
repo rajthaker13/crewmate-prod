@@ -1,9 +1,7 @@
-import SendbirdApp from '@sendbird/uikit-react/App';
 import '@sendbird/uikit-react/dist/index.css';
-import { useStateValue } from "../components/utility/StateProvider";
-import db, { auth, provider, functions, storage } from '../firebase/firebase'
+import db, { auth } from '../firebase/firebase'
 import React, { useEffect, useState, useRef } from "react";
-import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import Requests from '../components/common/Requests';
 import Talk from 'talkjs';
 

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { interactWithAssistant } from "../open_ai/OpenAI"
 import { Dropdown } from '@nextui-org/react';
-import db, { auth, provider, functions } from '../firebase/firebase';
+import db, { auth } from '../firebase/firebase';
 import SearchBar from "../components/common/SearchBar";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaBookmark } from 'react-icons/fa';
-import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import '../styles/ExploreJob.css'
 import GenerateModal from "../components/pathways/GenerateModal";
 import { ChatFeed, Message } from 'react-chat-ui'
