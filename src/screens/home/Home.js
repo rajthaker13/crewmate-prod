@@ -78,7 +78,7 @@ function Home(props) {
 
             </div>
 
-            <div style={{ marginTop: '5vh' }}>
+            <div style={{ marginTop: '6vh' }}>
                 {jobRecs && chunkArray(jobRecs, chunkSize).map((row, rowIndex) => {
                     return (
                         <div key={rowIndex} style={{ display: 'flex', marginBottom: '1rem' }}>
