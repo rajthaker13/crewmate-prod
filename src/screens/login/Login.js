@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
-import '../styles/Login.css'
-import db, { auth } from '../firebase/firebase';
-import { useStateValue } from "../components/utility/StateProvider";
-import { actionTypes } from '../components/utility/reducer';
+import './Login.css'
+import db, { auth } from '../../firebase/firebase';
+import { useStateValue } from "../../components/utility/StateProvider";
+import { actionTypes } from '../../components/utility/reducer';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import axios from 'axios';
 import { useLinkedIn } from 'react-linkedin-login-oauth2';
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import sample from '../data/sample.json'
+import sample from '../../data/sample.json'
 import { useNavigate } from 'react-router-dom';
-import LoginModal from "../components/login/LoginModal/LoginModal";
+import LoginModal from "../../components/login/LoginModal/LoginModal";
 import FadeIn from 'react-fade-in';
-import Graph from '../assets/Graph.svg'
-import User from '../assets/User.svg'
-import Dollar from '../assets/Dollar.svg'
+import Graph from '../../assets/Graph.svg'
+import User from '../../assets/User.svg'
+import Dollar from '../../assets/Dollar.svg'
 
 
 
@@ -178,7 +178,7 @@ function Login(props) {
                         </div>
                     </FadeIn>
                     <FadeIn delay={2000}>
-                        <img className="ss1" src={require('../assets/nikeTC.jpg')}></img>
+                        <img className="ss1" src={require('../../assets/nikeTC.jpg')}></img>
                     </FadeIn>
                 </div>
                 <div className="landing-slide-1">
@@ -210,7 +210,7 @@ function Login(props) {
                 </div>
                 <div className="footer-container">
                     <div className="footer-content-container">
-                        <img src={require('../assets/group3Gang.png')} className="footer-img" />
+                        <img src={require('../../assets/group3Gang.png')} className="footer-img" />
                         <h5 className="footer-text">Crewmate, 2023</h5>
                     </div>
                 </div>
@@ -244,7 +244,7 @@ function Login(props) {
                             </div>
                         </FadeIn>
                         <FadeIn delay={2000}>
-                            <img className="ss1" src={require('../assets/nikeTC.jpg')} style={{ width: '90vw' }}></img>
+                            <img className="ss1" src={require('../../assets/nikeTC.jpg')} style={{ width: '90vw' }}></img>
                         </FadeIn>
                     </div>
                     <div className="landing-slide-1" style={{ justifyContent: 'center', alignItems: 'center' }}>
@@ -276,7 +276,7 @@ function Login(props) {
                     </div>
                     <div className="footer-container">
                         <div className="footer-content-container">
-                            <img src={require('../assets/group3Gang.png')} className="footer-img" />
+                            <img src={require('../../assets/group3Gang.png')} className="footer-img" />
                             <h5 className="footer-text">Crewmate, 2023</h5>
                         </div>
                     </div>

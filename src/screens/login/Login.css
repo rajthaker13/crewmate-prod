@@ -1,14 +1,14 @@
 
 @font-face {
   font-family: 'Jura';
-  src: url('../styles/fonts/Jura/static/Jura-Regular.ttf') format('truetype');
+  src: url('../../styles/fonts/Jura/static/Jura-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Jura';
-  src: url('../styles/fonts/Jura/static/Jura-Bold.ttf') format('truetype');
+  src: url('../../styles/fonts/Jura/static/Jura-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
 }
@@ -16,14 +16,14 @@
 
 @font-face {
   font-family: 'Inter';
-  src: url('../styles/fonts/Inter/static/Inter-Regular.ttf') format('truetype');
+  src: url('../../styles/fonts/Inter/static/Inter-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Inter';
-  src: url('../styles/fonts/Inter/static/Inter-Bold.ttf') format('truetype');
+  src: url('../../styles/fonts/Inter/static/Inter-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
 }
@@ -145,7 +145,7 @@
 .landing-page-1 {
   min-height: 88vh;
   min-width: 100vw;
-  background: url('../assets/Gradient.svg');
+  background: url('../../assets/Gradient.svg');
   background-size: cover;
   flex-direction: column;
 }

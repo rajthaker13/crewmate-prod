@@ -1,14 +1,14 @@
 
 @font-face {
   font-family: 'Jura';
-  src: url('../styles/fonts/Jura/static/Jura-Regular.ttf') format('truetype');
+  src: url('../../../styles/fonts/Jura/static/Jura-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Jura';
-  src: url('../styles/fonts/Jura/static/Jura-Bold.ttf') format('truetype');
+  src: url('../../../styles/fonts/Jura/static/Jura-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
 }

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Avatar } from "@material-ui/core";
-import { useStateValue } from "../utility/StateProvider";
+import { useStateValue } from "../../utility/StateProvider";
 import { useNavigate } from "react-router-dom";
 import { slide as Menu } from 'react-burger-menu';
-import '../../styles/Header.css'
+import './Header.css'
 
 function Header(props) {
     const [isMobile, setIsMobile] = useState(props.mobile)
@@ -17,7 +17,7 @@ function Header(props) {
                 <div className="header_left">
                     <Avatar
                         alt='crewmate-logo'
-                        src={require('../../assets/group3Gang.png')}
+                        src={require('../../../assets/group3Gang.png')}
                         style={{ height: '3vw', width: 'auto', }}
                     />
                 </div>
@@ -36,7 +36,7 @@ function Header(props) {
                 < div style={{ height: '8vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <Avatar
                         alt='crewmate-logo'
-                        src={require('../../assets/group3Gang.png')}
+                        src={require('../../../assets/group3Gang.png')}
                         style={{ height: '5vh', width: 'auto', }}
                     />
                     {props.guest == false &&

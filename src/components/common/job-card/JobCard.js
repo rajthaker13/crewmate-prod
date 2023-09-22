@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import db, { auth } from '../../firebase/firebase';
+import db, { auth } from '../../../firebase/firebase';
 import { setDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import fetch from 'node-fetch'
-import '../../styles/JobCard.css'
+import './JobCard.css'
 import { FaBookmark } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
@@ -52,7 +52,7 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, 
             else {
                 const data = companyRef.data()['data']
                 if (data.length == 0) {
-                    icon = require('../../assets/crewmate-emblem.png')
+                    icon = require('../../../assets/crewmate-emblem.png')
                 }
                 else {
                     icon = data[0].icon
@@ -218,9 +218,9 @@ export function JobCard({ job, xs = 4, profile = false, index = 0, isSearching, 
     return (
         <div className={isMobile && loggedIn ? "card-mobile" : "card"} >
             <div style={{ flexDirection: 'row', display: 'flex', minHeight: '9vh' }}>
-                <img className="profile_icon" src={job.src ? require(`../../assets/demo/${job.src}`) : pfp} style={{ height: '50px', width: '50px' }} onError={({ currentTarget }) => {
+                <img className="profile_icon" src={job.src ? require(`../../../assets/demo/${job.src}`) : pfp} style={{ height: '50px', width: '50px' }} onError={({ currentTarget }) => {
                     currentTarget.onerror = null; // prevents looping
-                    currentTarget.src = require('../../assets/crewmate-emblem.png');
+                    currentTarget.src = require('../../../assets/crewmate-emblem.png');
                 }}></img>
                 <h3 className="company_name">{job.company_name}</h3>
             </div>

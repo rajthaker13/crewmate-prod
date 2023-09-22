@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import db, { auth } from '../firebase/firebase';
-import JobCard from "../components/common/JobCard";
-import SearchBar from "../components/common/SearchBar";
+import db, { auth } from '../../firebase/firebase';
+import JobCard from "../../components/common/job-card/JobCard";
+import SearchBar from "../../components/common/SearchBar";
 import { doc, getDoc } from "firebase/firestore";
-import Modal from "../components/home/Modal";
-import usePremiumStatus from "../stripe/usePremiumStatus";
+import Modal from "../../components/home/Modal";
+import usePremiumStatus from "../../stripe/usePremiumStatus";
 import { useLocation } from "react-router-dom";
-import '../styles/SearchBar.css'
+import './Home.css'
 
 
 

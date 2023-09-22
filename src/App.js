@@ -1,9 +1,9 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Switch } from "react-router-dom";
 import { useStateValue } from './components/utility/StateProvider';
-import Login from './screens/Login';
-import Header from './components/common/Header';
-import Home from './screens/Home';
+import Login from './screens/login/Login';
+import Header from './components/common/header/Header';
+import Home from './screens/home/Home';
 import { LinkedInCallback } from "react-linkedin-login-oauth2";
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 import ExploreJob from './screens/ExploreJob';

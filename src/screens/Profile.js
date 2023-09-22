@@ -3,7 +3,7 @@ import '../styles/Profile.css'
 import { Grid } from '@nextui-org/react';
 import db, { auth } from '../firebase/firebase';
 import { doc, getDoc } from "firebase/firestore";
-import JobCard from "../components/common/JobCard";
+import JobCard from "../components/common/job-card/JobCard";
 
 
 function Profile() {
