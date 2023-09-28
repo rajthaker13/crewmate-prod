@@ -582,7 +582,7 @@
 
   .landing-page-button-grey {
     border-radius: 50px;
-    background: var(--primary-colors-color-1, #616D8C);
+    background: #414141;
     width: 15vw;
     height: 5vh;
     margin-bottom:2%;
@@ -601,6 +601,7 @@
     border-color: #0c0f1f;
     border-width: 0px;
     text-align: center;
+    align-items: center;
   }
 
   .landing-page-button-text {
@@ -610,7 +611,8 @@
     font-family: 'Inter';
     font-size: 22px;
     font-style: normal;
-    font-weight: 800
+    font-weight: 800;
+    height: 50%;
   }
 
 
