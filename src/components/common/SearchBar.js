@@ -2,15 +2,12 @@ import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import '../../styles/SearchBar.css';
 import ClickAwayListener from 'react-click-away-listener';
-import { useStateValue } from "../utility/StateProvider";
-import { getCrewmateReccomendation, getJobRecommendation } from "../../open_ai/OpenAI"
 import axios from 'axios';
 import db, { auth } from '../../firebase/firebase';
 import { collection, addDoc, setDoc, doc, getDoc, updateDoc, getDocs } from "firebase/firestore";
 
 const SearchBar = (props) => {
     const [expanded, setExpanded] = useState(false);
-    const [state, dispatch] = useStateValue();
     const [jobRecs, setJobRecs] = useState([])
     const [embeddings, setEmbeddings] = useState([])
     const [userText, setUserText] = useState('')

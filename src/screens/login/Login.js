@@ -167,10 +167,10 @@ function Login(props) {
                     </FadeIn>
                     <FadeIn delay={2000}>
                         <div className="landing-page-button-row">
-                            <button className="landing-page-button-grey" onClick={talentCreation}>
+                            {/* <button className="landing-page-button-grey" onClick={talentCreation}>
                                 <h3 className="landing-page-button-text">Get Started</h3>
-                            </button>
-                            <button className="landing-page-button-black" onClick={() => {
+                            </button> */}
+                            <button className="landing-page-button-grey" onClick={() => {
                                 window.open("https://calendly.com/blakefaulkner/meeting", "_blank")
                             }}>
                                 <h3 className="landing-page-button-text">Book a Demo</h3>

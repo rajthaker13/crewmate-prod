@@ -589,6 +589,7 @@
     border-color: #0c0f1f;
     border-width: 0px;
     text-align: center;
+    align-items: center;
   }
 
   .landing-page-button-black {
@@ -604,14 +605,12 @@
 
   .landing-page-button-text {
     color: var(--neutral-colors-100, #FFF);
-    text-align: center;
     font-feature-settings: 'clig' off, 'liga' off;
     /* Text Single/100/Medium */
     font-family: 'Inter';
-    font-size: 20px;
+    font-size: 22px;
     font-style: normal;
-    font-weight: 800;
-    line-height: 18px; /* 112.5% */
+    font-weight: 800
   }
 
 
