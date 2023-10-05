@@ -26,42 +26,6 @@ function LoginModal({
 
   const navigation = useNavigate();
 
-  async function handleInput() {
-    console.log(url);
-    const regex = /in\/([^\/]+)/;
-
-    const match = url.match(regex);
-
-    const extractedText = match[1];
-
-    const member_url = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://api.coresignal.com/cdapi/v1/linkedin/member/collect/${extractedText}`;
-    axios
-      .get(member_url, {
-        headers: {
-          accept: "application/json",
-          Authorization: `Bearer ${process.env.REACT_APP_CORESIGNAL_API_KEY}`,
-        },
-      })
-      .then(async (response) => {
-        let email = "";
-        if (!auth.currentUser) {
-          email = "rajthaker13@yahoo.com";
-        } else {
-          email = auth.currentUser.email;
-        }
-        await updateDoc(doc(db, "users", email), {
-          data: response.data,
-          email: email,
-        });
-
-        setOpenModal(false);
-      })
-      .catch((error) => {
-        // Handle errors here when tokens run low for collect
-        console.error("Error:", error.message);
-      });
-  }
-
   async function login() {
     const regex = /in\/([^\/]+)/;
 
@@ -79,13 +43,15 @@ function LoginModal({
       })
       .then(async (response) => {
         await createUserWithEmailAndPassword(auth, email, password);
+        console.log(auth.currentUser.uid);
+        const data = response.data;
         const atsURL =
           "https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://us-central1-crewmate-prod.cloudfunctions.net/getMergeToken";
         axios
-          .get(
+          .post(
             atsURL,
             {
-              origin_id: companyName,
+              origin_id: auth.currentUser.uid,
               organization_name: companyName,
               email: email,
             },
@@ -102,7 +68,7 @@ function LoginModal({
               companyURL: companyURL,
               companySize: companySize,
               avgApplications: avgApplications,
-              data: response.data,
+              data: data,
               merge_token: res.data,
             });
             await setDoc(doc(db, "companies-tc", companyName), {
@@ -112,7 +78,7 @@ function LoginModal({
               avgApplications: avgApplications,
               merge_token: res.data,
             });
-            setOpenModal(false);
+            // setOpenModal(false);
             navigation("/ats", {
               state: {
                 token: token,
@@ -337,7 +303,7 @@ function LoginModal({
           />
         </div>
         <div className="generate_button_row_container">
-          <button className="generate_copy_text_button" onClick={mergeATS}>
+          <button className="generate_copy_text_button" onClick={login}>
             <h5 className="generate_button_actions_text">Register</h5>
           </button>
         </div>

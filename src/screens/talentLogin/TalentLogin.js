@@ -1,11 +1,15 @@
 import React, { useEffect, useCallback } from "react";
 import { useMergeLink } from "@mergeapi/react-merge-link";
 import { useLocation } from "react-router-dom";
-import { auth } from "../../firebase/firebase";
 import axios from "axios";
+import "./TalentLogin.css";
+import { doc, updateDoc } from "firebase/firestore";
+import db, { auth } from "../../firebase/firebase";
+import { useNavigate } from "react-router-dom";
 
 function TalentLogin() {
   const { state } = useLocation();
+  const navigation = useNavigate();
 
   useEffect(() => {
     console.log(auth.currentUser);
@@ -16,13 +20,18 @@ function TalentLogin() {
     const url =
       "https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://us-central1-crewmate-prod.cloudfunctions.net/getMergeAccount";
     axios
-      .get(
+      .post(
         url,
         { token: public_token },
         { headers: { "Content-Type": "application/json" } }
       )
-      .then((res) => {
-        console.log(res);
+      .then(async (res) => {
+        await updateDoc(doc(db, "users-tc", auth.currentUser.email), {
+          xAccountToken: res.data,
+          isNewAccount: true,
+        });
+
+        navigation("/creation");
       });
   }, []);
 
@@ -35,11 +44,20 @@ function TalentLogin() {
   });
 
   return (
-    <div>
-      <button disabled={!isReady} onClick={open}>
-        Preview linking experience
-      </button>
-    </div>
+    <>
+      <div className={"login-modal"}>
+        <h1 className="generate_modal_header-login">Connect Your ATS System</h1>
+        <div className="generate_button_row_container">
+          <button
+            className="generate_copy_text_button"
+            onClick={open}
+            disabled={!isReady}
+          >
+            <h5 className="generate_button_actions_text">Link</h5>
+          </button>
+        </div>
+      </div>
+    </>
   );
 }
 

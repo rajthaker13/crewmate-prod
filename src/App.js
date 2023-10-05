@@ -42,6 +42,7 @@ function App() {
                   />
                   <Route path="/ats" element={<TalentLogin />} />
                   <Route path="/" element={<Login />} />
+                  <Route path="/creation" element={<TalentCreation />} />
                 </Routes>
               </>
             ) : (

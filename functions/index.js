@@ -241,6 +241,8 @@ exports.getMergeToken = functions.https.onRequest(async (req, res) => {
     details.end_user_email_address = req.body.email; // your user's email address
     details.categories = ["ats"]; // choose your category
 
+    console.log(details);
+
     apiInstance
       .linkTokenCreate(details)
       .then(({ body }) => {
@@ -310,9 +312,9 @@ exports.getDudaURL = functions.https.onRequest(async (req, res) => {
       template_id: "1059653",
       lang: "en",
       site_data: {
-        external_uid: "testing-talent-creation",
+        external_uid: req.body.uid,
         site_business_info: {
-          business_name: "Acme Co.",
+          business_name: req.body.companyName,
           email: req.body.email,
           phone_number: "816-500-7458",
         },
@@ -358,7 +360,11 @@ exports.getDudaURL = functions.https.onRequest(async (req, res) => {
         target: "RESET_SITE",
       })
       .then((response) => {
-        res.status(200).json(response.url);
+        res.status(200).json({
+          url: response.url,
+          response: response,
+          site_name: site_name,
+        });
       });
   });
 });
