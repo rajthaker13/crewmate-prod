@@ -357,7 +357,7 @@ exports.getDudaURL = functions.https.onRequest(async (req, res) => {
       .getSSOLink({
         account_name: req.body.email,
         site_name: site_name,
-        target: "RESET_SITE",
+        target: "EDITOR",
       })
       .then((response) => {
         res.status(200).json({

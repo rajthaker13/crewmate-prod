@@ -32,9 +32,10 @@ function TalentCreation() {
           if (isNewAccount) {
             await updateDoc(doc(db, "users-tc", auth.currentUser.email), {
               isNewAccount: false,
+              site_name: res.data.site_name,
             });
           }
-          window.location.href = `https://crewmate.responsivewebsitebuilder.io/home/site/${res.data.site_name}/home`;
+          window.location.href = res.data.url;
         });
     }
 
