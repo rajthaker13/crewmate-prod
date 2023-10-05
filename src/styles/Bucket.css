@@ -1,32 +1,28 @@
 .bucket-first {
-    background-color: black;
-    height: 69%;
-    width: auto;
-    margin-right: 8%;
+  background-color: black;
+  height: 69%;
+  width: auto;
+  margin-right: 8%;
 }
 
 .bucket {
-    background-color: black;
-    height: 100px;
-    width: auto;
+  background-color: black;
+  height: 100px;
+  width: auto;
 }
-
 
 .bucket_title {
   font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 8;
-    color: #FAFAFA;
-    margin-top: 2%;
-    font-weight: 500;
-
-  }
-  .container {
-    background-color: #121212;
-    height: auto;
-    width: auto;
-    border-radius: 20px;
-    scrollbar-color: #9921e8;
-    min-height: 60vh;
-
-
-  }
+  font-size: 8;
+  color: #fafafa;
+  margin-top: 2%;
+  font-weight: 500;
+}
+.container {
+  background-color: #121212;
+  height: auto;
+  width: auto;
+  border-radius: 20px;
+  scrollbar-color: #9921e8;
+  min-height: 60vh;
+}

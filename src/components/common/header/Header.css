@@ -1,88 +1,95 @@
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px, 0;
-    background: #0f0c29; 
-    background: -webkit-linear-gradient(to left, #24243e, #302b63, #0f0c29);  
-    background: linear-gradient(to left, #24243e, #302b63, #0f0c29); 
-    color: white;
-    height: 50px;
-  }
-  
-  .header_left {
-    flex: .3;
-    display: flex;
-    align-items: center;
-    margin-left: 5%;
-    margin-top: 1%
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px, 0;
+  background: #0f0c29;
+  background: -webkit-linear-gradient(to left, #24243e, #302b63, #0f0c29);
+  background: linear-gradient(to left, #24243e, #302b63, #0f0c29);
+  color: white;
+  height: 50px;
+}
 
-  .header_center {
-    flex: .4;
-    display: flex;
-    align-items: center;
-    margin-left: 60px;
+.header_left {
+  flex: 0.3;
+  display: flex;
+  align-items: center;
+  margin-left: 5%;
+  margin-top: 1%;
+}
 
-  }
+.header_center {
+  flex: 0.4;
+  display: flex;
+  align-items: center;
+  margin-left: 60px;
+}
 
-  .crewmate_logo {
-    flex: 0.3;
-    display: flex;
-    align-items: center;
-  }
-  
+.crewmate_logo {
+  flex: 0.3;
+  display: flex;
+  align-items: center;
+}
 
-  
-  .header_search {
-    flex: 0.4;
-    background: #0f0c29;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    text-align: center;
-    display: flex;
-    padding: 0, 20px;
-    border: 1px, grey solid;
-    border-radius: 20px;
-    height: 50%;
-  }
-  
-  .header_search > input {
-    background-color: transparent;
-    border: none;
-    text-align: center;
-    min-width: 35vw;
-  }
-  
-  .header_right {
-    flex: 0.3;
-    display: flex;
-    align-items: flex-end;
-    margin-left: 0%;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    justify-content: space-around;
-    word-wrap: break-word;
-    /* Optionally, you can set a max-width for the text container to control the wrapping behavior */
-    max-width: calc(100% - 50px);
-  }
-  
-  .header_right > .MuiSvgIcon-root {
-    margin-left: auto;
-    margin-right: 20px;
-  }
-  .astext {
-    background:none;
-    border:none;
-    margin:0;
-    padding:0;
-    cursor: pointer;
+.header_search {
+  flex: 0.4;
+  background: #0f0c29; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #24243e,
+    #302b63,
+    #0f0c29
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #24243e,
+    #302b63,
+    #0f0c29
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  text-align: center;
+  display: flex;
+  padding: 0, 20px;
+  border: 1px, grey solid;
+  border-radius: 20px;
+  height: 50%;
+}
+
+.header_search > input {
+  background-color: transparent;
+  border: none;
+  text-align: center;
+  min-width: 35vw;
+}
+
+.header_right {
+  flex: 0.3;
+  display: flex;
+  align-items: flex-end;
+  margin-left: 0%;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  justify-content: space-around;
+  word-wrap: break-word;
+  /* Optionally, you can set a max-width for the text container to control the wrapping behavior */
+  max-width: calc(100% - 50px);
+}
+
+.header_right > .MuiSvgIcon-root {
+  margin-left: auto;
+  margin-right: 20px;
+}
+.astext {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
 }
 
 .header_labels {
-  color: #FFF;
+  color: #fff;
   text-align: center;
-  font-family: 'Jura';
+  font-family: "Jura";
   font-size: 24px;
   font-style: normal;
   font-weight: 600;

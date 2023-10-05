@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   background-color: #0c0f1f;
-  background: var(--neutral-colors-800, #0E1425);
+  background: var(--neutral-colors-800, #0e1425);
   height: auto;
   min-width: 100vw;
   overflow: auto;
@@ -10,8 +10,7 @@
   /* background-repeat: no-repeat; */
   flex-direction: column;
   align-content: start;
-  min-height: 100vh
-  
+  min-height: 100vh;
 }
 
 .App-logo {
