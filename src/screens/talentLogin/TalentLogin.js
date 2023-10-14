@@ -28,7 +28,7 @@ function TalentLogin() {
       .then(async (res) => {
         await updateDoc(doc(db, "users-tc", auth.currentUser.email), {
           xAccountToken: res.data,
-          isNewAccount: true,
+          isNewAccount: false,
         });
 
         navigation("/creation");

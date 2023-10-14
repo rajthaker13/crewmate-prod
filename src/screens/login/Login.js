@@ -153,7 +153,40 @@ function Login(props) {
     //         clearInterval(tickerInterval);
     //     };
     // }
-  }, [sampleJobs.length, isLoggingIn, isLoggingInTC]);
+
+    async function getData() {
+      const apiUrl =
+        "https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://api.coresignal.com/cdapi/v1/linkedin/company/search/filter";
+      const jwtToken = `${process.env.REACT_APP_CORESIGNAL_API_KEY}`; // Replace with your actual JWT token
+
+      const requestData = {
+        website: "joincrewmate.com",
+      };
+
+      const axiosConfig = {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${jwtToken}`,
+          "Content-Type": "application/json",
+        },
+      };
+
+      axios
+        .post(apiUrl, requestData, axiosConfig)
+        .then((response) => {
+          // Handle the response data here
+          const collectUrl = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://api.coresignal.com/cdapi/v1/linkedin/company/collect/${response.data[0]}`;
+          axios.get(collectUrl, axiosConfig).then((res) => {
+            console.log(res);
+          });
+        })
+        .catch((error) => {
+          // Handle errors here
+          console.error(error);
+        });
+    }
+    // getData();
+  }, []);
 
   return (
     <div>

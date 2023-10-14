@@ -13,6 +13,8 @@ function TalentCreation() {
       const userRef = await getDoc(doc(db, "users-tc", auth.currentUser.email));
       const isNewAccount = userRef.data()["isNewAccount"];
       const companyName = userRef.data()["companyName"];
+      const firstName = userRef.data()["firstName"];
+      const lastName = userRef.data()["lastName"];
 
       const link = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://us-central1-crewmate-prod.cloudfunctions.net/getDudaURL`;
       await axios
@@ -23,6 +25,8 @@ function TalentCreation() {
             isNewAccount: isNewAccount,
             uid: auth.currentUser.uid,
             companyName: companyName,
+            firstName: firstName,
+            lastName: lastName,
           },
           { headers: { "Content-Type": "application/json" } }
         )

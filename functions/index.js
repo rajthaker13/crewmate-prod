@@ -191,18 +191,15 @@ exports.getJobRec = functions.https.onRequest(async (req, res) => {
     );
 
     const embedding = response.data.data[0].embedding;
-
-    console.log(embedding);
-
     const mongodb_url =
-      "mongodb+srv://raj:Chicago23@crewmate-prod.2ezis.mongodb.net/?retryWrites=true&w=majority";
+      "mongodb+srv://raj:Chicago23@crewmate-production.2ezis.mongodb.net/?retryWrites=true&w=majority";
     const client = new MongoClient(mongodb_url);
 
     await client.connect();
 
     const db = client.db("jobs"); // Replace with your database name.
 
-    const collection = db.collection("alphaFinale"); // Replace with your collection name.
+    const collection = db.collection(req.body.company_name); // Replace with your collection name.
 
     // Query for similar documents.
     const documents = await collection
@@ -213,7 +210,7 @@ exports.getJobRec = functions.https.onRequest(async (req, res) => {
             knnBeta: {
               vector: embedding,
               path: "plot_embedding",
-              k: 250,
+              k: 3,
             },
           },
         },
@@ -221,6 +218,38 @@ exports.getJobRec = functions.https.onRequest(async (req, res) => {
       .toArray();
 
     await client.close();
+
+    res.status(200).json(documents);
+  });
+});
+
+const cachedData = {};
+
+exports.getAllJobs = functions.https.onRequest(async (req, res) => {
+  cors(req, res, async () => {
+    const company_name = req.body.company_name;
+
+    if (cachedData[company_name]) {
+      // If cached, return the cached data
+      res.status(200).json(cachedData[company_name]);
+      return;
+    }
+    const mongodb_url =
+      "mongodb+srv://raj:Chicago23@crewmate-production.2ezis.mongodb.net/?retryWrites=true&w=majority";
+
+    const client = new MongoClient(mongodb_url);
+
+    await client.connect();
+
+    const db = client.db("jobs"); // Replace with your database name.
+
+    const collection = db.collection(req.body.company_name);
+
+    const documents = await collection.find({}).toArray(); // Replace with your collection name.
+
+    await client.close();
+
+    cachedData[company_name] = documents;
 
     res.status(200).json(documents);
   });
@@ -302,14 +331,13 @@ exports.getMergeJobs = functions.https.onRequest(async (req, res) => {
 
 exports.getDudaURL = functions.https.onRequest(async (req, res) => {
   cors(req, res, async () => {
-    console.log("trying");
     const duda = new Duda({
       user: "a11091ae7a",
       pass: "yYrSuAkmPu19",
     });
 
     const site_response = await duda.sites.create({
-      template_id: "1059653",
+      template_id: "1061798",
       lang: "en",
       site_data: {
         external_uid: req.body.uid,
@@ -322,6 +350,73 @@ exports.getDudaURL = functions.https.onRequest(async (req, res) => {
     });
 
     const site_name = site_response.site_name;
+
+    console.log(site_response);
+
+    if (req.body.isNewAccount == true) {
+      await duda.accounts.create({
+        account_name: req.body.email,
+      });
+      console.log("Worked");
+    } else {
+      await duda.accounts.get({
+        account_name: req.body.email,
+      });
+    }
+
+    await duda.accounts.permissions.grantSiteAccess({
+      account_name: req.body.email,
+      site_name: site_name,
+      permissions: [
+        "PUSH_NOTIFICATIONS",
+        "REPUBLISH",
+        "EDIT",
+        "INSITE",
+        "PUBLISH",
+        "CUSTOM_DOMAIN",
+        "RESET",
+        "SEO",
+        "STATS_TAB",
+      ],
+    });
+
+    duda.accounts.authentication
+      .getSSOLink({
+        account_name: req.body.email,
+        site_name: site_name,
+        target: "EDITOR",
+      })
+      .then((response) => {
+        res.status(200).json({
+          url: response.url,
+          response: response,
+          site_name: site_name,
+        });
+      });
+  });
+});
+
+exports.getExistingDudaSite = functions.https.onRequest(async (req, res) => {
+  cors(req, res, async () => {
+    const duda = new Duda({
+      user: "a11091ae7a",
+      pass: "yYrSuAkmPu19",
+    });
+
+    const site_response = await duda.sites.create({
+      template_id: "1061798",
+      lang: "en",
+      site_data: {
+        external_uid: req.body.uid,
+        site_business_info: {
+          business_name: req.body.companyName,
+          email: req.body.email,
+          phone_number: "816-500-7458",
+        },
+      },
+    });
+
+    const site_name = req.body.site_name;
 
     console.log(site_response);
 

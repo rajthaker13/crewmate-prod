@@ -59,31 +59,63 @@ function LoginModal({
           )
           .then(async (res) => {
             const token = res.data;
-            await setDoc(doc(db, "users-tc", email), {
-              firstName: firstName,
-              lastName: lastName,
-              role: role,
-              email: email,
-              companyName: companyName,
-              companyURL: companyURL,
-              companySize: companySize,
-              avgApplications: avgApplications,
-              data: data,
-              merge_token: res.data,
-            });
-            await setDoc(doc(db, "companies-tc", companyName), {
-              companyName: companyName,
-              companyURL: companyURL,
-              companySize: companySize,
-              avgApplications: avgApplications,
-              merge_token: res.data,
-            });
-            // setOpenModal(false);
-            navigation("/ats", {
-              state: {
-                token: token,
+            const apiUrl =
+              "https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://api.coresignal.com/cdapi/v1/linkedin/company/search/filter";
+            const jwtToken = `${process.env.REACT_APP_CORESIGNAL_API_KEY}`; // Replace with your actual JWT token
+
+            const requestData = {
+              website: companyURL,
+            };
+
+            const axiosConfig = {
+              headers: {
+                accept: "application/json",
+                Authorization: `Bearer ${jwtToken}`,
+                "Content-Type": "application/json",
               },
-            });
+            };
+
+            axios
+              .post(apiUrl, requestData, axiosConfig)
+              .then((companySearch) => {
+                // Handle the response data here
+                const collectUrl = `https://vast-waters-56699-3595bd537b3a.herokuapp.com/https://api.coresignal.com/cdapi/v1/linkedin/company/collect/${companySearch.data[0]}`;
+                axios
+                  .get(collectUrl, axiosConfig)
+                  .then(async (companyCollect) => {
+                    await setDoc(doc(db, "users-tc", email), {
+                      firstName: firstName,
+                      lastName: lastName,
+                      role: role,
+                      email: email,
+                      companyName: companyName,
+                      companyURL: companyURL,
+                      companySize: companySize,
+                      avgApplications: avgApplications,
+                      data: data,
+                      merge_token: res.data,
+                    });
+                    await setDoc(doc(db, "companies-tc", companyName), {
+                      companyName: companyName,
+                      companyURL: companyURL,
+                      companySize: companySize,
+                      avgApplications: avgApplications,
+                      merge_token: res.data,
+                      data: companyCollect.data,
+                    });
+                    navigation("/ats", {
+                      state: {
+                        token: token,
+                      },
+                    });
+                  });
+              })
+              .catch((error) => {
+                // Handle errors here
+                console.error(error);
+              });
+
+            // setOpenModal(false);
           });
       })
       .catch((error) => {
