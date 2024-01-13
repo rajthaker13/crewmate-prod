@@ -17,7 +17,7 @@ function Header(props) {
           <div className="header_left">
             <Avatar
               alt="crewmate-logo"
-              src={require("../../../assets/group3Gang.png")}
+              src={require("../../../assets/newLanding/logo.png")}
               style={{ height: "3vw", width: "auto" }}
             />
           </div>

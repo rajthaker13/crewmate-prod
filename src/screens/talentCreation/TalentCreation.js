@@ -3,12 +3,14 @@ import "./TalentCreation.css";
 import axios from "axios";
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import db, { auth } from "../../firebase/firebase";
+import { useLocation } from "react-router-dom";
 
 function TalentCreation() {
   const [needData, setNeedData] = useState(true);
+  const { state } = useLocation();
 
   useEffect(() => {
-    console.log(auth.currentUser);
+    console.log(state.data);
     async function getDudaLink() {
       const userRef = await getDoc(doc(db, "users-tc", auth.currentUser.email));
       const isNewAccount = userRef.data()["isNewAccount"];
@@ -27,6 +29,7 @@ function TalentCreation() {
             companyName: companyName,
             firstName: firstName,
             lastName: lastName,
+            data: state.data,
           },
           { headers: { "Content-Type": "application/json" } }
         )

@@ -19,6 +19,7 @@ function LoginModal({
   const [url, setUrl] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [companyURL, setCompanyURL] = useState("");
+  const [companyLinkedIn, setCompanyLinkedIn] = useState("");
   const [companySize, setCompanySize] = useState("");
   const [avgApplications, setavgApplications] = useState("");
   const [password, setPassword] = useState("");
@@ -103,9 +104,9 @@ function LoginModal({
                       merge_token: res.data,
                       data: companyCollect.data,
                     });
-                    navigation("/ats", {
+                    navigation("/creation", {
                       state: {
-                        token: token,
+                        data: companyCollect.data,
                       },
                     });
                   });
@@ -186,23 +187,6 @@ function LoginModal({
               : "login-input-container"
           }
         >
-          <h3 className="generate_input_header">Role</h3>
-          <textarea
-            className="login-text-input"
-            value={role}
-            onChange={(e) => {
-              setRole(e.target.value);
-            }}
-            placeholder="The Sith Lord"
-          />
-        </div>
-        <div
-          className={
-            isMobile
-              ? "generate_text_container-mobile"
-              : "login-input-container"
-          }
-        >
           <h3 className="generate_input_header">Email</h3>
           <textarea
             className="login-text-input"
@@ -254,50 +238,14 @@ function LoginModal({
               : "login-input-container"
           }
         >
-          <h3 className="generate_input_header">Company URL</h3>
+          <h3 className="generate_input_header">Company URL (after www.)</h3>
           <textarea
             className="login-text-input"
             value={companyURL}
             onChange={(e) => {
               setCompanyURL(e.target.value);
             }}
-            placeholder="www.deathstar.com"
-          />
-        </div>
-        <div
-          className={
-            isMobile
-              ? "generate_text_container-mobile"
-              : "login-input-container"
-          }
-        >
-          <h3 className="generate_input_header">Company Size</h3>
-          <textarea
-            className="login-text-input"
-            value={companySize}
-            onChange={(e) => {
-              setCompanySize(e.target.value);
-            }}
-            placeholder="10,000+"
-          />
-        </div>
-        <div
-          className={
-            isMobile
-              ? "generate_text_container-mobile"
-              : "login-input-container"
-          }
-        >
-          <h3 className="generate_input_header">
-            Avg. Applications Received Annually
-          </h3>
-          <textarea
-            className="login-text-input"
-            value={avgApplications}
-            onChange={(e) => {
-              setavgApplications(e.target.value);
-            }}
-            placeholder="10,000+"
+            placeholder="deathstar.com"
           />
         </div>
         <div

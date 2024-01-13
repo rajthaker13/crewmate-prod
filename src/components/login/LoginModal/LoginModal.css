@@ -21,7 +21,6 @@
     rgba(225, 157, 250, 0.05) 88.21%,
     rgba(236, 161, 254, 0.05) 100%
   );
-  backdrop-filter: blur(1000px);
   z-index: 2;
   display: flex;
   position: fixed;
