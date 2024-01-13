@@ -2,7 +2,25 @@
 .modal {
   flex-shrink: 0;
   border-radius: 16px;
-  background: linear-gradient(135deg, rgba(82, 113, 196, 0.05) 0%, rgba(83, 113, 196, 0.05) 11.79%, rgba(87, 115, 198, 0.05) 21.38%, rgba(93, 116, 200, 0.05) 29.12%, rgba(101, 119, 203, 0.05) 35.34%, rgba(110, 122, 207, 0.05) 40.37%, rgba(121, 125, 211, 0.05) 44.56%, rgba(133, 129, 215, 0.05) 48.24%, rgba(145, 133, 220, 0.05) 51.76%, rgba(159, 137, 225, 0.05) 55.44%, rgba(172, 141, 230, 0.05) 59.63%, rgba(186, 145, 235, 0.05) 64.66%, rgba(199, 150, 240, 0.05) 70.88%, rgba(212, 154, 245, 0.05) 78.62%, rgba(225, 157, 250, 0.05) 88.21%, rgba(236, 161, 254, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(82, 113, 196, 0.05) 0%,
+    rgba(83, 113, 196, 0.05) 11.79%,
+    rgba(87, 115, 198, 0.05) 21.38%,
+    rgba(93, 116, 200, 0.05) 29.12%,
+    rgba(101, 119, 203, 0.05) 35.34%,
+    rgba(110, 122, 207, 0.05) 40.37%,
+    rgba(121, 125, 211, 0.05) 44.56%,
+    rgba(133, 129, 215, 0.05) 48.24%,
+    rgba(145, 133, 220, 0.05) 51.76%,
+    rgba(159, 137, 225, 0.05) 55.44%,
+    rgba(172, 141, 230, 0.05) 59.63%,
+    rgba(186, 145, 235, 0.05) 64.66%,
+    rgba(199, 150, 240, 0.05) 70.88%,
+    rgba(212, 154, 245, 0.05) 78.62%,
+    rgba(225, 157, 250, 0.05) 88.21%,
+    rgba(236, 161, 254, 0.05) 100%
+  );
   backdrop-filter: blur(1000px);
   z-index: 2;
   display: flex;
@@ -15,46 +33,63 @@
   transform: translate(-50%, -50%);
   height: 80vh;
   flex-direction: column;
-  justify-content: center
-  }
+  justify-content: center;
+}
 
-  .modal-mobile {
-    flex-shrink: 0;
-    border-radius: 16px;
-    background: linear-gradient(135deg, rgba(82, 113, 196, 0.05) 0%, rgba(83, 113, 196, 0.05) 11.79%, rgba(87, 115, 198, 0.05) 21.38%, rgba(93, 116, 200, 0.05) 29.12%, rgba(101, 119, 203, 0.05) 35.34%, rgba(110, 122, 207, 0.05) 40.37%, rgba(121, 125, 211, 0.05) 44.56%, rgba(133, 129, 215, 0.05) 48.24%, rgba(145, 133, 220, 0.05) 51.76%, rgba(159, 137, 225, 0.05) 55.44%, rgba(172, 141, 230, 0.05) 59.63%, rgba(186, 145, 235, 0.05) 64.66%, rgba(199, 150, 240, 0.05) 70.88%, rgba(212, 154, 245, 0.05) 78.62%, rgba(225, 157, 250, 0.05) 88.21%, rgba(236, 161, 254, 0.05) 100%);
-    backdrop-filter: blur(1000px);
-    z-index: 2;
-    display: flex;
-    position: fixed;
-    width: 95%;
-    height: 30%;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 80vh;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .modal-content {
-    background-color: #121212;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    width: 60%;
-    height: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    flex-direction: column;
-  }
-  
-  .modal-content h2 {
-    margin-bottom: 10px;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 16;
-    color: #FAFAFA;
-  }
-  
+.modal-mobile {
+  flex-shrink: 0;
+  border-radius: 16px;
+  background: linear-gradient(
+    135deg,
+    rgba(82, 113, 196, 0.05) 0%,
+    rgba(83, 113, 196, 0.05) 11.79%,
+    rgba(87, 115, 198, 0.05) 21.38%,
+    rgba(93, 116, 200, 0.05) 29.12%,
+    rgba(101, 119, 203, 0.05) 35.34%,
+    rgba(110, 122, 207, 0.05) 40.37%,
+    rgba(121, 125, 211, 0.05) 44.56%,
+    rgba(133, 129, 215, 0.05) 48.24%,
+    rgba(145, 133, 220, 0.05) 51.76%,
+    rgba(159, 137, 225, 0.05) 55.44%,
+    rgba(172, 141, 230, 0.05) 59.63%,
+    rgba(186, 145, 235, 0.05) 64.66%,
+    rgba(199, 150, 240, 0.05) 70.88%,
+    rgba(212, 154, 245, 0.05) 78.62%,
+    rgba(225, 157, 250, 0.05) 88.21%,
+    rgba(236, 161, 254, 0.05) 100%
+  );
+  backdrop-filter: blur(1000px);
+  z-index: 2;
+  display: flex;
+  position: fixed;
+  width: 95%;
+  height: 30%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #121212;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  width: 60%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  flex-direction: column;
+}
+
+.modal-content h2 {
+  margin-bottom: 10px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 16;
+  color: #fafafa;
+}

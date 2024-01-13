@@ -1,16 +1,15 @@
 .App {
   text-align: center;
-  background-color: #0c0f1f;
-  background: url('./assets/black-backdrop-3.gif'), lightgray 50% / cover no-repeat;
+  background-image: url("./assets/newLanding/bg.png");
   height: auto;
   min-width: 100vw;
   overflow: auto;
-  /* background-size: cover; */
+  background-size: cover;
   width: 100vw;
-  /* background-repeat: no-repeat; */
+  background-repeat: no-repeat;
   flex-direction: column;
   align-content: start;
-  
+  min-height: 300vh;
 }
 
 .App-logo {

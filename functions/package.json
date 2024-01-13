@@ -2,10 +2,13 @@
   "name": "linkedin-auth-functions",
   "description": "Authenticate with LinkedIn Firebase Functions sample",
   "dependencies": {
+    "@dudadev/partner-api": "^2.2.2",
     "@firebase/app": "^0.4.15",
     "@firebase/app-types": "^0.4.3",
     "@google-cloud/functions-framework": "^3.2.1",
     "@google-cloud/storage": "^6.11.0",
+    "@mergeapi/merge-ats-node": "^1.0.10",
+    "@mergeapi/merge-hris-node": "^1.3.0",
     "ajv": "^5.5.2",
     "axios": "^1.4.0",
     "big-json": "^3.2.0",
@@ -20,10 +23,12 @@
     "mongodb": "^5.7.0",
     "node-fetch": "^2.6.12",
     "node-linkedin": "github:captainjackrana/node-linkedin",
+    "openai": "^4.20.1",
     "pako": "^2.1.0",
     "path": "^0.12.7",
     "request-promise": "^4.2.6",
     "stream": "^0.0.2",
+    "tnl-midjourney-api": "^1.0.3",
     "zlib": "^1.0.5"
   },
   "devDependencies": {
